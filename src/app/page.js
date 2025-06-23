@@ -1,10 +1,13 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import UserCalendar from "@/components/Calendar";
+import CalendarSkeleton from "@/components/CalendarSkeletion";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <div >
-      <p>My app deployed to Render</p>
-    </div>
+    <>
+      <Suspense fallback={<CalendarSkeleton />}>
+        <UserCalendar />
+      </Suspense>
+    </>
   );
 }

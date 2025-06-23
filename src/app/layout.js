@@ -1,5 +1,10 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "@/styles/custom-calendar.scss";
+import Sidebar from "@/components/Sidebar";
+import Header from "@/components/Header";
+import StyledComponentsRegistry from "@/lib/registry";
+import Square from "@/components/Square";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +25,42 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <StyledComponentsRegistry>
+          <div
+            style={{
+              display: "flex",
+              width: "100vw",
+              height: "auto",
+              padding: "3px 10px",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                width: "180px",
+                height: "auto",
+                padding: "3px 10px",
+                flexDirection: "column",
+              }}
+            >
+              <Square />
+              <Sidebar />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                margin: "3px 10px",
+                flexGrow: 1,
+                overflow: "hidden",
+              }}
+            >
+              <Header />
+              {children}
+            </div>
+          </div>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
