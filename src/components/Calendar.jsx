@@ -4,6 +4,7 @@ import "@/styles/custom-calendar.scss";
 import moment from "moment";
 import styled from "styled-components";
 import { useState } from "react";
+import { useCalendar } from "@/context/CalendarContext";
 
 const CalendarWrapper = styled.div`
   display: flex;
@@ -24,15 +25,15 @@ const CalendarSizing = styled.div`
 
 const localizer = momentLocalizer(moment);
 
-export default function UserCalendar({ props }) {
-  const [events, setEvents] = useState([]);
+export default function UserCalendar() {
+  const {events, addEvent, selectedDate, setSelectedDate} = useCalendar();
 
   const handleSelectSlot = ({ start, end }) => {
     const title = window.prompt(
       `New event from ${start.toLocaleString()} to ${end.toLocaleString()}`
     );
     if (title) {
-      setEvents((prev) => [...prev, { start, end, title }]);
+      addEvent({ start, end, title })
     }
   };
 
@@ -48,7 +49,7 @@ export default function UserCalendar({ props }) {
             defaultView="month"
             selectable
             onSelectSlot={handleSelectSlot}
-            onSelectEvent={(event) => alert(`Event ${event.title} was added to your calendar`)}
+            onSelectEvent={(event) => alert(`Event ${event.title} is on your calendar`)}
           />
         </CalendarSizing>
       </CalendarWrapper>
