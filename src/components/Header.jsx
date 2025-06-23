@@ -4,11 +4,11 @@ import styled from "styled-components";
 const HeaderWrapper = styled.div`
   min-height: 150px;
   max-height: 150px;
-  width: 98%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 10px 0;
 `;
 
 const HeaderContent = styled.div`
