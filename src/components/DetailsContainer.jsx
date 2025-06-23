@@ -1,6 +1,5 @@
 "use client";
 import { useCalendar } from "@/context/CalendarContext";
-import { useContext } from "react";
 import styled from "styled-components";
 import DetailsMessageTab from "./DetailsMessageTab";
 import { usePathname } from "next/navigation";
@@ -36,7 +35,7 @@ const EmptyInfoWrapper = styled.div`
 `;
 
 export default function DetailsContainer() {
-  const { messages } = useCalendar();
+  const { messages, contacts } = useCalendar();
   const pathname = usePathname();
 
   return (
