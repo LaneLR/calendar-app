@@ -33,7 +33,7 @@ export default function LoginPage() {
     });
   };
 
-    const handleRegisterChange = (e) => {
+  const handleRegisterChange = (e) => {
     setRegisterData({
       ...registerData,
       [e.target.name]: e.target.value,
@@ -57,9 +57,11 @@ export default function LoginPage() {
       if (!res.ok) {
         console.error({ error: "Response was bad" });
       }
+    if (data.user) {
       loginUser(data.user);
-      setLoginData({ username: "", password: ""});
-      router.push('/')
+      setRegisterData({ username: "", password: ""});
+      router.push("/");
+    }
     } catch (err) {
       console.error("error occurred: ", err);
     }
@@ -82,9 +84,12 @@ export default function LoginPage() {
       if (!res.ok) {
         console.error({ error: "Response was bad" });
       }
-      loginUser(data.user);
-      setRegisterData({ username: "", password: "", confirmPassword: "" });
-      router.push('/')
+
+      if (data.user) {
+        loginUser(data.user);
+        setRegisterData({ username: "", password: "", confirmPassword: "" });
+        router.push("/");
+      } 
     } catch (err) {
       console.error("error occurred: ", err);
     }
