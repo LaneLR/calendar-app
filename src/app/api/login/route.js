@@ -33,6 +33,9 @@ export async function POST(req) {
 
 
   } catch (err) {
-    console.error("Error occurred: ", err);
+    {
+    console.error(err)
+    return NextResponse.json({error: 'Internal error'}, {status: 500})
+  }
   }
 }
