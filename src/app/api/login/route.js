@@ -20,22 +20,28 @@ export async function POST(req) {
       );
     }
 
-    const user = await User.findOne({where: {username}})
+    const user = await User.findOne({ where: { username } });
 
     if (!user) {
-        return NextResponse.json({error: "User doesn't exist"})
+      return NextResponse.json({ error: "User doesn't exist" });
     }
 
     const isPasswordValid = await user.validatePassword(password);
+
     if (!isPasswordValid) {
-        return NextResponse.json({error: "Wrong password"})
+      return NextResponse.json({ error: "Wrong password" });
     }
 
+    const { password: _, ...userWithoutPassword } = user.toJSON();
 
+    return NextResponse.json({
+      message: "Login successful",
+      user: userWithoutPassword,
+    });
   } catch (err) {
     {
-    console.error(err)
-    return NextResponse.json({error: 'Internal error'}, {status: 500})
-  }
+      console.error(err);
+      return NextResponse.json({ error: "Internal error" }, { status: 500 });
+    }
   }
 }
