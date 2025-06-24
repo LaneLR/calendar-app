@@ -2,7 +2,7 @@ import getSequelizeInstance from "../sequelize.js";
 import User from "./User.js";
 import Message from "./Message.js";
 import { DataTypes } from "sequelize";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 
 async function initializeModels() {
   const sequelize = await getSequelizeInstance();
@@ -57,13 +57,27 @@ async function initializeModels() {
     { sequelize, modelName: "Message" }
   );
 
+  Event.init(
+    {
+      title: DataTypes.STRING,
+      date: DataTypes.DATEONLY,
+      time: DataTypes.TIME,
+      description: DataTypes.TEXT,
+    },
+    { sequelize, modelName: "Event" }
+  );
+
   // associations
   User.belongsToMany(User, { as: "Contacts", through: "UserContacts" });
 
   User.hasMany(Message, { foreignKey: "senderUserId", as: "SentMessages" });
-  User.hasMany(Message, { foreignKey: "recipientUserId", as: "ReceivedMessages" });
+  User.hasMany(Message, {foreignKey: "recipientUserId", as: "ReceivedMessages"});
+
   Message.belongsTo(User, { foreignKey: "senderUserId", as: "Sender" });
   Message.belongsTo(User, { foreignKey: "recipientUserId", as: "Recipient" });
+
+  User.hasMany(Event, { foreignKey: "userId" });
+  Event.belongsTo(User, { foreignKey: "userId" });
 
   return {
     sequelize,
