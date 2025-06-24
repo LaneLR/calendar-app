@@ -62,18 +62,15 @@ async function initializeModels() {
   User.belongsToMany(User, { as: "Contacts", through: "UserContacts" });
 
   User.hasMany(Message, { foreignKey: "senderUserId", as: "SentMessages" });
-  User.hasMany(Message, {
-    foreignKey: "recipientUserId",
-    as: "ReceivedMessages",
-  });
+  User.hasMany(Message, { foreignKey: "recipientUserId", as: "ReceivedMessages" });
   Message.belongsTo(User, { foreignKey: "senderUserId", as: "Sender" });
   Message.belongsTo(User, { foreignKey: "recipientUserId", as: "Recipient" });
 
-  db.sequelize = sequelize;
-  db.User = User;
-  db.Message = Message;
-
-  return db;
+  return {
+    sequelize,
+    User,
+    Message,
+  };
 }
 
 export default initializeModels;
