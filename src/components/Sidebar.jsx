@@ -1,4 +1,5 @@
 "use client";
+import { useCalendar } from "@/context/CalendarContext";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -44,6 +45,8 @@ const SidebarTab = styled(Link)`
 `;
 
 export default function Sidebar({ children }) {
+  const { user, logoutUser } = useCalendar();
+
   return (
     <>
       <SidebarWrapper>
@@ -51,6 +54,11 @@ export default function Sidebar({ children }) {
           <SidebarTab href="/">Calendar</SidebarTab>
           <SidebarTab href="/messages">Messages</SidebarTab>
           <SidebarTab href="/contacts">Contacts</SidebarTab>
+          {user.username !== "" ? (
+            <SidebarTab href="/"><button onClick={(e) => { e.preventDefault(); logoutUser(); }}>Logout</button></SidebarTab>
+          ) : (
+            <SidebarTab href="/login">Login</SidebarTab>
+          )}
         </SidebarTabContainer>
       </SidebarWrapper>
     </>
