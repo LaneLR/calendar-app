@@ -7,11 +7,13 @@ if (!global.db) {
 
 export default async function initializeDbAndModels() {
   if (!global.db.sequelize || !global.db.User || !global.db.Message) {
+    
     try {
       console.log(
         "Attempting to initialize models..."
       );
       const db = await initializeModels();
+      await sequelize.sync(); //set up table columns if not already
       global.db = db
       console.log("Models successfully initialized");
     } catch (err) {
