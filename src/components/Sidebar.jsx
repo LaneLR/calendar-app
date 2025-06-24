@@ -45,7 +45,7 @@ const SidebarTab = styled(Link)`
 `;
 
 export default function Sidebar({ children }) {
-  const { user, logoutUser } = useCalendar();
+  const { isLoggedIn, logoutUser } = useCalendar();
 
   return (
     <>
@@ -54,7 +54,7 @@ export default function Sidebar({ children }) {
           <SidebarTab href="/">Calendar</SidebarTab>
           <SidebarTab href="/messages">Messages</SidebarTab>
           <SidebarTab href="/contacts">Contacts</SidebarTab>
-          {user.username !== "" ? (
+          {isLoggedIn ? (
             <SidebarTab><button style={{border: 'hidden'}} onClick={(e) => { e.preventDefault(); logoutUser(); }}>Logout</button></SidebarTab>
           ) : (
             <SidebarTab href="/login">Login</SidebarTab>

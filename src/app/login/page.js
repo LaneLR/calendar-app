@@ -9,21 +9,21 @@ const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  flexdirection: "column";
+  flex-direction: column;
 `;
 
 export default function LoginPage() {
-  const { loginUser, setUser, user } = useCalendar();
+  const { loginUser } = useCalendar();
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
-    confirmPassword: "",
   });
   const [registerData, setRegisterData] = useState({
     username: "",
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const handleLoginChange = (e) => {
@@ -42,30 +42,36 @@ export default function LoginPage() {
 
   const handleLoginUser = async (e) => {
     e.preventDefault();
+    setError(null);
+
     try {
-      const res = await fetch(`/api/login`, {
+      const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(loginData),
+        body: JSON.stringify(loginData), 
       });
 
       const data = await res.json();
 
-      if (!res.ok) {
-        console.error({ error: "Response was bad" });
+      if (!res.ok || data.error) {
+        setError(data.error || "Login failed");
+        return;
       }
+
       if (data.user) {
         loginUser(data.user);
-        setRegisterData({ username: "", password: "" });
+        setLoginData({ username: "", password: "" });
         router.push("/");
       }
     } catch (err) {
-      console.error("error occurred: ", err);
+      setError("Something went wrong during login");
+      console.error(err);
     }
   };
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
+    setError(null);
 
     if (registerData.password !== registerData.confirmPassword) {
       setError("Passwords do not match");
@@ -73,7 +79,7 @@ export default function LoginPage() {
     }
 
     try {
-      const res = await fetch(`/api/register`, {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -84,25 +90,30 @@ export default function LoginPage() {
 
       const data = await res.json();
 
-      if (!res.ok) {
-        console.error({ error: data.error || "Something happened during registration" });
+      if (!res.ok || data.error) {
+        setError(data.error || "Registration failed");
+        return;
       }
 
       if (data.user) {
         loginUser(data.user);
         setRegisterData({ username: "", password: "", confirmPassword: "" });
         router.push("/");
-      } else {
-        console.log("didnt work");
       }
     } catch (err) {
-      console.error("error occurred: ", err);
+      setError("Something went wrong during registration");
+      console.error(err);
     }
   };
 
   return (
     <>
       <LoginWrapper>
+        <h2>Login</h2>
+
+        {/* for error handling */}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
         <form
           onSubmit={handleLoginUser}
           style={{ display: "flex", flexDirection: "column" }}
@@ -126,7 +137,12 @@ export default function LoginPage() {
           <button type="submit">Login</button>
         </form>
       </LoginWrapper>
+
       <LoginWrapper>
+        <h2>Register</h2>
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
         <form
           onSubmit={handleCreateUser}
           style={{ display: "flex", flexDirection: "column" }}

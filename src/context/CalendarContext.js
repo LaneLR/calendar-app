@@ -13,11 +13,13 @@ export function CalendarProvider({ children }) {
     username: "",
     password: "",
   });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const loginUser = (userData) => {
     setUser(userData);
+    setIsLoggedIn(true);
   };
 
   const logoutUser = () => {
@@ -25,7 +27,8 @@ export function CalendarProvider({ children }) {
       username: "",
       password: "",
     });
-    router.push('/')
+    setIsLoggedIn(false);
+    router.push("/");
   };
 
   const addEvent = (newEvent) => {
@@ -53,28 +56,27 @@ export function CalendarProvider({ children }) {
   };
 
   return (
-    <>
-      <CalendarContext.Provider
-        value={{
-          events,
-          messages,
-          contacts,
-          user,
-          selectedDate,
-          setSelectedDate,
-          loginUser,
-          logoutUser,
-          addContact,
-          addMessage,
-          deleteContact,
-          emptyEvents,
-          deleteEvent,
-          addEvent,
-        }}
-      >
-        {children}
-      </CalendarContext.Provider>
-    </>
+    <CalendarContext.Provider
+      value={{
+        events,
+        messages,
+        contacts,
+        user,
+        isLoggedIn,
+        loginUser,
+        logoutUser,
+        selectedDate,
+        setSelectedDate,
+        addContact,
+        addMessage,
+        deleteContact,
+        emptyEvents,
+        deleteEvent,
+        addEvent,
+      }}
+    >
+      {children}
+    </CalendarContext.Provider>
   );
 }
 
