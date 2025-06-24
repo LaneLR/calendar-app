@@ -44,6 +44,24 @@ const SidebarTab = styled(Link)`
   }
 `;
 
+const SidebarTabDiv = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 3px;
+  width: 100%;
+  border: 1px solid white;
+  height: 40px;
+  color: black;
+  background-color: yellow;
+  cursor: pointer;
+  border-radius: 7px;
+
+  &:first-of-type {
+    margin-top: 10px;
+  }
+`;
+
 export default function Sidebar({ children }) {
   const { isLoggedIn, logoutUser } = useCalendar();
 
@@ -55,10 +73,21 @@ export default function Sidebar({ children }) {
           <SidebarTab href="/messages">Messages</SidebarTab>
           <SidebarTab href="/contacts">Contacts</SidebarTab>
           {isLoggedIn ? (
-            <SidebarTab><button style={{border: 'hidden'}} onClick={(e) => { e.preventDefault(); logoutUser(); }}>Logout</button></SidebarTab>
+            <SidebarTabDiv>
+              <button
+                style={{ border: "hidden" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  logoutUser();
+                }}
+              >
+                Logout
+              </button>
+            </SidebarTabDiv>
           ) : (
             <SidebarTab href="/login">Login</SidebarTab>
           )}
+          <SidebarTab href="/register">Create account</SidebarTab>
         </SidebarTabContainer>
       </SidebarWrapper>
     </>
