@@ -23,6 +23,7 @@ export default function LoginPage() {
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const handleLoginChange = (e) => {
@@ -41,6 +42,7 @@ export default function LoginPage() {
 
   const handleLoginUser = async (e) => {
     e.preventDefault();
+    setError(null);
 
     try {
       const res = await fetch("/api/login", {
@@ -52,7 +54,8 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (!res.ok || data.error) {
-        console.error("Problems occurred with logging-in data");
+        setError(data.error || "Login failed");
+        console.error(error);
         return;
       }
 
@@ -62,14 +65,18 @@ export default function LoginPage() {
         router.push("/");
       }
     } catch (err) {
+      setError("Something went wrong during login");
       console.error(err);
     }
   };
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
+    setError(null);
 
     if (registerData.password !== registerData.confirmPassword) {
+      setError("Passwords do not match");
+      console.error(error);
       return;
     }
 
@@ -86,7 +93,8 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (!res.ok || data.error) {
-        console.error("Problems occurred with create-user data");
+        setError(data.error || "Registration failed");
+        console.error(error);
         return;
       }
 
@@ -96,6 +104,7 @@ export default function LoginPage() {
         router.push("/");
       }
     } catch (err) {
+      setError("Something went wrong during registration");
       console.error(err);
       return;
     }
@@ -137,7 +146,6 @@ export default function LoginPage() {
         <h2>Register</h2>
 
         {error && <p style={{ color: "red" }}>{error}</p>}
-
         <form
           onSubmit={handleCreateUser}
           style={{ display: "flex", flexDirection: "column" }}
