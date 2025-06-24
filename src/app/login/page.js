@@ -13,15 +13,27 @@ const LoginWrapper = styled.div`
 
 export default function LoginPage() {
   const { loginUser, setUser } = useCalendar();
-  const [formData, setFormData] = useState({
+  const [loginData, setLoginData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [registerData, setRegisterData] = useState({
     username: "",
     password: "",
     confirmPassword: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
+  const handleLoginChange = (e) => {
+    setLoginData({
+      ...loginData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+    const handleRegisterChange = (e) => {
+    setRegisterData({
+      ...registerData,
       [e.target.name]: e.target.value,
     });
   };
@@ -33,8 +45,8 @@ export default function LoginPage() {
         method: "POST",
         headers: { "Content-Type ": "application/json" },
         body: JSON.stringify({
-          username: formData.username,
-          password: formData.password,
+          username: loginData.username,
+          password: loginData.password,
         }),
       });
 
@@ -57,8 +69,8 @@ export default function LoginPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: formData.username,
-          password: formData.password,
+          username: registerData.username,
+          password: registerData.password,
         }),
       });
 
@@ -85,16 +97,16 @@ export default function LoginPage() {
             placeholder="username"
             type="text"
             name="username"
-            value={formData.username}
-            onChange={handleChange}
+            value={loginData.username}
+            onChange={handleLoginChange}
             required
           />
           <input
             placeholder="password"
             type="password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={loginData.password}
+            onChange={handleLoginChange}
             required
           />
           <button type="submit">Login</button>
@@ -109,24 +121,24 @@ export default function LoginPage() {
             placeholder="username"
             type="text"
             name="username"
-            value={formData.username}
-            onChange={handleChange}
+            value={registerData.username}
+            onChange={handleRegisterChange}
             required
           />
           <input
             placeholder="password"
             type="password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={registerData.password}
+            onChange={handleRegisterChange}
             required
           />
           <input
             placeholder="Confirm password"
             type="password"
             name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
+            value={registerData.confirmPassword}
+            onChange={handleRegisterChange}
             required
           />
           <button type="submit">Register</button>
