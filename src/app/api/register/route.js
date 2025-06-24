@@ -20,7 +20,8 @@ export async function POST(req) {
     const {password: _, ...userWithoutPassword} = createNewUser.toJSON();
   
     return NextResponse.json({
-        message: "User was created successfully"
+        message: "User was created successfully",
+        user: userWithoutPassword,
     })
 } catch (err) {
     console.error(err)
