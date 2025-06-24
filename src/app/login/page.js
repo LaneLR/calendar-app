@@ -110,6 +110,7 @@ export default function LoginPage() {
             type="text"
             name="username"
             value={formData.username}
+            onChange={handleChange}
             required
           />
           <input
@@ -128,7 +129,7 @@ export default function LoginPage() {
             onChange={handleChange}
             required
           />
-          <button type="submit">Login</button>
+          <button type="submit">Register</button>
         </form>
       </LoginWrapper>
     </>

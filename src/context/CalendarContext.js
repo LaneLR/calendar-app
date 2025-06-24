@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 
 const CalendarContext = createContext();
@@ -13,6 +14,8 @@ export function CalendarProvider({ children }) {
     password: "",
   });
 
+  const router = useRouter()
+
   const loginUser = (userData) => {
     setUser(userData);
   };
@@ -22,6 +25,7 @@ export function CalendarProvider({ children }) {
       username: "",
       password: "",
     });
+    router.push('/')
   };
 
   const addEvent = (newEvent) => {

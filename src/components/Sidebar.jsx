@@ -55,7 +55,7 @@ export default function Sidebar({ children }) {
           <SidebarTab href="/messages">Messages</SidebarTab>
           <SidebarTab href="/contacts">Contacts</SidebarTab>
           {user.username !== "" ? (
-            <SidebarTab href="/"><button onClick={(e) => { e.preventDefault(); logoutUser(); }}>Logout</button></SidebarTab>
+            <SidebarTab><button style={{border: 'hidden'}} onClick={(e) => { e.preventDefault(); logoutUser(); }}>Logout</button></SidebarTab>
           ) : (
             <SidebarTab href="/login">Login</SidebarTab>
           )}
