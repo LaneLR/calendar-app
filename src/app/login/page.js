@@ -62,7 +62,9 @@ export default function LoginPage() {
       if (data.user) {
         loginUser(data.user);
         setLoginData({ username: "", password: "" });
-        router.push("/");
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
       }
     } catch (err) {
       setError("Something went wrong during login");
@@ -101,7 +103,9 @@ export default function LoginPage() {
       if (data.user) {
         loginUser(data.user);
         setRegisterData({ username: "", password: "", confirmPassword: "" });
-        router.push("/");
+        setTimeout(() => {
+          router.push("/");
+        }, 100);
       }
     } catch (err) {
       setError("Something went wrong during registration");
