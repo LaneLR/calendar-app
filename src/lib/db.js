@@ -1,23 +1,24 @@
-import initializeModels from "./models";
-
-if (!global.db) {
-  global.db = {};
-}
+import getSequelizeInstance from "./sequelize";
+import initializeModels from "@/lib/models";
 
 export default async function initializeDbAndModels() {
-  if (!global.db.sequelize || !global.db.User || !global.db.Message) {
-    
+  if (!global.db?.sequelize) {
     try {
-      console.log(
-        "Attempting to initialize models..."
-      );
-      const db = await initializeModels();
-      await sequelize.sync(); //set up table columns if not already
-      global.db = db
-      console.log("Models successfully initialized");
+      console.log("Initializing Sequelize and models...");
+
+      const sequelize = await getSequelizeInstance();
+
+      const db = await initializeModels(sequelize);
+
+      await sequelize.sync({ alter: true });
+
+      global.db = db;
+
+      console.log("DB and models initialized");
     } catch (err) {
-      console.error(err);
+      console.error("Error initializing DB and models:", err);
     }
   }
+
   return global.db;
 }
