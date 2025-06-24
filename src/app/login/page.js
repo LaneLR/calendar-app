@@ -23,7 +23,6 @@ export default function LoginPage() {
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState(null);
   const router = useRouter();
 
   const handleLoginChange = (e) => {
@@ -42,19 +41,18 @@ export default function LoginPage() {
 
   const handleLoginUser = async (e) => {
     e.preventDefault();
-    setError(null);
 
     try {
       const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(loginData), 
+        body: JSON.stringify(loginData),
       });
 
       const data = await res.json();
 
       if (!res.ok || data.error) {
-        setError(data.error || "Login failed");
+        console.error("Problems occurred with logging-in data");
         return;
       }
 
@@ -64,17 +62,14 @@ export default function LoginPage() {
         router.push("/");
       }
     } catch (err) {
-      setError("Something went wrong during login");
       console.error(err);
     }
   };
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
-    setError(null);
 
     if (registerData.password !== registerData.confirmPassword) {
-      setError("Passwords do not match");
       return;
     }
 
@@ -91,7 +86,7 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (!res.ok || data.error) {
-        setError(data.error || "Registration failed");
+        console.error("Problems occurred with create-user data");
         return;
       }
 
@@ -101,8 +96,8 @@ export default function LoginPage() {
         router.push("/");
       }
     } catch (err) {
-      setError("Something went wrong during registration");
       console.error(err);
+      return;
     }
   };
 
