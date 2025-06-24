@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import initializeDbAndModels from "@/lib/db";
 import { NextResponse } from "next/server";
 
