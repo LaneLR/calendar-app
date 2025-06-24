@@ -1,5 +1,4 @@
 import initializeModels from "./models";
-import getSequelizeInstance from "./sequelize";
 
 if (!global.db) {
   global.db = {};
