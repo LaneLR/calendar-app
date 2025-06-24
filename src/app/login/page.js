@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { useCalendar } from "@/context/CalendarContext";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const LoginWrapper = styled.div`
   display: flex;
@@ -23,6 +24,7 @@ export default function LoginPage() {
     password: "",
     confirmPassword: "",
   });
+  const router = useRouter();
 
   const handleLoginChange = (e) => {
     setLoginData({
@@ -38,12 +40,12 @@ export default function LoginPage() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleLoginUser = async (e) => {
     e.preventDefault();
     try {
       const res = await fetch(`/api/login`, {
         method: "POST",
-        headers: { "Content-Type ": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: loginData.username,
           password: loginData.password,
@@ -57,6 +59,7 @@ export default function LoginPage() {
       }
       loginUser(data.user);
       setLoginData({ username: "", password: ""});
+      router.push('/')
     } catch (err) {
       console.error("error occurred: ", err);
     }
@@ -81,6 +84,7 @@ export default function LoginPage() {
       }
       loginUser(data.user);
       setRegisterData({ username: "", password: "", confirmPassword: "" });
+      router.push('/')
     } catch (err) {
       console.error("error occurred: ", err);
     }
@@ -90,7 +94,7 @@ export default function LoginPage() {
     <>
       <LoginWrapper>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleLoginUser}
           style={{ display: "flex", flexDirection: "column" }}
         >
           <input
