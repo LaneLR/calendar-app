@@ -28,7 +28,10 @@ export function CalendarProvider({ children }) {
       password: "",
     });
     setIsLoggedIn(false);
-    router.push("/");
+    setTimeout(() => {
+      router.refresh();
+      router.push("/");
+    }, 100);
   };
 
   const addEvent = (newEvent) => {
