@@ -1,4 +1,4 @@
-import getSequelizeInstance from "../lib/sequelize";  // adjust if path is different
+import getSequelizeInstance from "../sequelize.js"; 
 import User from "./User.js";
 import Message from "./Message.js";
 import { DataTypes } from "sequelize";
