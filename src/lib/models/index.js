@@ -2,8 +2,7 @@ import getSequelizeInstance from "../sequelize.js";
 import User from "./User.js";
 import Message from "./Message.js";
 import { DataTypes } from "sequelize";
-
-const db = {};
+import bcrypt from 'bcryptjs';
 
 async function initializeModels() {
   const sequelize = await getSequelizeInstance();
