@@ -13,7 +13,7 @@ const LoginWrapper = styled.div`
 `;
 
 export default function LoginPage() {
-  const { loginUser, setUser } = useCalendar();
+  const { loginUser, setUser, user } = useCalendar();
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -46,10 +46,7 @@ export default function LoginPage() {
       const res = await fetch(`/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: loginData.username,
-          password: loginData.password,
-        }),
+        body: JSON.stringify(loginData),
       });
 
       const data = await res.json();
@@ -57,11 +54,11 @@ export default function LoginPage() {
       if (!res.ok) {
         console.error({ error: "Response was bad" });
       }
-    if (data.user) {
-      loginUser(data.user);
-      setRegisterData({ username: "", password: ""});
-      router.push("/");
-    }
+      if (data.user) {
+        loginUser(data.user);
+        setRegisterData({ username: "", password: "" });
+        router.push("/");
+      }
     } catch (err) {
       console.error("error occurred: ", err);
     }
@@ -69,6 +66,12 @@ export default function LoginPage() {
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
+
+    if (registerData.password !== registerData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
     try {
       const res = await fetch(`/api/register`, {
         method: "POST",
@@ -82,14 +85,16 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        console.error({ error: "Response was bad" });
+        console.error({ error: data.error || "Something happened during registration" });
       }
 
       if (data.user) {
         loginUser(data.user);
         setRegisterData({ username: "", password: "", confirmPassword: "" });
         router.push("/");
-      } 
+      } else {
+        console.log("didnt work");
+      }
     } catch (err) {
       console.error("error occurred: ", err);
     }
