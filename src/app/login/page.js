@@ -56,7 +56,7 @@ export default function LoginPage() {
         console.error({ error: "Response was bad" });
       }
       loginUser(data.user);
-      setFormData({ username: "", password: "", confirmPassword: "" });
+      setLoginData({ username: "", password: ""});
     } catch (err) {
       console.error("error occurred: ", err);
     }
@@ -80,7 +80,7 @@ export default function LoginPage() {
         console.error({ error: "Response was bad" });
       }
       loginUser(data.user);
-      setFormData({ username: "", password: "", confirmPassword: "" });
+      setRegisterData({ username: "", password: "", confirmPassword: "" });
     } catch (err) {
       console.error("error occurred: ", err);
     }
