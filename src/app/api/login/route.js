@@ -33,9 +33,11 @@ export async function POST(req) {
     const { password: _, ...userWithoutPassword } = user.toJSON();
 
     console.log("Returning success response");
-    return await NextResponse.json({
+    return NextResponse.json({
       message: "Login successful",
       user: userWithoutPassword,
+    }, {
+      status: 200
     });
   } catch (err) {
     console.error("Error in login route:", err);
