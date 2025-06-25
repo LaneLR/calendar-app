@@ -7,17 +7,16 @@ export async function POST(req) {
     const Event = db.Event;
 
     const body = await req.json();
-    const { title, date, time, description, userId } = body;
+    const { title, start, end, userId } = body;
 
-    if (!userId || !title || !date) {
+    if (!userId || !title) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     const newEvent = await Event.create({
       title,
-      date,
-      time,
-      description,
+      start,
+      end,
       userId,
     });
 
