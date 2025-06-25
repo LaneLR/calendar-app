@@ -14,6 +14,7 @@ export function CalendarProvider({ children }) {
     password: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [calendarView, setCalendarView] = useState("month")
 
   const router = useRouter();
 
@@ -30,8 +31,9 @@ export function CalendarProvider({ children }) {
     setIsLoggedIn(false);
     setTimeout(() => {
       router.refresh();
-      router.push("/");
+      router.push("/login");
     }, 100);
+    emptyEvents();
   };
 
   const addEvent = (newEvent) => {
@@ -69,6 +71,8 @@ export function CalendarProvider({ children }) {
         loginUser,
         logoutUser,
         selectedDate,
+        calendarView,
+        setCalendarView,
         setSelectedDate,
         setEvents,
         addContact,
