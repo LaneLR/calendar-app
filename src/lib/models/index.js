@@ -60,12 +60,33 @@ async function initializeModels() {
 
   Event.init(
     {
-      title: DataTypes.STRING,
-      date: DataTypes.DATEONLY,
-      time: DataTypes.TIME,
-      description: DataTypes.TEXT,
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+        date: {
+          type: DataTypes.DATEONLY,
+          allowNull: false,
+      },
+      time: { 
+        type: DataTypes.TIME,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      }
     },
-    { sequelize, modelName: "Event" }
+    {
+      sequelize,
+      modelName: "Event",
+      tableName: "Events",
+      timestamps: true,
+    }
   );
 
   // associations
@@ -84,6 +105,7 @@ async function initializeModels() {
     sequelize,
     User,
     Message,
+    Event,
   };
 }
 
