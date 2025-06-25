@@ -75,7 +75,7 @@ async function initializeModels() {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-  });
+  }, { sequelize, modelName: "Event" });
 
   // associations
   User.belongsToMany(User, { as: "Contacts", through: "UserContacts" });
