@@ -14,6 +14,7 @@ export function CalendarProvider({ children }) {
     password: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [calendarView, setCalendarView] = useState("month")
 
   const router = useRouter();
 
@@ -30,12 +31,13 @@ export function CalendarProvider({ children }) {
     setIsLoggedIn(false);
     setTimeout(() => {
       router.refresh();
-      router.push("/");
+      router.push("/login");
     }, 100);
+    emptyEvents();
   };
 
   const addEvent = (newEvent) => {
-    setEvents((prev) => [...prev, newEvent]);
+    setEvents((prev = []) => [...prev, newEvent]);
   };
 
   const deleteEvent = (deleted) => {
@@ -47,7 +49,7 @@ export function CalendarProvider({ children }) {
   };
 
   const addMessage = (newMessage) => {
-    setMessages((prev) => [...prev, newMessage]);
+    setMessages((prev = []) => [...prev, newMessage]);
   };
 
   const addContact = (newContact) => {
@@ -69,6 +71,8 @@ export function CalendarProvider({ children }) {
         loginUser,
         logoutUser,
         selectedDate,
+        calendarView,
+        setCalendarView,
         setSelectedDate,
         setEvents,
         addContact,

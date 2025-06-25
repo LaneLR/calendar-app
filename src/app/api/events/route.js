@@ -9,7 +9,7 @@ export async function POST(req) {
     const body = await req.json();
     const { title, start, end, userId } = body;
 
-    if (!userId || !title) {
+    if (!userId || !title || !start || !end) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
@@ -41,7 +41,7 @@ export async function GET(req) {
 
     const events = await Event.findAll({
       where: { userId },
-      order: [["date", "ASC"]],
+      order: [["start", "ASC"]],
     });
 
     return NextResponse.json({ events });

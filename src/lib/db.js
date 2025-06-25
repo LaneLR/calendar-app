@@ -17,6 +17,7 @@ export default async function initializeDbAndModels() {
       console.log("DB and models initialized");
     } catch (err) {
       console.error("Error initializing DB and models:", err);
+      return null;
     }
   }
 

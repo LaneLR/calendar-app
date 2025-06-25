@@ -56,10 +56,6 @@ const SidebarTabDiv = styled.div`
   background-color: yellow;
   cursor: pointer;
   border-radius: 7px;
-
-  &:first-of-type {
-    margin-top: 10px;
-  }
 `;
 
 export default function Sidebar({ children }) {
@@ -76,8 +72,7 @@ export default function Sidebar({ children }) {
             <SidebarTabDiv>
               <button
                 style={{ border: "hidden", backgroundColor: 'inherit', fontSize: 'inherit', color: 'inherit' }}
-                onClick={(e) => {
-                  e.preventDefault();
+                onClick={() => {
                   logoutUser();
                 }}
               >
