@@ -37,9 +37,10 @@ export default function UserCalendar() {
       const newEvent = {
         userId: user.id,
         title,
-        date: moment(start).format("MM-DD-YYYY"),
-        date: moment(start).format("HH:mm:ss"),
+        start,
+        end,
       };
+      // console.log("Sending this event: ", newEvent)
 
       try {
         const res = await fetch(`/api/events`, {
@@ -47,20 +48,15 @@ export default function UserCalendar() {
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(newEvent),
         });
-
+        // console.log(res);
         const data = await res.json();
 
         if (!res.ok) {
-          console.error("Error with event response: ", err);
+          console.error("Error with event response: ");
           return;
         }
 
-        addEvent({
-          id: data.event.id,
-          title: data.event.title,
-          start: new Date(data.event.date + "|" + data.event.time),
-          end: new Date(data.event.date + "|" + data.event.time),
-        });
+        addEvent(data.event)
       } catch (err) {
         console.error("Error with event: ", err);
         return;
@@ -72,19 +68,20 @@ export default function UserCalendar() {
     try {
       const res = await fetch(`/api/events?userId=${user.id}`);
       const data = await res.json();
-      const formattedEvents = data.events.map((event) => ({
-        id: event.id,
-        title: event.title,
-        start: new Date(event.date + "T" + event.time),
-        end: new Date(event.date + "T" + event.time),
-      }));
 
-      setEvents(formattedEvents);
+      if (Array.isArray(data.events)) {
+        const parsedEvents = data.events.map((event) => ({
+          ...event,
+          start: new Date(event.start),
+          end: new Date(event.end),
+        }));
+
+        setEvents(parsedEvents);
+      }
     } catch (err) {
-      console.error("Error getting events: ", err);
-      return;
+      console.error("Error getting events:", err);
     }
-  };
+  }
 
   useEffect(() => {
     if (user.id) {
