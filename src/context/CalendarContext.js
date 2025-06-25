@@ -14,7 +14,7 @@ export function CalendarProvider({ children }) {
     password: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [calendarView, setCalendarView] = useState("month")
+  const [calendarView, setCalendarView] = useState("month");
 
   const router = useRouter();
 
@@ -41,7 +41,12 @@ export function CalendarProvider({ children }) {
   };
 
   const deleteEvent = (deleted) => {
-    setEvents((prev) => prev.filter((e) => e.title !== deleted));
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete this event?`
+    );
+    if (confirmDelete) {
+      setEvents((prev) => prev.filter((e) => e.id !== deleted));
+    }
   };
 
   const emptyEvents = () => {
