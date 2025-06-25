@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useCalendar } from "@/context/CalendarContext";
 
 const RegisterWrapper = styled.div`
   display: flex;
@@ -11,7 +12,8 @@ const RegisterWrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function LoginPage() {
+export default function RegisterPage() {
+  const {loginUser} = useCalendar();
 
   const [registerData, setRegisterData] = useState({
     username: "",
