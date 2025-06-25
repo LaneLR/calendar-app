@@ -58,42 +58,33 @@ async function initializeModels() {
     { sequelize, modelName: "Message" }
   );
 
-  Event.init(
-    {
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-        date: {
-          type: DataTypes.DATEONLY,
-          allowNull: false,
-      },
-      time: { 
-        type: DataTypes.TIME,
-        allowNull: false,
-      },
-      description: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      }
+  Event.init({
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    {
-      sequelize,
-      modelName: "Event",
-      tableName: "Events",
-      timestamps: true,
-    }
-  );
+    start: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    end: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  });
 
   // associations
   User.belongsToMany(User, { as: "Contacts", through: "UserContacts" });
 
   User.hasMany(Message, { foreignKey: "senderUserId", as: "SentMessages" });
-  User.hasMany(Message, {foreignKey: "recipientUserId", as: "ReceivedMessages"});
+  User.hasMany(Message, {
+    foreignKey: "recipientUserId",
+    as: "ReceivedMessages",
+  });
 
   Message.belongsTo(User, { foreignKey: "senderUserId", as: "Sender" });
   Message.belongsTo(User, { foreignKey: "recipientUserId", as: "Recipient" });
