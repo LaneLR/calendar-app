@@ -11,7 +11,7 @@ async function getSequelizeInstance() {
         //check if pg exists and is not empty
         return console.error("DEBUG: pg import is empty or failed");
       } else {
-        console.log("pg imoport successfully, the keys are: ", Object.keys(pg));
+        console.log("pg imported successfully, the keys are: ", Object.keys(pg));
       }
 
       if (!process.env.DATABASE_URL) {
