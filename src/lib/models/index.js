@@ -1,6 +1,7 @@
 import getSequelizeInstance from "../sequelize.js";
 import User from "./User.js";
 import Message from "./Message.js";
+import Event from "./Event.js";
 import { DataTypes } from "sequelize";
 import bcrypt from "bcryptjs";
 
