@@ -41,7 +41,7 @@ export async function GET(req) {
 
     const events = await Event.findAll({
       where: { userId },
-      order: [["date", "ASC"]],
+      order: [["start", "ASC"]],
     });
 
     return NextResponse.json({ events });
