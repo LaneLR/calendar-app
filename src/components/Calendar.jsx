@@ -3,7 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import "@/styles/custom-calendar.scss";
 import moment from "moment";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCalendar } from "@/context/CalendarContext";
 
 const CalendarWrapper = styled.div`
@@ -26,16 +26,71 @@ const CalendarSizing = styled.div`
 const localizer = momentLocalizer(moment);
 
 export default function UserCalendar() {
-  const {events, addEvent, selectedDate, setSelectedDate} = useCalendar();
+  const { events, addEvent, user, setEvents, selectedDate, setSelectedDate } =
+    useCalendar();
 
-  const handleSelectSlot = ({ start, end }) => {
+  const handleSelectSlot = async ({ start, end }) => {
     const title = window.prompt(
       `New event from ${start.toLocaleString()} to ${end.toLocaleString()}`
     );
     if (title) {
-      addEvent({ start, end, title })
+      const newEvent = {
+        userId: user.id,
+        title,
+        date: moment(start).format("MM-DD-YYYY"),
+        date: moment(start).format("HH:mm:ss"),
+      };
+
+      try {
+        const res = await fetch(`/api/events`, {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(newEvent),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          console.error("Error with event response: ", err);
+          return;
+        }
+
+        addEvent({
+          id: data.event.id,
+          title: data.event.title,
+          start: new Date(data.event.date + "|" + data.event.time),
+          end: new Date(data.event.date + "|" + data.event.time),
+        });
+      } catch (err) {
+        console.error("Error with event: ", err);
+        return;
+      }
     }
   };
+
+  const fetchEvents = async () => {
+    try {
+      const res = await fetch(`/api/events?userId=${user.id}`);
+      const data = await res.json();
+      const formattedEvents = data.events.map((event) => ({
+        id: event.id,
+        title: event.title,
+        start: new Date(event.date + "T" + event.time),
+        end: new Date(event.date + "T" + event.time),
+      }));
+
+      setEvents(formattedEvents);
+    } catch (err) {
+      console.error("Error getting events: ", err);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    if (user.id) {
+      fetchEvents();
+    }
+  }, [user.id]);
 
   return (
     <>
@@ -44,12 +99,14 @@ export default function UserCalendar() {
           <Calendar
             localizer={localizer}
             events={events}
-            startAccessor='start'
-            endAccessor='end'
+            startAccessor="start"
+            endAccessor="end"
             defaultView="month"
             selectable
             onSelectSlot={handleSelectSlot}
-            onSelectEvent={(event) => alert(`Event ${event.title} is on your calendar`)}
+            onSelectEvent={(event) =>
+              alert(`Event ${event.title} is on your calendar`)
+            }
           />
         </CalendarSizing>
       </CalendarWrapper>

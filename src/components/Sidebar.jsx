@@ -75,7 +75,7 @@ export default function Sidebar({ children }) {
           {isLoggedIn ? (
             <SidebarTabDiv>
               <button
-                style={{ border: "hidden" }}
+                style={{ border: "hidden", backgroundColor: 'inherit', fontSize: 'inherit', color: 'inherit' }}
                 onClick={(e) => {
                   e.preventDefault();
                   logoutUser();
