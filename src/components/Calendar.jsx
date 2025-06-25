@@ -3,7 +3,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import "@/styles/custom-calendar.scss";
 import moment from "moment";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useCalendar } from "@/context/CalendarContext";
 
 const CalendarWrapper = styled.div`
@@ -37,8 +37,8 @@ export default function UserCalendar() {
       const newEvent = {
         userId: user.id,
         title,
-        start,
-        end,
+        start: start.toISOString(),
+        end: end.toISOString(),
       };
       // console.log("Sending this event: ", newEvent)
 
@@ -56,7 +56,11 @@ export default function UserCalendar() {
           return;
         }
 
-        addEvent(data.event);
+        addEvent({
+          ...data.event,
+          start: new Date(data.event.start),
+          end: new Date(data.event.end),
+        });
       } catch (err) {
         console.error("Error with event: ", err);
         return;
