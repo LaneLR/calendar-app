@@ -35,7 +35,7 @@ export function CalendarProvider({ children }) {
   };
 
   const addEvent = (newEvent) => {
-    setEvents((prev) => [...prev, newEvent]);
+    setEvents((prev = []) => [...prev, newEvent]);
   };
 
   const deleteEvent = (deleted) => {
