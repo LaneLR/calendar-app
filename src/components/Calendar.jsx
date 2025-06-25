@@ -26,7 +26,7 @@ const CalendarSizing = styled.div`
 const localizer = momentLocalizer(moment);
 
 export default function UserCalendar() {
-  const { events, addEvent, user, setEvents, selectedDate, setSelectedDate } =
+  const { events, addEvent, user, setEvents, calendarView, setCalendarView } =
     useCalendar();
 
   const handleSelectSlot = async ({ start, end }) => {
@@ -56,7 +56,7 @@ export default function UserCalendar() {
           return;
         }
 
-        addEvent(data.event)
+        addEvent(data.event);
       } catch (err) {
         console.error("Error with event: ", err);
         return;
@@ -81,7 +81,7 @@ export default function UserCalendar() {
     } catch (err) {
       console.error("Error getting events:", err);
     }
-  }
+  };
 
   useEffect(() => {
     if (user?.id) {
@@ -94,11 +94,14 @@ export default function UserCalendar() {
       <CalendarWrapper>
         <CalendarSizing>
           <Calendar
+            key={user.id || "calendar"}
             localizer={localizer}
             events={events}
             startAccessor="start"
             endAccessor="end"
             defaultView="month"
+            view={calendarView}
+            onView={(view) => setCalendarView(view)}
             selectable
             onSelectSlot={handleSelectSlot}
             onSelectEvent={(event) =>
