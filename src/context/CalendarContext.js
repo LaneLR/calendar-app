@@ -20,6 +20,23 @@ export function CalendarProvider({ children }) {
   const loginUser = (userData) => {
     setUser(userData);
     setIsLoggedIn(true);
+
+    //fetch the data immediately at log in
+    fetch(`/api/events?userId=${userData.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data.events)) {
+          const parsedEvents = data.events.map((event) => ({
+            ...event,
+            start: new Date(event.start),
+            end: new Date(event.end),
+          }));
+          setEvents(parsedEvents);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching events after login:", err);
+      });
   };
 
   const logoutUser = () => {
@@ -47,7 +64,7 @@ export function CalendarProvider({ children }) {
   };
 
   const addMessage = (newMessage) => {
-    setMessages((prev) => [...prev, newMessage]);
+    setMessages((prev = []) => [...prev, newMessage]);
   };
 
   const addContact = (newContact) => {

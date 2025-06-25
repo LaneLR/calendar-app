@@ -64,31 +64,6 @@ export default function UserCalendar() {
     }
   };
 
-  const fetchEvents = async () => {
-    try {
-      const res = await fetch(`/api/events?userId=${user.id}`);
-      const data = await res.json();
-
-      if (Array.isArray(data.events)) {
-        const parsedEvents = data.events.map((event) => ({
-          ...event,
-          start: new Date(event.start),
-          end: new Date(event.end),
-        }));
-
-        setEvents(parsedEvents);
-      }
-    } catch (err) {
-      console.error("Error getting events:", err);
-    }
-  }
-
-  useEffect(() => {
-    if (user.id) {
-      fetchEvents();
-    }
-  }, [user.id]);
-
   return (
     <>
       <CalendarWrapper>
