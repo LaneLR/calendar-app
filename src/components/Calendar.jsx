@@ -26,8 +26,15 @@ const CalendarSizing = styled.div`
 const localizer = momentLocalizer(moment);
 
 export default function UserCalendar() {
-  const { events, addEvent, user, setEvents, calendarView, setCalendarView } =
-    useCalendar();
+  const {
+    events,
+    addEvent,
+    user,
+    setEvents,
+    calendarView,
+    setCalendarView,
+    deleteEvent,
+  } = useCalendar();
 
   const handleSelectSlot = async ({ start, end }) => {
     const title = window.prompt(
@@ -87,6 +94,28 @@ export default function UserCalendar() {
     }
   };
 
+  const handleDeleteEvent = async (event) => {
+    if (!event || !event.id) {
+      console.error("Invalid event for deletion");
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/events/${event.id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error("Delete failed:", data.error);
+        return;
+      }
+      deleteEvent(event.id);
+    } catch (err) {
+      console.error("Error occurred while trying to delete event: ", err);
+    }
+  };
+
   useEffect(() => {
     if (user?.id) {
       fetchEvents();
@@ -108,9 +137,7 @@ export default function UserCalendar() {
             onView={(view) => setCalendarView(view)}
             selectable
             onSelectSlot={handleSelectSlot}
-            onSelectEvent={(event) =>
-              alert(`Event ${event.title} is on your calendar`)
-            }
+            onSelectEvent={handleDeleteEvent}
           />
         </CalendarSizing>
       </CalendarWrapper>
