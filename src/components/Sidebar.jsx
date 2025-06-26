@@ -60,7 +60,7 @@ const SidebarTabDiv = styled.button`
   font-size: 1rem;
 `;
 
-export default function Sidebar({ children }) {
+export default function Sidebar() {
   const { isLoggedIn, logoutUser } = useCalendar();
 
   const router = useRouter();
