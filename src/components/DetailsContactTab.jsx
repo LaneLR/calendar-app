@@ -67,7 +67,7 @@ const ContactFunctionWrapper = styled.div`
 export default function DetailsContactTab({ contact }) {
   const trashcanImage = "/images/trashcan.png";
 
-  const { result, addContact } = useCalendar();
+  const { result, addContacts,  } = useCalendar();
 
   return (
     <TabWrapper>
@@ -81,7 +81,7 @@ export default function DetailsContactTab({ contact }) {
       </ContactSnippetWrapper>
 
       {result.length < 3 ? (
-        <AddContactButton onClick={() => addContact()}>+</AddContactButton>
+        <AddContactButton onClick={() => addContacts(contact.id)}>+</AddContactButton>
       ) : (
         <>
           <ContactFunctionWrapper>
@@ -96,7 +96,7 @@ export default function DetailsContactTab({ contact }) {
                 cursor: "pointer",
               }}
             />
-          </ContactFunctionWrapper>{" "}
+          </ContactFunctionWrapper>
         </>
       )}
     </TabWrapper>
