@@ -91,8 +91,8 @@ async function initializeModels() {
   Message.belongsTo(User, { foreignKey: "senderUserId", as: "Sender" });
   Message.belongsTo(User, { foreignKey: "recipientUserId", as: "Recipient" });
 
-  User.hasMany(Event, { foreignKey: "userId" });
-  Event.belongsTo(User, { foreignKey: "userId" });
+  User.belongsToMany(Event, { through: "UserEvents" });
+  Event.belongsToMany(User, { through: "UserEvents" }); 
 
   return {
     sequelize,
