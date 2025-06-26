@@ -61,12 +61,24 @@ export function CalendarProvider({ children }) {
     setMessages((prev = []) => [...prev, newMessage]);
   };
 
-  const addContact = (newContact) => {
-    setContacts((prev) => [...prev, newContact]);
+  const addContact = async (userId, contactId) => {
+    await fetch(`/api/contacts/add`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, contactId }),
+    });
+
+    await loadContacts(userId);
   };
 
   const deleteContact = (deleted) => {
     setContacts((prev) => prev.filter((e) => e.name !== deleted));
+  };
+
+  const loadContacts = async (userId) => {
+    const res = await fetch(`/api/contacts?userId=${userId}`);
+    const data = await res.json();
+    setContacts(data.contacts);
   };
 
   useEffect(() => {
@@ -127,6 +139,8 @@ export function CalendarProvider({ children }) {
         setResult,
         searchTerm,
         setSearchTerm,
+        loadContacts,
+        addContact,
       }}
     >
       {loadingAuth ? <div>Loading...</div> : children}
