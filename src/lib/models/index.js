@@ -78,7 +78,12 @@ async function initializeModels() {
   }, { sequelize, modelName: "Event" });
 
   // associations
-  User.belongsToMany(User, { as: "Contacts", through: "UserContacts" });
+  User.belongsToMany(User, {
+  as: "Contacts",
+  through: "UserContacts",
+  foreignKey: "UserId",  // who is doing the adding
+  otherKey: "ContactId",   // who is being added
+});
 
   User.hasMany(Message, { foreignKey: "senderUserId", as: "SentMessages" });
   User.hasMany(Message, { foreignKey: "recipientUserId", as: "ReceivedMessages" });
@@ -87,7 +92,7 @@ async function initializeModels() {
   Message.belongsTo(User, { foreignKey: "recipientUserId", as: "Recipient" });
 
   User.hasMany(Event, { foreignKey: "userId" });
-  Event.belongsToMany(User, { foreignKey: "userId" });
+  Event.belongsTo(User, { foreignKey: "userId" });
 
   return {
     sequelize,

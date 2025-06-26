@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
-import loading from "@/app/loading";
 
 const CalendarContext = createContext();
 
@@ -61,29 +60,53 @@ export function CalendarProvider({ children }) {
     setMessages((prev = []) => [...prev, newMessage]);
   };
 
-  const addContact = async (userId, contactId) => {
-    await fetch(`/api/contacts/add`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, contactId }),
-    });
+  const addContacts = async (contactId) => {
+    if (!contactId || isNaN(contactId)) {
+      console.error("Bad or invalid contactId: ", contactId);
+      return;
+    }
 
-    await loadContacts(userId);
-  };
+    try {
+      await fetch(`/api/contacts/add`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id, contactId }),
+      });
 
-  const deleteContact = (deleted) => {
-    setContacts((prev) => prev.filter((e) => e.name !== deleted));
+      await loadContacts(user.id);
+    } catch (err) {
+      console.error("Error at addContacts: ", err);
+    }
   };
 
   const loadContacts = async (userId) => {
     const res = await fetch(`/api/contacts?userId=${userId}`);
     const data = await res.json();
     setContacts(data.contacts);
+    router.refresh();
+  };
+
+  const deleteContact = async (contactId) => {
+    if (!contactId || isNaN(contactId)) {
+      console.error("Bad or invalid Delete: ", contactId);
+      return;
+    }
+    try {
+      await fetch(`/api/contacts/delete`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id, contactId }),
+      });
+
+      await loadContacts(user.id);
+    } catch (err) {
+      console.error("Error at deleteContact: ", err);
+    }
+    setContacts((prev) => prev.filter((e) => e.name !== contactId));
   };
 
   useEffect(() => {
     const checkAuth = async () => {
-      console.log("Checking auth status...");
       try {
         const res = await fetch("/api/auth-status", {
           method: "GET",
@@ -97,18 +120,16 @@ export function CalendarProvider({ children }) {
             username: data.user.username,
           });
           setIsLoggedIn(true);
-          console.log("Auth successful. User:", data.user);
+          await loadContacts(data.user.userId);
         }
       } catch (err) {
-        console.error("Error checking auth status:", err);
       } finally {
         setLoadingAuth(false);
-        console.log("setLoadingAuth(false)");
       }
     };
 
     checkAuth();
-  }, []);
+  }, [user.id]);
 
   return (
     <CalendarContext.Provider
@@ -127,7 +148,6 @@ export function CalendarProvider({ children }) {
         setCalendarView,
         setSelectedDate,
         setEvents,
-        addContact,
         setMessages,
         setContacts,
         addMessage,
@@ -140,7 +160,7 @@ export function CalendarProvider({ children }) {
         searchTerm,
         setSearchTerm,
         loadContacts,
-        addContact,
+        addContacts,
       }}
     >
       {loadingAuth ? <div>Loading...</div> : children}

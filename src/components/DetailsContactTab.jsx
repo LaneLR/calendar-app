@@ -67,7 +67,9 @@ const ContactFunctionWrapper = styled.div`
 export default function DetailsContactTab({ contact }) {
   const trashcanImage = "/images/trashcan.png";
 
-  const { result, addContact } = useCalendar();
+  const { contacts, addContacts, deleteContact } = useCalendar();
+  const contactExists = contacts.some((c) => c.id === contact.id);
+
 
   return (
     <TabWrapper>
@@ -80,23 +82,30 @@ export default function DetailsContactTab({ contact }) {
         <ContactSnippet>{contact.username}</ContactSnippet>
       </ContactSnippetWrapper>
 
-      {result.length < 3 ? (
-        <AddContactButton onClick={() => addContact()}>+</AddContactButton>
+      {!contactExists ? (
+        <AddContactButton onClick={() => addContacts(contact.id)}>
+          +
+        </AddContactButton>
       ) : (
         <>
           <ContactFunctionWrapper>
-            <Image
-              src={trashcanImage}
-              width={25}
-              height={50}
-              alt="Delete contact icon"
-              style={{
-                margin: "0 10px",
-                objectFit: "contain",
-                cursor: "pointer",
-              }}
-            />
-          </ContactFunctionWrapper>{" "}
+            <button
+              style={{ border: "none", backgroundColor: "rgba(0,0,0,0)" }}
+              onClick={() => deleteContact(contact.id)}
+            >
+              <Image
+                src={trashcanImage}
+                width={25}
+                height={50}
+                alt="Delete contact icon"
+                style={{
+                  margin: "0 10px",
+                  objectFit: "contain",
+                  cursor: "pointer",
+                }}
+              />
+            </button>
+          </ContactFunctionWrapper>
         </>
       )}
     </TabWrapper>

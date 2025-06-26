@@ -43,13 +43,13 @@ export default function DetailsContainer() {
       {pathname.startsWith("/messages") ? (
         //message section below
         <>
-          {messages.length === 0 ? (
+          {messages?.length === 0 ? (
             <EmptyInfoWrapper>
               <h1>You have no Messages</h1>
             </EmptyInfoWrapper>
           ) : (
             <>
-              {messages.map((message, i) => (
+              {messages?.map((message, i) => (
                 <TabsLayout key={i}>
                   <DetailsMessageTab message={message} />
                 </TabsLayout>
@@ -61,11 +61,15 @@ export default function DetailsContainer() {
         //end messages section
         // contacts section below
         <>
-          {contacts.length === 0 && searchTerm.length < 3 ? (
+          {Array.isArray(contacts) &&
+          contacts.length === 0 &&
+          searchTerm.length < 3 ? (
             <EmptyInfoWrapper>
               <h1>You have no Contacts</h1>
             </EmptyInfoWrapper>
-          ) : contacts.length > 0 && searchTerm.length < 3 ? (
+          ) : Array.isArray(contacts) &&
+            contacts.length > 0 &&
+            searchTerm.length < 3 ? (
             <>
               {contacts.map((contact, i) => (
                 <TabsLayout key={i}>
@@ -73,7 +77,7 @@ export default function DetailsContainer() {
                 </TabsLayout>
               ))}
             </>
-          ) : searchTerm.length >= 3 ? (
+          ) : searchTerm.length >= 3 && result.length > 0 ? (
             <>
               {result.map((contact, i) => (
                 <TabsLayout key={i}>
@@ -81,8 +85,14 @@ export default function DetailsContainer() {
                 </TabsLayout>
               ))}
             </>
+          ) : searchTerm.length >= 3 && result.length === 0 ? (
+            <EmptyInfoWrapper>
+              <h1>No results found</h1>
+            </EmptyInfoWrapper>
           ) : (
-            <>An error has occurred</>
+            <EmptyInfoWrapper>
+              <h1>Loading...</h1>
+            </EmptyInfoWrapper>
           )}
         </>
         //end contacts section

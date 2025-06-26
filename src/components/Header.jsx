@@ -1,4 +1,5 @@
 "use client";
+import { useCalendar } from "@/context/CalendarContext";
 import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
@@ -20,10 +21,13 @@ const HeaderContent = styled.div`
 `;
 
 export default function Header({ children }) {
+  const { user } = useCalendar()
+
   return (
     <>
       <HeaderWrapper>
-        <HeaderContent>{children}</HeaderContent>
+        <HeaderContent><p style={{color: 'black'}}>
+          {user.username}</p>{children}</HeaderContent>
       </HeaderWrapper>
     </>
   );
