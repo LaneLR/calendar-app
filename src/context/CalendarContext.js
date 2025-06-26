@@ -18,6 +18,7 @@ export function CalendarProvider({ children }) {
   const [loadingAuth, setLoadingAuth] = useState(true);
   const [result, setResult] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [date, setDate] = useState(new Date());
 
   const router = useRouter();
 
@@ -161,6 +162,8 @@ export function CalendarProvider({ children }) {
         setSearchTerm,
         loadContacts,
         addContacts,
+        date,
+        setDate,
       }}
     >
       {loadingAuth ? <div>Loading...</div> : children}

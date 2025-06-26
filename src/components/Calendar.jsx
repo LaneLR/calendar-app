@@ -35,6 +35,8 @@ export default function UserCalendar() {
     setCalendarView,
     deleteEvent,
     isLoggedIn,
+    date,
+    setDate,
   } = useCalendar();
 
   const handleSelectSlot = async ({ start, end }) => {
@@ -117,11 +119,11 @@ export default function UserCalendar() {
     }
   };
 
-useEffect(() => {
-  if (isLoggedIn && user?.id) {
-    fetchEvents();
-  }
-}, [user?.id]);
+  useEffect(() => {
+    if (isLoggedIn && user?.id) {
+      fetchEvents();
+    }
+  }, [user?.id]);
 
   return (
     <>
@@ -133,13 +135,14 @@ useEffect(() => {
             events={events}
             startAccessor="start"
             endAccessor="end"
-            defaultView="month"
             view={calendarView}
             onView={(view) => setCalendarView(view)}
             selectable
+            date={date}
             onSelectSlot={handleSelectSlot}
             onSelectEvent={handleDeleteEvent}
-            style={{minHeight: '494px', minWidth: '452px'}}
+            onNavigate={(date) => setDate(date)}
+            style={{ minHeight: "494px", minWidth: "452px" }}
           />
         </CalendarSizing>
       </CalendarWrapper>
