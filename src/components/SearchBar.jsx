@@ -44,7 +44,7 @@ export default function SearchBar() {
       <SearchBarWrapper>
         <Search
           type="text"
-          placeholder="Search..."
+          placeholder="Find new contacts..."
           value={searchTerm}
           onChange={handleSearch}
         />
