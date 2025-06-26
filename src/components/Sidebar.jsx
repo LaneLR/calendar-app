@@ -36,7 +36,7 @@ const SidebarTab = styled(Link)`
   border: 1px solid white;
   height: 40px;
   color: black;
-  background-color:rgb(187, 151, 194);
+  background-color: rgb(187, 151, 194);
   cursor: pointer;
   border-radius: 7px;
 
@@ -54,13 +54,14 @@ const SidebarTabDiv = styled.button`
   border: 1px solid white;
   height: 40px;
   color: black;
-  background-color: purple;
+  background-color: rgb(187, 151, 194);
   cursor: pointer;
   border-radius: 7px;
+  font-size: 1rem;
 `;
 
 export default function Sidebar({ children }) {
-  const { isLoggedIn, logoutUser, setLoadingAuth } = useCalendar();
+  const { isLoggedIn, logoutUser } = useCalendar();
 
   const router = useRouter();
 
@@ -100,9 +101,11 @@ export default function Sidebar({ children }) {
               Logout
             </SidebarTabDiv>
           ) : (
-            <SidebarTab href="/login">Login</SidebarTab>
+            <>
+              <SidebarTab href="/login">Login</SidebarTab>
+              <SidebarTab href="/register">Create account</SidebarTab>
+            </>
           )}
-          <SidebarTab href="/register">Create account</SidebarTab>
         </SidebarTabContainer>
       </SidebarWrapper>
     </>

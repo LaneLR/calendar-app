@@ -1,9 +1,15 @@
 "use client";
+import { useCalendar } from "@/context/CalendarContext";
 import Image from "next/image";
 import styled from "styled-components";
 
+const TabWrapper = styled.div`
+  width: 100%;
+  display: flex;
+`;
+
 const UserContactIconWrapper = styled.div`
-  width: 13%;
+  min-width: 13%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -19,7 +25,6 @@ const UserContactIcon = styled.div`
   justify-content: center;
   align-items: center;
   background-color: orange;
-  cursor: pointer;
 `;
 
 const ContactSnippetWrapper = styled.div`
@@ -30,7 +35,6 @@ const ContactSnippetWrapper = styled.div`
   font-size: 1.2rem;
   font-weight: 500;
   padding: 10px;
-  cursor: pointer;
 `;
 
 const ContactSnippet = styled.div`
@@ -39,6 +43,16 @@ const ContactSnippet = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+const AddContactButton = styled.button`
+  border: 0;
+  background-color: inherit;
+  font-size: 1.6rem;
+  width: auto;
+  padding: 0 10px;
+  cursor: pointer;
+  color: black;
 `;
 
 const ContactFunctionWrapper = styled.div`
@@ -53,29 +67,38 @@ const ContactFunctionWrapper = styled.div`
 export default function DetailsContactTab({ contact }) {
   const trashcanImage = "/images/trashcan.png";
 
+  const { result, addContact } = useCalendar();
+
   return (
-    <>
+    <TabWrapper>
       <UserContactIconWrapper>
         <UserContactIcon>
-          {/* contact.usericon */}
-          User
+          {contact.username.slice(0, 2).toUpperCase()}
         </UserContactIcon>
       </UserContactIconWrapper>
       <ContactSnippetWrapper>
-        <ContactSnippet>
-          {/* contact.name */}
-          firstname lastname
-        </ContactSnippet>
+        <ContactSnippet>{contact.username}</ContactSnippet>
       </ContactSnippetWrapper>
-      <ContactFunctionWrapper>
-        <Image
-          src={trashcanImage}
-          width={25}
-          height={50}
-          alt="Delete contact icon"
-          style={{ margin: "0 10px", objectFit: "contain", cursor: "pointer" }}
-        />
-      </ContactFunctionWrapper>
-    </>
+
+      {result.length < 3 ? (
+        <AddContactButton onClick={() => addContact()}>+</AddContactButton>
+      ) : (
+        <>
+          <ContactFunctionWrapper>
+            <Image
+              src={trashcanImage}
+              width={25}
+              height={50}
+              alt="Delete contact icon"
+              style={{
+                margin: "0 10px",
+                objectFit: "contain",
+                cursor: "pointer",
+              }}
+            />
+          </ContactFunctionWrapper>{" "}
+        </>
+      )}
+    </TabWrapper>
   );
 }

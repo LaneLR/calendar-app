@@ -17,6 +17,8 @@ export function CalendarProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [calendarView, setCalendarView] = useState("month");
   const [loadingAuth, setLoadingAuth] = useState(true);
+  const [result, setResult] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const router = useRouter();
 
@@ -59,12 +61,24 @@ export function CalendarProvider({ children }) {
     setMessages((prev = []) => [...prev, newMessage]);
   };
 
-  const addContact = (newContact) => {
-    setContacts((prev) => [...prev, newContact]);
+  const addContact = async (userId, contactId) => {
+    await fetch(`/api/contacts/add`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId, contactId }),
+    });
+
+    await loadContacts(userId);
   };
 
   const deleteContact = (deleted) => {
     setContacts((prev) => prev.filter((e) => e.name !== deleted));
+  };
+
+  const loadContacts = async (userId) => {
+    const res = await fetch(`/api/contacts?userId=${userId}`);
+    const data = await res.json();
+    setContacts(data.contacts);
   };
 
   useEffect(() => {
@@ -79,7 +93,7 @@ export function CalendarProvider({ children }) {
         if (res.ok) {
           const data = await res.json();
           setUser({
-            id: data.user.userId, 
+            id: data.user.userId,
             username: data.user.username,
           });
           setIsLoggedIn(true);
@@ -121,6 +135,12 @@ export function CalendarProvider({ children }) {
         emptyEvents,
         deleteEvent,
         addEvent,
+        result,
+        setResult,
+        searchTerm,
+        setSearchTerm,
+        loadContacts,
+        addContact,
       }}
     >
       {loadingAuth ? <div>Loading...</div> : children}

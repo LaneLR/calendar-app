@@ -139,6 +139,7 @@ useEffect(() => {
             selectable
             onSelectSlot={handleSelectSlot}
             onSelectEvent={handleDeleteEvent}
+            style={{minHeight: '494px', minWidth: '452px'}}
           />
         </CalendarSizing>
       </CalendarWrapper>

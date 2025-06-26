@@ -35,24 +35,18 @@ const EmptyInfoWrapper = styled.div`
 `;
 
 export default function DetailsContainer() {
-  const { messages, contacts } = useCalendar();
+  const { messages, contacts, searchTerm, result } = useCalendar();
   const pathname = usePathname();
 
   return (
     <Wrapper>
       {pathname.startsWith("/messages") ? (
+        //message section below
         <>
           {messages.length === 0 ? (
-            <>
-              {/* remove below lines */}
-              <TabsLayout>
-                <DetailsMessageTab />
-              </TabsLayout>
-              {/* remove above lines */}
-              <EmptyInfoWrapper>
-                <h1>You have no Messages</h1>
-              </EmptyInfoWrapper>
-            </>
+            <EmptyInfoWrapper>
+              <h1>You have no Messages</h1>
+            </EmptyInfoWrapper>
           ) : (
             <>
               {messages.map((message, i) => (
@@ -64,19 +58,14 @@ export default function DetailsContainer() {
           )}
         </>
       ) : (
+        //end messages section
+        // contacts section below
         <>
-          {contacts.length === 0 ? (
-            <>
-              {/* remove below lines */}
-              <TabsLayout>
-                <DetailsContactTab />
-              </TabsLayout>
-              {/* remove above lines */}
-              <EmptyInfoWrapper>
-                <h1>You have no Contacts</h1>
-              </EmptyInfoWrapper>
-            </>
-          ) : (
+          {contacts.length === 0 && searchTerm.length < 3 ? (
+            <EmptyInfoWrapper>
+              <h1>You have no Contacts</h1>
+            </EmptyInfoWrapper>
+          ) : contacts.length > 0 && searchTerm.length < 3 ? (
             <>
               {contacts.map((contact, i) => (
                 <TabsLayout key={i}>
@@ -84,8 +73,19 @@ export default function DetailsContainer() {
                 </TabsLayout>
               ))}
             </>
+          ) : searchTerm.length >= 3 ? (
+            <>
+              {result.map((contact, i) => (
+                <TabsLayout key={i}>
+                  <DetailsContactTab contact={contact} />
+                </TabsLayout>
+              ))}
+            </>
+          ) : (
+            <>An error has occurred</>
           )}
         </>
+        //end contacts section
       )}
     </Wrapper>
   );

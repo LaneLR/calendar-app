@@ -31,9 +31,10 @@ export default function Square({ children }) {
         <SquareContent>
           <Image
             src="/images/PlanzLogo.png"
-            fill
+            height={125}
+            width={100}
             alt="Planz Logo"
-            style={{ objectFit: "contain" }}
+            style={{ objectFit: "contain", padding: '9px' }}
           />
         </SquareContent>
       </SquareWrapper>
