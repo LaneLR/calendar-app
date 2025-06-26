@@ -6,27 +6,24 @@ export async function GET(req) {
   const User = db.User;
 
   const { searchParams } = new URL(req.url);
-  const userId = searchParams.get("userId");
+  const userId = parseInt(searchParams.get("userId"), 10); //parse the param
 
   if (!userId) {
-    return NextResponse.json({ error: "Missing userId" }, { status: 400 });
+    return NextResponse.json({ error: "Missing or invalid userId" }, { status: 400 });
   }
 
   try {
-    const userWithContacts = await User.findByPk(userId, {
-      include: [{
-        model: User,
-        as: "Contacts",
-        attributes: ['id', 'username'],
-        through: { attributes: [] }, // removes join table fields
-      }],
-    });
+    const user = await User.findByPk(userId);
 
-    if (!userWithContacts) {
+    if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ contacts: userWithContacts.Contacts });
+    const contacts = await user.getContacts({
+      attributes: ["id", "username"], 
+    });
+
+    return NextResponse.json({ contacts });
   } catch (error) {
     console.error("Error fetching contacts:", error);
     return NextResponse.json({ error: "Failed to fetch contacts" }, { status: 500 });

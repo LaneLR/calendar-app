@@ -24,7 +24,7 @@ export async function GET(req) {
         [Op.ne]: excluded,
       }
     },
-    attributes: ["username"],
+    attributes: ["id", "username"],
   });
   return NextResponse.json(results);
 }

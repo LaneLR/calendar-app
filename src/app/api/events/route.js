@@ -8,6 +8,7 @@ export async function POST(req) {
 
     const body = await req.json();
     const { title, start, end, userId } = body;
+    console.log("Data: ", body)
 
     if (!userId || !title || !start || !end) {
       return NextResponse.json(
@@ -22,6 +23,7 @@ export async function POST(req) {
       end,
       userId,
     });
+    console.log(newEvent)
 
     return NextResponse.json({ message: "Event created", event: newEvent });
   } catch (err) {
