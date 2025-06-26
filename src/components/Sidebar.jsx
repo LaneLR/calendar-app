@@ -1,6 +1,7 @@
 "use client";
 import { useCalendar } from "@/context/CalendarContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
 
 const SidebarWrapper = styled.div`
@@ -8,7 +9,7 @@ const SidebarWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   height: 75vh;
-  background-color: rgba(89, 208, 255, 0.3);
+  background-color: lavender;
   border-radius: 8px;
   box-shadow: 4px 6px 5px 3px rgba(0, 0, 0, 0.1);
   min-width: 130px;
@@ -35,7 +36,7 @@ const SidebarTab = styled(Link)`
   border: 1px solid white;
   height: 40px;
   color: black;
-  background-color: yellow;
+  background-color:rgb(187, 151, 194);
   cursor: pointer;
   border-radius: 7px;
 
@@ -44,7 +45,7 @@ const SidebarTab = styled(Link)`
   }
 `;
 
-const SidebarTabDiv = styled.div`
+const SidebarTabDiv = styled.button`
   display: flex;
   justify-content: left;
   align-items: center;
@@ -53,13 +54,35 @@ const SidebarTabDiv = styled.div`
   border: 1px solid white;
   height: 40px;
   color: black;
-  background-color: yellow;
+  background-color: purple;
   cursor: pointer;
   border-radius: 7px;
 `;
 
 export default function Sidebar({ children }) {
-  const { isLoggedIn, logoutUser } = useCalendar();
+  const { isLoggedIn, logoutUser, setLoadingAuth } = useCalendar();
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch(`/api/logout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (res.ok) {
+        logoutUser();
+        setTimeout(() => {
+          router.refresh();
+          router.push("/login");
+        }, 100);
+      }
+    } catch (err) {
+      console.log("Error occurred while handling logout: ", err);
+      return;
+    }
+  };
 
   return (
     <>
@@ -69,15 +92,12 @@ export default function Sidebar({ children }) {
           <SidebarTab href="/messages">Messages</SidebarTab>
           <SidebarTab href="/contacts">Contacts</SidebarTab>
           {isLoggedIn ? (
-            <SidebarTabDiv>
-              <button
-                style={{ border: "hidden", backgroundColor: 'inherit', fontSize: 'inherit', color: 'inherit' }}
-                onClick={() => {
-                  logoutUser();
-                }}
-              >
-                Logout
-              </button>
+            <SidebarTabDiv
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              Logout
             </SidebarTabDiv>
           ) : (
             <SidebarTab href="/login">Login</SidebarTab>

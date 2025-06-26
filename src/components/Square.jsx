@@ -1,5 +1,6 @@
 "use client";
 import styled from "styled-components";
+import Image from "next/image";
 
 const SquareWrapper = styled.div`
   height: 150px;
@@ -11,7 +12,12 @@ const SquareWrapper = styled.div`
 `;
 
 const SquareContent = styled.div`
-  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background-color: lavender;
   width: 100%;
   height: 100%;
   border-radius: 8px;
@@ -22,7 +28,14 @@ export default function Square({ children }) {
   return (
     <>
       <SquareWrapper>
-        <SquareContent>{children}</SquareContent>
+        <SquareContent>
+          <Image
+            src="/images/PlanzLogo.png"
+            fill
+            alt="Planz Logo"
+            style={{ objectFit: "contain" }}
+          />
+        </SquareContent>
       </SquareWrapper>
     </>
   );
