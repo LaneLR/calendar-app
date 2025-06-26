@@ -26,7 +26,8 @@ export default function Header({ children }) {
   return (
     <>
       <HeaderWrapper>
-        <HeaderContent>{user.username}{children}</HeaderContent>
+        <HeaderContent><p style={{color: 'black'}}>
+          {user.username}</p>{children}</HeaderContent>
       </HeaderWrapper>
     </>
   );
