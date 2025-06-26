@@ -43,6 +43,10 @@ const SidebarTab = styled(Link)`
   &:first-of-type {
     margin-top: 10px;
   }
+
+    &:hover {
+  background-color: rgb(149, 114, 156)
+  }
 `;
 
 const SidebarTabDiv = styled.button`
@@ -58,6 +62,10 @@ const SidebarTabDiv = styled.button`
   cursor: pointer;
   border-radius: 7px;
   font-size: 1rem;
+
+  &:hover {
+  background-color: rgb(149, 114, 156)
+  }
 `;
 
 export default function Sidebar() {
@@ -90,7 +98,6 @@ export default function Sidebar() {
       <SidebarWrapper>
         <SidebarTabContainer>
           <SidebarTab href="/">Calendar</SidebarTab>
-          <SidebarTab href="/messages">Messages</SidebarTab>
           <SidebarTab href="/contacts">Contacts</SidebarTab>
           {isLoggedIn ? (
             <SidebarTabDiv
