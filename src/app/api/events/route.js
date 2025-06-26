@@ -36,10 +36,10 @@ export async function GET(req) {
     const Event = db.Event;
 
     const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId");
+    const userId = parseInt(searchParams.get("userId"), 10);
 
-    if (!userId) {
-      return NextResponse.json({ error: "Missing userId" }, { status: 400 });
+    if (isNaN(userId)) {
+      return NextResponse.json({ error: "Invalid or missing userId" }, { status: 400 });
     }
 
     const events = await Event.findAll({
