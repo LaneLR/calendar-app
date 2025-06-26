@@ -2,8 +2,13 @@
 import Image from "next/image";
 import styled from "styled-components";
 
+const TabWrapper = styled.div`
+width: 100%;
+display: flex;
+`
+
 const UserContactIconWrapper = styled.div`
-  width: 13%;
+  min-width: 13%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -41,6 +46,16 @@ const ContactSnippet = styled.div`
   text-overflow: ellipsis;
 `;
 
+const AddContactButton = styled.button`
+border: 0;
+background-color: inherit;
+font-size: 1.6rem;
+width: auto;
+padding: 0 5px;
+cursor: pointer;
+color: black;
+`
+
 const ContactFunctionWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -54,19 +69,18 @@ export default function DetailsContactTab({ contact }) {
   const trashcanImage = "/images/trashcan.png";
 
   return (
-    <>
+    <TabWrapper>
       <UserContactIconWrapper>
         <UserContactIcon>
-          {/* contact.usericon */}
-          User
+          {contact.username.slice(0, 2).toUpperCase()}
         </UserContactIcon>
       </UserContactIconWrapper>
       <ContactSnippetWrapper>
-        <ContactSnippet>
-          {/* contact.name */}
-          firstname lastname
-        </ContactSnippet>
+        <ContactSnippet>{contact.username}</ContactSnippet>
       </ContactSnippetWrapper>
+      <AddContactButton>
+        +
+      </AddContactButton>
       <ContactFunctionWrapper>
         <Image
           src={trashcanImage}
@@ -76,6 +90,6 @@ export default function DetailsContactTab({ contact }) {
           style={{ margin: "0 10px", objectFit: "contain", cursor: "pointer" }}
         />
       </ContactFunctionWrapper>
-    </>
+    </TabWrapper>
   );
 }
