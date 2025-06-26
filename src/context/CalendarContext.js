@@ -86,23 +86,23 @@ export function CalendarProvider({ children }) {
     router.refresh();
   };
 
-  const deleteContact = async (deleted) => {
-    if (!deleted || isNaN(deleted)) {
-      console.error("Bad or invalid Delete: ", deleted);
+  const deleteContact = async (contactId) => {
+    if (!contactId || isNaN(contactId)) {
+      console.error("Bad or invalid Delete: ", contactId);
       return;
     }
     try {
       await fetch(`/api/contacts/delete`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(deleted),
+        body: JSON.stringify({ userId: user.id, contactId }),
       });
 
       await loadContacts(user.id);
     } catch (err) {
       console.error("Error at deleteContact: ", err);
     }
-    setContacts((prev) => prev.filter((e) => e.name !== deleted));
+    setContacts((prev) => prev.filter((e) => e.name !== contactId));
   };
 
   useEffect(() => {
