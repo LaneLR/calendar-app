@@ -10,7 +10,10 @@ export async function POST(req) {
     const { title, start, end, userId } = body;
 
     if (!userId || !title || !start || !end) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
     }
 
     const newEvent = await Event.create({
@@ -22,7 +25,7 @@ export async function POST(req) {
 
     return NextResponse.json({ message: "Event created", event: newEvent });
   } catch (err) {
-    console.error("Error in create event route:", err);
+    console.error("Error in POST event route:", err);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
 }
@@ -33,10 +36,10 @@ export async function GET(req) {
     const Event = db.Event;
 
     const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId");
+    const userId = parseInt(searchParams.get("userId"), 10);
 
-    if (!userId) {
-      return NextResponse.json({ error: "Missing userId" }, { status: 400 });
+    if (isNaN(userId)) {
+      return NextResponse.json({ error: "Invalid or missing userId" }, { status: 400 });
     }
 
     const events = await Event.findAll({
@@ -46,7 +49,7 @@ export async function GET(req) {
 
     return NextResponse.json({ events });
   } catch (err) {
-    console.error("Error in get events route:", err);
+    console.error("Error in GET events route:", err);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
 }

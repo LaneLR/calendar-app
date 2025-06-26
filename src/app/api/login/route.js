@@ -2,6 +2,7 @@ export const runtime = "nodejs";
 
 import initializeDbAndModels from "@/lib/db";
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
 export async function POST(req) {
   try {
@@ -30,15 +31,44 @@ export async function POST(req) {
       return NextResponse.json({ error: "Wrong password" });
     }
 
+    if (!process.env.JWT_SECRET) {
+      console.error("JWT_SECRET is not defined in environment variables!");
+      return NextResponse.json(
+        { error: "Server error: JWT_SECRET missing" },
+        { status: 500 }
+      );
+    }
+
+    const token = jwt.sign(
+      { userId: user.id, username: user.username },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+
     const { password: _, ...userWithoutPassword } = user.toJSON();
 
     console.log("Returning success response");
-    return NextResponse.json({
-      message: "Login successful",
-      user: userWithoutPassword,
-    }, {
-      status: 200
+    const response = NextResponse.json(
+      {
+        message: "Login successful",
+        user: userWithoutPassword,
+      },
+      {
+        status: 200,
+      }
+    );
+
+    response.cookies.set("jwt_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 1, // 1 hour
+      path: "/", // root or main  page
     });
+
+    return response; //return the response with the cookies set
   } catch (err) {
     console.error("Error in login route:", err);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
