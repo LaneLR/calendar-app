@@ -63,7 +63,7 @@ export default function RegisterPage() {
         setRegisterData({ username: "", password: "", confirmPassword: "" });
         setTimeout(() => {
           router.refresh();
-          router.push("/login");
+          router.push("/");
         }, 100);
       }
     } catch (err) {
