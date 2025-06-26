@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import loading from "@/app/loading";
 
 const CalendarContext = createContext();
 
@@ -15,6 +16,7 @@ export function CalendarProvider({ children }) {
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [calendarView, setCalendarView] = useState("month");
+  const [loadingAuth, setLoadingAuth] = useState(true);
 
   const router = useRouter();
 
@@ -65,6 +67,35 @@ export function CalendarProvider({ children }) {
     setContacts((prev) => prev.filter((e) => e.name !== deleted));
   };
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      console.log("Checking auth status...");
+      try {
+        const res = await fetch("/api/auth-status", {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setUser({
+            id: data.user.userId, 
+            username: data.user.username,
+          });
+          setIsLoggedIn(true);
+          console.log("Auth successful. User:", data.user);
+        }
+      } catch (err) {
+        console.error("Error checking auth status:", err);
+      } finally {
+        setLoadingAuth(false);
+        console.log("setLoadingAuth(false)");
+      }
+    };
+
+    checkAuth();
+  }, []);
+
   return (
     <CalendarContext.Provider
       value={{
@@ -75,6 +106,8 @@ export function CalendarProvider({ children }) {
         isLoggedIn,
         loginUser,
         logoutUser,
+        loadingAuth,
+        setLoadingAuth,
         selectedDate,
         calendarView,
         setCalendarView,
@@ -90,7 +123,7 @@ export function CalendarProvider({ children }) {
         addEvent,
       }}
     >
-      {children}
+      {loadingAuth ? <div>Loading...</div> : children}
     </CalendarContext.Provider>
   );
 }

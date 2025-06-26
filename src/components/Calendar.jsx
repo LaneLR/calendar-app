@@ -34,6 +34,7 @@ export default function UserCalendar() {
     calendarView,
     setCalendarView,
     deleteEvent,
+    isLoggedIn,
   } = useCalendar();
 
   const handleSelectSlot = async ({ start, end }) => {
@@ -116,18 +117,18 @@ export default function UserCalendar() {
     }
   };
 
-  useEffect(() => {
-    if (user?.id) {
-      fetchEvents();
-    }
-  }, [user?.id]);
+useEffect(() => {
+  if (isLoggedIn && user?.id) {
+    fetchEvents();
+  }
+}, [user?.id]);
 
   return (
     <>
       <CalendarWrapper>
         <CalendarSizing>
           <Calendar
-            key={user.id || "calendar"}
+            key={user?.id || "calendar"}
             localizer={localizer}
             events={events}
             startAccessor="start"
