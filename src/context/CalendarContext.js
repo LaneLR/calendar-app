@@ -17,6 +17,8 @@ export function CalendarProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [calendarView, setCalendarView] = useState("month");
   const [loadingAuth, setLoadingAuth] = useState(true);
+  const [result, setResult] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const router = useRouter();
 
@@ -79,7 +81,7 @@ export function CalendarProvider({ children }) {
         if (res.ok) {
           const data = await res.json();
           setUser({
-            id: data.user.userId, 
+            id: data.user.userId,
             username: data.user.username,
           });
           setIsLoggedIn(true);
@@ -121,6 +123,10 @@ export function CalendarProvider({ children }) {
         emptyEvents,
         deleteEvent,
         addEvent,
+        result,
+        setResult,
+        searchTerm,
+        setSearchTerm,
       }}
     >
       {loadingAuth ? <div>Loading...</div> : children}
