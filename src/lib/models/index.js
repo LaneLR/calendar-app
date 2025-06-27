@@ -73,7 +73,7 @@ async function initializeModels() {
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
   }, { sequelize, modelName: "Event" });
 

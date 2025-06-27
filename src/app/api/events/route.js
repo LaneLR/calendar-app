@@ -4,11 +4,10 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     const db = await initializeDbAndModels();
-    const Event = db.Event;
+    const {Event, User} = db
 
     const body = await req.json();
     const { title, start, end, userIds } = body;
-    console.log("Data: ", body);
 
     if (!userIds || !title || !start || !end) {
       return NextResponse.json(
@@ -23,11 +22,11 @@ export async function POST(req) {
       end,
     });
 
-    const usersInEvent = await db.User.findAll({
+    const usersInEvent = await User.findAll({
       where: { id: userIds },
     });
 
-    await newEvent.addUsers(usersInEvent);
+    await newEvent.addUsers([...usersInEvent]);
 
     console.log(newEvent);
 
@@ -44,7 +43,7 @@ export async function POST(req) {
 export async function GET(req) {
   try {
     const db = await initializeDbAndModels();
-    const Event = db.Event;
+    const {Event, User} = db
 
     const { searchParams } = new URL(req.url);
     const userId = parseInt(searchParams.get("userId"), 10);
@@ -56,10 +55,18 @@ export async function GET(req) {
       );
     }
 
-    const events = await Event.findAll({
-      where: { userId },
-      order: [["start", "ASC"]],
+    const user = await User.findByPk(userId, {
+      include: {
+        model: Event,
+        through: { attributes: [] },
+      },
     });
+
+    const events = user.Events.map((event) => ({
+      ...event.toJSON(),
+      start: event.start,
+      end: event.end,
+    }));
 
     return NextResponse.json({ events });
   } catch (err) {

@@ -53,7 +53,7 @@ export default function UserCalendar() {
     for (const contact of contacts) {
       const invited = window.confirm(`Invite user: ${contact.username}`);
       if (invited) {
-        invited.push(contact.id);
+        usersForEventByIds.push(contact.id);
       }
     }
 
