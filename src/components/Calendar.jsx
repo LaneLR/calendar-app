@@ -22,6 +22,7 @@ const CalendarSizing = styled.div`
   width: 100%;
   max-width: 1200px;
   height: 100%;
+  
 `;
 
 const localizer = momentLocalizer(moment);
@@ -116,7 +117,8 @@ export default function UserCalendar() {
             onSelectSlot={handleSelectSlot}
             onSelectEvent={handleDeleteEvent}
             onNavigate={(date) => setDate(date)}
-            style={{ minHeight: "494px", minWidth: "452px" }}
+            style={{ minHeight: "494px", minWidth: "452px",   boxShadow: '2px 3px 6px 4px rgba(0, 0, 0, 0.1)'
+}}
           />
           {showModal && <EventFormModal start={modalStart} end={modalEnd} />}
         </CalendarSizing>
