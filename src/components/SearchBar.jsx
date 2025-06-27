@@ -3,7 +3,7 @@ import { useCalendar } from "@/context/CalendarContext";
 import styled from "styled-components";
 
 const SearchBarWrapper = styled.div`
-  width: 100%;
+  width: 90%;
   height: auto;
   margin: 5px 0 10px 0;
   display: flex;

@@ -189,7 +189,23 @@ export function CalendarProvider({ children }) {
         setDate,
       }}
     >
-      {loadingAuth ? <div>Loading...</div> : children}
+      {loadingAuth ? (
+        <div
+          style={{
+            fontSize: "3.5rem",
+            padding: "0 0 50px 0",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexGrow: "1",
+            height: "100vh",
+          }}
+        >
+          Loading...
+        </div>
+      ) : (
+        children
+      )}
     </CalendarContext.Provider>
   );
 }
