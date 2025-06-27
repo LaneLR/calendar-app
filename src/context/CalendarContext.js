@@ -42,6 +42,7 @@ export function CalendarProvider({ children }) {
 
   const addEvent = (newEvent) => {
     setEvents((prev = []) => [...prev, newEvent]);
+    router.refresh();
   };
 
   const deleteEvent = (deleted) => {
@@ -50,6 +51,24 @@ export function CalendarProvider({ children }) {
     );
     if (confirmDelete) {
       setEvents((prev) => prev.filter((e) => e.id !== deleted));
+    }
+  };
+
+  const handleDeleteEvent = async (event) => {
+    if (!event?.id) return;
+
+    try {
+      const res = await fetch(`/api/events/${event.id}`, { method: "DELETE" });
+      if (!res.ok) {
+        const data = await res.json();
+        console.error("Delete failed:", data.error);
+        return;
+      }
+
+      deleteEvent(event.id);
+      router.refresh();
+    } catch (err) {
+      console.error("Error deleting event:", err);
     }
   };
 
@@ -130,7 +149,7 @@ export function CalendarProvider({ children }) {
     };
 
     checkAuth();
-  }, [user.id]);
+  }, [user.id, events]);
 
   return (
     <CalendarContext.Provider
@@ -156,6 +175,7 @@ export function CalendarProvider({ children }) {
         emptyEvents,
         deleteEvent,
         addEvent,
+        handleDeleteEvent,
         result,
         setResult,
         searchTerm,
