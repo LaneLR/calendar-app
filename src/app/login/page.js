@@ -53,7 +53,7 @@ export default function LoginPage() {
         setTimeout(() => {
           router.refresh();
           router.push("/");
-        }, 100);
+        });
       }
     } catch (err) {
       setError("Something went wrong during login");
