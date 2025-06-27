@@ -1,6 +1,7 @@
 "use client";
 import { useCalendar } from "@/context/CalendarContext";
 import styled from "styled-components";
+import EventFormModal from "./EventFormModal";
 
 const HeaderWrapper = styled.div`
   min-height: 150px;
@@ -13,6 +14,9 @@ const HeaderWrapper = styled.div`
 `;
 
 const HeaderContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: lavender;
   width: 100%;
   height: 100%;
@@ -21,13 +25,15 @@ const HeaderContent = styled.div`
 `;
 
 export default function Header({ children }) {
-  const { user } = useCalendar()
+  const { user } = useCalendar();
 
   return (
     <>
       <HeaderWrapper>
-        <HeaderContent><p style={{color: 'black'}}>
-          {user.username}</p>{children}</HeaderContent>
+        <HeaderContent>
+          <p style={{ color: "black", fontSize: '1.4rem' }}>{user.username}</p>
+          {children}
+        </HeaderContent>
       </HeaderWrapper>
     </>
   );
