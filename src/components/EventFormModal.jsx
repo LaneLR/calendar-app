@@ -64,16 +64,35 @@ const TitleBar = styled.input`
   margin: 0 0 20px 0;
 `;
 
-const StartTimeBar = styled.input`
+const AddDatesContainers = styled.div`
+  display: flex;
+  justify-content: space-between;
   width: 80%;
+  flex-flow: row nowrap;
+
+  @media (max-width: 1588px) {
+    flex-flow: column nowrap;
+  }
+`;
+
+const StartTimeBar = styled.input`
+  width: auto;
   font-size: 1.1rem;
   margin: 0 0 20px 0;
+
+  @media (max-width: 1588px) {
+    width: 100%;
+  }
 `;
 
 const EndTimeBar = styled.input`
-  width: 80%;
+  width: auto;
   font-size: 1.1rem;
   margin: 0 0 20px 0;
+
+  @media (max-width: 1588px) {
+    width: 100%;
+  }
 `;
 
 const ContactsAddedContainer = styled.div`
@@ -116,10 +135,7 @@ export default function EventFormModal({ contact }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newEvent),
       });
-
-      //   console.log("RES ---->", res)
       const data = await res.json();
-      //   console.log("DATA ---->", data)
 
       if (!res.ok) {
         console.error("Could not create event", data);
@@ -138,7 +154,6 @@ export default function EventFormModal({ contact }) {
       return;
     }
   };
-
 
   //type="datetime-local" sets time to UTC,
   //so adjust time to my local time
@@ -171,39 +186,37 @@ export default function EventFormModal({ contact }) {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <StartTimeBar
-                type="datetime-local"
-                value={start ? formatLocalDateTime(start) : ""}
-                onChange={(e) => setStart(new Date(e.target.value))}
-              />
+              <AddDatesContainers>
+                <StartTimeBar
+                  type="datetime-local"
+                  value={start ? formatLocalDateTime(start) : ""}
+                  onChange={(e) => setStart(new Date(e.target.value))}
+                />
 
-              <EndTimeBar
-                type="datetime-local"
-                value={end ? formatLocalDateTime(end) : ""}
-                onChange={(e) => setEnd(new Date(e.target.value))}
-              />
+                <EndTimeBar
+                  type="datetime-local"
+                  value={end ? formatLocalDateTime(end) : ""}
+                  onChange={(e) => setEnd(new Date(e.target.value))}
+                />
+              </AddDatesContainers>
 
               <TextContainerLeftAlign>
                 <h4>Add Contacts</h4>
               </TextContainerLeftAlign>
               <ContactsAddedContainer>
                 {contacts.map((contact) => (
-                  <label key={contact.id}>
-                    <input
-                      type="checkbox"
-                      checked={selectContacts.includes(contact.id)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectContacts([...selectContacts, contact.id]);
-                        } else {
-                          setSelectContacts(
-                            selectContacts.filter((id) => id !== contact.id)
-                          );
-                        }
-                      }}
-                    />
-                    <ContactTabInModal conact={contact} />
-                  </label>
+                  <ContactTabInModal
+                    key={contact.id}
+                    contact={contact}
+                    isSelected={selectContacts.includes(contact.id)}
+                    onToggle={(id) => {
+                      setSelectContacts((prev) =>
+                        prev.includes(id)
+                          ? prev.filter((cid) => cid !== id)
+                          : [...prev, id]
+                      );
+                    }}
+                  />
                 ))}
               </ContactsAddedContainer>
 
