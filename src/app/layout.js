@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "@/styles/custom-calendar.scss";
+// import "@/styles/custom-calendar.css";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import StyledComponentsRegistry from "@/lib/registry";
