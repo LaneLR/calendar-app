@@ -19,6 +19,7 @@ export function CalendarProvider({ children }) {
   const [result, setResult] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [date, setDate] = useState(new Date());
+  const [showModal, setShowModal] = useState(false);
 
   const router = useRouter();
 
@@ -165,6 +166,8 @@ export function CalendarProvider({ children }) {
         setLoadingAuth,
         selectedDate,
         calendarView,
+        showModal,
+        setShowModal,
         setCalendarView,
         setSelectedDate,
         setEvents,

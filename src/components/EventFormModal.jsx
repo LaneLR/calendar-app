@@ -1,0 +1,231 @@
+"use client";
+import { useCalendar } from "@/context/CalendarContext";
+import { useState } from "react";
+import styled from "styled-components";
+import TabExample from "./ContactTabInModal";
+import Button from "./Button";
+import ContactTabInModal from "./ContactTabInModal";
+
+const ModalWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
+const ModalForm = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 70%;
+`;
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+`;
+
+const ModalButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+`;
+
+const ModalFormContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-flow: column nowrap;
+  background-color: white;
+  height: auto;
+  width: 60%;
+  padding: 30px;
+  border-radius: 10px;
+`;
+
+const TextContainerLeftAlign = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  text-align: left;
+  width: 80%;
+`;
+
+const TitleBar = styled.input`
+  width: 80%;
+  font-size: 1.1rem;
+  margin: 0 0 20px 0;
+`;
+
+const StartTimeBar = styled.input`
+  width: 80%;
+  font-size: 1.1rem;
+  margin: 0 0 20px 0;
+`;
+
+const EndTimeBar = styled.input`
+  width: 80%;
+  font-size: 1.1rem;
+  margin: 0 0 20px 0;
+`;
+
+const ContactsAddedContainer = styled.div`
+  width: 80%;
+  height: auto;
+  background-color: lightgray;
+  margin: 0 0 20px 0;
+`;
+
+export default function EventFormModal({ contact }) {
+  const { showModal, setShowModal, contacts, addEvent, setEvents, user } =
+    useCalendar();
+
+  const [title, setTitle] = useState("");
+  const [selectContacts, setSelectContacts] = useState([]);
+  const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log("Start: ", start, " End: ", end, " Title: ", title);
+
+    if (!start || !end || !title) {
+      console.error("Missing start, end, or title");
+      return;
+    }
+
+    const userIds = [user.id, ...selectContacts];
+    const newEvent = {
+      title,
+      end: end.toISOString(),
+      start: start.toISOString(),
+      userIds,
+    };
+
+    try {
+      const res = await fetch(`/api/events`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newEvent),
+      });
+
+      //   console.log("RES ---->", res)
+      const data = await res.json();
+      //   console.log("DATA ---->", data)
+
+      if (!res.ok) {
+        console.error("Could not create event", data);
+        return;
+      }
+
+      addEvent({
+        ...data.event,
+        start: new Date(data.event.start),
+        end: new Date(data.event.end),
+      });
+
+      setShowModal(false);
+    } catch (err) {
+      console.error("Error occurred while submitting form: ", err);
+      return;
+    }
+  };
+
+
+  //type="datetime-local" sets time to UTC,
+  //so adjust time to my local time
+  function formatLocalDateTime(date) {
+    const pad = (n) => (n < 10 ? "0" + n : n);
+    return (
+      date.getFullYear() +
+      "-" +
+      pad(date.getMonth() + 1) +
+      "-" +
+      pad(date.getDate()) +
+      "T" +
+      pad(date.getHours()) +
+      ":" +
+      pad(date.getMinutes())
+    );
+  }
+
+  return (
+    <>
+      <ModalOverlay>
+        <ModalWrapper>
+          <ModalForm onSubmit={handleSubmit}>
+            <ModalFormContainer>
+              <TextContainerLeftAlign>
+                <h4>Title</h4>
+              </TextContainerLeftAlign>
+              <TitleBar
+                placeholder="Title..."
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <StartTimeBar
+                type="datetime-local"
+                value={start ? formatLocalDateTime(start) : ""}
+                onChange={(e) => setStart(new Date(e.target.value))}
+              />
+
+              <EndTimeBar
+                type="datetime-local"
+                value={end ? formatLocalDateTime(end) : ""}
+                onChange={(e) => setEnd(new Date(e.target.value))}
+              />
+
+              <TextContainerLeftAlign>
+                <h4>Add Contacts</h4>
+              </TextContainerLeftAlign>
+              <ContactsAddedContainer>
+                {contacts.map((contact) => (
+                  <label key={contact.id}>
+                    <input
+                      type="checkbox"
+                      checked={selectContacts.includes(contact.id)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setSelectContacts([...selectContacts, contact.id]);
+                        } else {
+                          setSelectContacts(
+                            selectContacts.filter((id) => id !== contact.id)
+                          );
+                        }
+                      }}
+                    />
+                    <ContactTabInModal conact={contact} />
+                  </label>
+                ))}
+              </ContactsAddedContainer>
+
+              <ModalButtonWrapper>
+                <Button type="submit">Confirm</Button>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    setShowModal(false);
+                    setTitle("");
+                    setEnd(null);
+                    setStart(null);
+                    setSelectContacts([]);
+                  }}
+                >
+                  Cancel
+                </Button>
+              </ModalButtonWrapper>
+            </ModalFormContainer>
+          </ModalForm>
+        </ModalWrapper>
+      </ModalOverlay>
+    </>
+  );
+}
