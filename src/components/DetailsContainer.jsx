@@ -4,17 +4,19 @@ import styled from "styled-components";
 import DetailsMessageTab from "./DetailsMessageTab";
 import { usePathname } from "next/navigation";
 import DetailsContactTab from "./DetailsContactTab";
+import SearchBar from "./SearchBar";
 
 const ComponentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+  flex-flow: column;
 `;
 
 const ContactsSectionWrapper = styled.div`
   flex-flow: column nowrap;
-  width: 100%;
+  width: 90%;
   height: 100%;
   max-width: 1200px;
   box-sizing: border-box;
@@ -45,6 +47,7 @@ export default function DetailsContainer() {
 
   return (
     <ComponentWrapper>
+      <SearchBar />
       <ContactsSectionWrapper>
         {pathname.startsWith("/messages") ? (
           //message section below
