@@ -3,8 +3,9 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import "@/styles/custom-calendar.scss";
 import moment from "moment";
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCalendar } from "@/context/CalendarContext";
+import EventFormModal from "./EventFormModal";
 
 const CalendarWrapper = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ const CalendarSizing = styled.div`
   width: 100%;
   max-width: 1200px;
   height: 100%;
+  
 `;
 
 const localizer = momentLocalizer(moment);
@@ -38,54 +40,17 @@ export default function UserCalendar() {
     date,
     setDate,
     contacts,
+    setShowModal,
+    showModal,
   } = useCalendar();
 
+  const [modalStart, setModalStart] = useState(null);
+  const [modalEnd, setModalEnd] = useState(null);
+
   const handleSelectSlot = async ({ start, end }) => {
-    const title = window.prompt(
-      `New event from ${start.toLocaleString()} to ${end.toLocaleString()}`
-    );
-    //if event doesn't have title, i.e. doesn't exist
-    if (!title) return;
-
-    const usersForEventByIds = [user.id];
-
-    //for everyone in contacts, if invited add them to array
-    for (const contact of contacts) {
-      const invited = window.confirm(`Invite user: ${contact.username}`);
-      if (invited) {
-        usersForEventByIds.push(contact.id);
-      }
-    }
-
-    const newEvent = {
-      userIds: usersForEventByIds,
-      title,
-      start: start.toISOString(),
-      end: end.toISOString(),
-    };
-
-    try {
-      const res = await fetch(`/api/events`, {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(newEvent),
-      });
-      const data = await res.json();
-
-      if (!res.ok) {
-        console.error("Error with event response: ");
-        return;
-      }
-
-      addEvent({
-        ...data.event,
-        start: new Date(data.event.start),
-        end: new Date(data.event.end),
-      });
-    } catch (err) {
-      console.error("Error with event: ", err);
-      return;
-    }
+    setModalStart(start)
+    setModalEnd(end)
+    setShowModal(true)
   };
 
   const fetchEvents = async () => {
@@ -152,8 +117,10 @@ export default function UserCalendar() {
             onSelectSlot={handleSelectSlot}
             onSelectEvent={handleDeleteEvent}
             onNavigate={(date) => setDate(date)}
-            style={{ minHeight: "494px", minWidth: "452px" }}
+            style={{ minHeight: "494px", minWidth: "452px",   boxShadow: '2px 3px 6px 4px rgba(0, 0, 0, 0.1)'
+}}
           />
+          {showModal && <EventFormModal start={modalStart} end={modalEnd} />}
         </CalendarSizing>
       </CalendarWrapper>
     </>
