@@ -37,44 +37,54 @@ export default function UserCalendar() {
     isLoggedIn,
     date,
     setDate,
+    contacts,
   } = useCalendar();
 
   const handleSelectSlot = async ({ start, end }) => {
     const title = window.prompt(
       `New event from ${start.toLocaleString()} to ${end.toLocaleString()}`
     );
-    if (title) {
-      const newEvent = {
-        userId: user.id,
-        title,
-        start: start.toISOString(),
-        end: end.toISOString(),
-      };
-      // console.log("Sending this event: ", newEvent)
+    //if event doesn't have title, i.e. doesn't exist
+    if (!title) return;
 
-      try {
-        const res = await fetch(`/api/events`, {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify(newEvent),
-        });
-        // console.log(res);
-        const data = await res.json();
+    const usersForEventByIds = [user.id];
 
-        if (!res.ok) {
-          console.error("Error with event response: ");
-          return;
-        }
+    //for everyone in contacts, if invited add them to array
+    for (const contact of contacts) {
+      const invited = window.confirm(`Invite user: ${contact.username}`);
+      if (invited) {
+        invited.push(contact.id);
+      }
+    }
 
-        addEvent({
-          ...data.event,
-          start: new Date(data.event.start),
-          end: new Date(data.event.end),
-        });
-      } catch (err) {
-        console.error("Error with event: ", err);
+    const newEvent = {
+      userIds: usersForEventByIds,
+      title,
+      start: start.toISOString(),
+      end: end.toISOString(),
+    };
+
+    try {
+      const res = await fetch(`/api/events`, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(newEvent),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error("Error with event response: ");
         return;
       }
+
+      addEvent({
+        ...data.event,
+        start: new Date(data.event.start),
+        end: new Date(data.event.end),
+      });
+    } catch (err) {
+      console.error("Error with event: ", err);
+      return;
     }
   };
 
