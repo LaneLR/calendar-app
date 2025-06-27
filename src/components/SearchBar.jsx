@@ -6,12 +6,16 @@ const SearchBarWrapper = styled.div`
   width: 100%;
   height: auto;
   margin: 5px 0 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Search = styled.input`
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   width: 100%;
   padding: 5px;
+  max-width: 1200px;
 
   &:focus {
     outline: none;
