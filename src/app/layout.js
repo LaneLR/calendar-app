@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
               style={{
                 display: "flex",
                 width: "100vw",
-                height: "auto",
+                height: "100vh",
                 padding: "3px 10px",
                 overflow: "hidden",
               }}
@@ -41,8 +41,8 @@ export default function RootLayout({ children }) {
                 style={{
                   display: "flex",
                   width: "180px",
-                  height: "auto",
-                  padding: "3px 10px",
+                  height: "100vh",
+                  padding: "3px 0 3px 10px",
                   flexDirection: "column",
                 }}
               >
