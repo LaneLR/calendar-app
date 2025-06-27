@@ -7,10 +7,10 @@ export async function POST(req) {
     const Event = db.Event;
 
     const body = await req.json();
-    const { title, start, end, userId } = body;
-    console.log("Data: ", body)
+    const { title, start, end, userIds } = body;
+    console.log("Data: ", body);
 
-    if (!userId || !title || !start || !end) {
+    if (!userIds || !title || !start || !end) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -21,11 +21,20 @@ export async function POST(req) {
       title,
       start,
       end,
-      userId,
     });
-    console.log(newEvent)
 
-    return NextResponse.json({ message: "Event created", event: newEvent });
+    const usersInEvent = await db.User.findAll({
+      where: { id: userIds },
+    });
+
+    await newEvent.addUsers(usersInEvent);
+
+    console.log(newEvent);
+
+    return NextResponse.json(
+      { message: "Event created", event: newEvent },
+      { status: 201 }
+    );
   } catch (err) {
     console.error("Error in POST event route:", err);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
@@ -41,7 +50,10 @@ export async function GET(req) {
     const userId = parseInt(searchParams.get("userId"), 10);
 
     if (isNaN(userId)) {
-      return NextResponse.json({ error: "Invalid or missing userId" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid or missing userId" },
+        { status: 400 }
+      );
     }
 
     const events = await Event.findAll({
