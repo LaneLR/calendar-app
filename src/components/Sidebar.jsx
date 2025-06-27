@@ -8,7 +8,7 @@ const SidebarWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  height: 75vh;
+  height: 80%;
   background-color: lavender;
   border-radius: 8px;
   box-shadow: 4px 6px 5px 3px rgba(0, 0, 0, 0.1);
@@ -25,6 +25,7 @@ const SidebarTabContainer = styled.div`
   flex-flow: column nowrap;
   width: 100%;
   gap: 5px;
+  height: 90%;
 `;
 
 const SidebarTab = styled(Link)`

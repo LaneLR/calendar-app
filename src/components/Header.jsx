@@ -6,7 +6,7 @@ import EventFormModal from "./EventFormModal";
 const HeaderWrapper = styled.div`
   min-height: 150px;
   max-height: 150px;
-  width: 100%;
+  width: 98.5%;
   display: flex;
   justify-content: center;
   align-items: center;
