@@ -30,11 +30,11 @@ export function CalendarProvider({ children }) {
   };
 
   const logoutUser = () => {
+    setTheme("light")
     setUser({
       username: "",
       password: "",
     });
-    setTheme("light")
     setIsLoggedIn(false);
     setTimeout(() => {
       router.refresh();

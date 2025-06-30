@@ -27,7 +27,7 @@ const UserContactIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-toolbar-bg);
+  background-color: var(--color-user-icon);
 `;
 
 const ContactSnippetWrapper = styled.div`
@@ -46,6 +46,7 @@ const ContactSnippet = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--color-contacts-text)
 `;
 
 const AddContactButton = styled.button`
@@ -55,6 +56,7 @@ const AddContactButton = styled.button`
   width: auto;
   padding: 0 10px;
   cursor: pointer;
+  margin: 0 10px;
 `;
 
 const ContactFunctionWrapper = styled.div`
