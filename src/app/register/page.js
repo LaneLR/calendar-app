@@ -3,17 +3,43 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCalendar } from "@/context/CalendarContext";
+import Button from "@/components/Button";
+import Link from "next/link";
 
 const RegisterWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   height: 100%;
   flex-direction: column;
+  width: 300px;
+`;
+
+const RegisterFormWrapper = styled.div`
+  height: auto;
+  padding: 20px;
+  background-color: var(--color-toolbar-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+`;
+
+const InputBoxes = styled.input`
+  padding: 10px;
+  font-size: 1.2rem;
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+
+  &:focus {
+    border: none;
+  }
 `;
 
 export default function RegisterPage() {
-  const {loginUser} = useCalendar();
+  const { loginUser } = useCalendar();
 
   const [registerData, setRegisterData] = useState({
     username: "",
@@ -76,39 +102,63 @@ export default function RegisterPage() {
   return (
     <>
       <RegisterWrapper>
-        <h2>Register</h2>
+        <div><div>
+          <h1 style={{fontSize: '2.8rem', marginBottom: '10px'}}>Register</h1>
+          <RegisterFormWrapper>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+            <form
+              onSubmit={handleCreateUser}
+              style={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+              }}
+            >
+              <InputBoxes
+                placeholder="Username"
+                type="text"
+                name="username"
+                value={registerData.username}
+                onChange={handleRegisterChange}
+                required
+              />
+              <InputBoxes
+                placeholder="Password"
+                type="password"
+                name="password"
+                value={registerData.password}
+                onChange={handleRegisterChange}
+                required
+              />
+              <InputBoxes
+                placeholder="Confirm password"
+                type="password"
+                name="confirmPassword"
+                value={registerData.confirmPassword}
+                onChange={handleRegisterChange}
+                required
+              />
+              <Button
+                style={{ marginTop: "20px", width: "130px", fontWeight: "600" }}
+                type="submit"
+              >
+                Register
+              </Button>
+            </form>
+          </RegisterFormWrapper>
+        </div>
+        <div style={{marginTop: '20px', width: '100%', textAlign: 'center'}}>
+            Already have an account?{" "}
+            <Link href={"/register"}>
+              <u>Log in!</u>
+            </Link>
+          </div>
+          
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <form
-          onSubmit={handleCreateUser}
-          style={{ display: "flex", flexDirection: "column" }}
-        >
-          <input
-            placeholder="username"
-            type="text"
-            name="username"
-            value={registerData.username}
-            onChange={handleRegisterChange}
-            required
-          />
-          <input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={registerData.password}
-            onChange={handleRegisterChange}
-            required
-          />
-          <input
-            placeholder="Confirm password"
-            type="password"
-            name="confirmPassword"
-            value={registerData.confirmPassword}
-            onChange={handleRegisterChange}
-            required
-          />
-          <button type="submit">Register</button>
-        </form>
+          </div>
+        <div></div>
       </RegisterWrapper>
     </>
   );
