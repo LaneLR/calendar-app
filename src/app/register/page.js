@@ -102,62 +102,69 @@ export default function RegisterPage() {
   return (
     <>
       <RegisterWrapper>
-        <div><div>
-          <h1 style={{fontSize: '2.8rem', marginBottom: '10px'}}>Register</h1>
-          <RegisterFormWrapper>
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            <form
-              onSubmit={handleCreateUser}
-              style={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-              }}
-            >
-              <InputBoxes
-                placeholder="Username"
-                type="text"
-                name="username"
-                value={registerData.username}
-                onChange={handleRegisterChange}
-                required
-              />
-              <InputBoxes
-                placeholder="Password"
-                type="password"
-                name="password"
-                value={registerData.password}
-                onChange={handleRegisterChange}
-                required
-              />
-              <InputBoxes
-                placeholder="Confirm password"
-                type="password"
-                name="confirmPassword"
-                value={registerData.confirmPassword}
-                onChange={handleRegisterChange}
-                required
-              />
-              <Button
-                style={{ marginTop: "20px", width: "130px", fontWeight: "600" }}
-                type="submit"
+        <div>
+          <div>
+            <h1 style={{ fontSize: "2.8rem", marginBottom: "10px" }}>
+              Register
+            </h1>
+            <RegisterFormWrapper>
+              <form
+                onSubmit={handleCreateUser}
+                style={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                }}
               >
-                Register
-              </Button>
-            </form>
-          </RegisterFormWrapper>
-        </div>
-        <div style={{marginTop: '20px', width: '100%', textAlign: 'center'}}>
+                <InputBoxes
+                  placeholder="Username"
+                  type="text"
+                  name="username"
+                  value={registerData.username}
+                  onChange={handleRegisterChange}
+                  required
+                />
+                <InputBoxes
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  value={registerData.password}
+                  onChange={handleRegisterChange}
+                  required
+                />
+                <InputBoxes
+                  placeholder="Confirm password"
+                  type="password"
+                  name="confirmPassword"
+                  value={registerData.confirmPassword}
+                  onChange={handleRegisterChange}
+                  required
+                />
+                <Button
+                  style={{
+                    marginTop: "20px",
+                    width: "130px",
+                    fontWeight: "600",
+                  }}
+                  type="submit"
+                >
+                  Register
+                </Button>
+              </form>
+            </RegisterFormWrapper>
+          </div>
+          {error && <p style={{ color: "var(--color-error-text)", marginTop: '20px', }}>{error}</p>}
+          <div
+            style={{ marginTop: "20px", width: "100%", textAlign: "center" }}
+          >
             Already have an account?{" "}
             <Link href={"/register"}>
               <u>Log in!</u>
             </Link>
           </div>
-          
-
-          </div>
+        </div>
         <div></div>
       </RegisterWrapper>
     </>
