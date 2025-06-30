@@ -24,16 +24,6 @@ const Search = styled.input`
   }
 `;
 
-const InputBoxes = styled.input`
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-
-  &:focus {
-    outline: none;
-  }
-`
-
 export default function SearchBar() {
   const { user, setResult, searchTerm, setSearchTerm } = useCalendar();
 
