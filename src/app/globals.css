@@ -137,7 +137,7 @@ a {
 }
 
 .rbc-month-header, .rbc-row-content, .rbc-row-bg, .rbc-month-view {
-  gap: 1px;
+  gap: 4px;
 }
 
 .rbc-row-content {
