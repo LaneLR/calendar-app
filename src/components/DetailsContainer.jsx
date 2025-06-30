@@ -10,13 +10,14 @@ const ComponentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 80%;
   flex-flow: column;
+  width: 100%;
 `;
 
 const ContactsSectionWrapper = styled.div`
   flex-flow: column nowrap;
-  width: 90%;
+  width: 60%;
   height: 100%;
   max-width: 1200px;
   box-sizing: border-box;
