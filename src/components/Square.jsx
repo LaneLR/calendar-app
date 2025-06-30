@@ -1,6 +1,7 @@
 "use client";
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
 const SquareWrapper = styled.div`
   width: auto;
@@ -35,24 +36,32 @@ export default function Square() {
             alt="Planz Logo"
             style={{ objectFit: "contain", padding: '9px' }}
           /> */}
-          <Image
-            className="logo"
-            src={"/images/PlanzCalendar.png"}
-            width={100}
-            height={90}
-            alt="Planz Calendar Logo"
-            style={{ padding: '10px'}}
-          />
-          <div style={{display: 'flex', alignContent: 'flex-end', height: "100%"}}>
-                      <Image 
-          className="logo" 
-          src={'/images/PlanzText.png'}
-          width={170}
-          height={60}
-          alt="Planz Text Logo"
-          />
-          </div>
+          <Link href={"/"}>
+            <Image
+              className="logo"
+              src={"/images/PlanzCalendar.png"}
+              width={100}
+              height={90}
+              alt="Planz Calendar Logo"
+              style={{ padding: "10px" }}
+            />
+          </Link>
 
+          <div
+            style={{
+              display: "flex",
+              alignContent: "flex-end",
+              height: "100%",
+            }}
+          >
+            <Image
+              className="logo"
+              src={"/images/PlanzText.png"}
+              width={170}
+              height={60}
+              alt="Planz Text Logo"
+            />
+          </div>
         </SquareContent>
       </SquareWrapper>
     </>
