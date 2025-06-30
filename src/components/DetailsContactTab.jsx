@@ -55,6 +55,7 @@ const AddContactButton = styled.button`
   width: auto;
   padding: 0 10px;
   cursor: pointer;
+  margin: 0 10px;
 `;
 
 const ContactFunctionWrapper = styled.div`
