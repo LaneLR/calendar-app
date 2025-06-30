@@ -55,7 +55,6 @@ export default function Square() {
             }}
           >
             <Image
-              className="logo"
               src={"/images/PlanzText.png"}
               width={170}
               height={60}
