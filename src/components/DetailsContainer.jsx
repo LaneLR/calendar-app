@@ -10,22 +10,23 @@ const ComponentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80%;
+  height: 85%;
   flex-flow: column;
-  width: 100%;
+  width: 60%;
 `;
 
 const ContactsSectionWrapper = styled.div`
   flex-flow: column nowrap;
-  width: 60%;
+  width: 100%;
   height: 100%;
   max-width: 1200px;
   box-sizing: border-box;
   border: 2px solid black;
   border-radius: 8px;
   overflow: hidden;
-  background-color: darkgray;
-  color: white;
+  background-color: var(--color-calendar-bg);
+  color: #fff;
+  overflow-y: auto;
 `;
 
 const TabsLayout = styled.div`
@@ -40,11 +41,16 @@ const EmptyInfoWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  font-size: 1.4rem;
+  text-align: center;
 `;
 
 export default function DetailsContainer() {
   const { messages, contacts, searchTerm, result } = useCalendar();
   const pathname = usePathname();
+
+    const contact = [{username: "Lane", password: "password"}]
+
 
   return (
     <ComponentWrapper>
@@ -75,7 +81,7 @@ export default function DetailsContainer() {
             contacts.length === 0 &&
             searchTerm.length < 3 ? (
               <EmptyInfoWrapper>
-                <h1>You have no Contacts</h1>
+                <h1>Your Contacts List is empty...</h1>
               </EmptyInfoWrapper>
             ) : Array.isArray(contacts) &&
               contacts.length > 0 &&
