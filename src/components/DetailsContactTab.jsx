@@ -17,7 +17,7 @@ const UserContactIconWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 7px 20px 7px 15px;
-  color: #fff; 
+  color: var(--color-contacts-text); 
 `;
 
 const UserContactIcon = styled.div`

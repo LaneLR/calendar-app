@@ -36,7 +36,7 @@
   --color-header-bg: rgba(145, 71, 148, 0.692);
 
   --color-contacts-bg: #fff;
-  --color-contacts-text: #1e1e1e;
+  --color-contacts-text: #333;
   --color-error-text: red;
 }
 
@@ -75,7 +75,7 @@ html.dark {
   --color-header-button-hover: #444;
   --color-header-text-hover: #eee;
   --color-contacts-bg: #333;
-  --color-contacts-text: #fff;
+  --color-contacts-text: #333;
   --color-error-text: red;
 }
 
