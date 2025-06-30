@@ -24,8 +24,8 @@ const ContactsSectionWrapper = styled.div`
   border: 2px solid black;
   border-radius: 8px;
   overflow: hidden;
-  background-color: var(--color-calendar-bg);
-  color: #fff;
+  background-color: var(--color-contacts-container-bg);
+  color: var(--color-contacts-text);
   overflow-y: auto;
 `;
 

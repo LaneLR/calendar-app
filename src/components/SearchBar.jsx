@@ -17,7 +17,7 @@ const Search = styled.input`
   max-width: 1200px;
   padding: 10px;
   border-radius: 5px;
-  border: 2px solid var(--color-toolbar-bg);
+  border: 2px solid black;
 
   &:focus {
     outline: none;
