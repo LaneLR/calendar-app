@@ -1,4 +1,29 @@
-@import 'react-big-calendar/lib/css/react-big-calendar.css';
+@import "react-big-calendar/lib/css/react-big-calendar.css";
+/* @import '../styles/custom-calendar.css'; */
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --color-toolbar-bg: #EF3E0E;
+  --color-toolbar-button: rgb(255, 255, 255);
+  --color-toolbar-button-hover: rgba(79, 45, 80, 0.692);
+  --color-toolbar-button-active: rgba(79, 45, 80, 0.692) !important;
+  --color-toolbar-label: #fff;
+
+  --color-calendar-bg: #d3d3d3;
+  --color-calendar-border: #ee5126;
+  --color-calendar-numbers: #ffffff;
+
+  --color-event-bg: #EF3E0E;
+  --color-event-text: #fff;
+
+  --color-today-border: #007bff;
+  --color-header-bg: rgba(145, 71, 148, 0.692);
+}
 
 html,
 body {
@@ -6,22 +31,26 @@ body {
   overflow-x: hidden;
   height: auto;
   min-height: 100%;
-  background-color: rgb(255, 255, 255);
 }
 
 body {
-
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;  
   height: 100%;
 }
 
-*, :root {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-
+html.dark {
+  --color-toolbar-bg: #1e1e1e;
+  --color-toolbar-button: #333;
+  --color-toolbar-button-hover: #444;
+  --color-toolbar-button-active: #555;
+  --color-toolbar-label: #eee;
+  --color-calendar-bg: rgba(97, 92, 92, 0.2);
+  --color-calendar-border: #555;
+  --color-event-bg: #2a2a2a;
+  --color-event-text: #fff;
+  --color-today-border: #6c63ff;
+  --color-header-bg: #2c2c3c;
 }
 
 main {
@@ -33,3 +62,163 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.rbc-toolbar {
+  background-color: var(--color-toolbar-bg);
+  color: var(--color-toolbar-label);
+  padding: 1rem;
+  font-size: 1.2rem;
+  border-radius: 9px;
+}
+
+.rbc-event {
+  border-radius: 8px;
+  padding: 4px;
+  font-size: 0.9rem;
+  background-color: var(--color-event-bg);
+  color: var(--color-event-text);
+}
+
+.rbc-today {
+  border: 1px solid var(--color-today-border);
+}
+
+.rbc-month-view {
+  border-radius: 9px;
+  border: none;
+  background-color: var(--color-calendar-bg);
+  padding: 0 8px 8px 8px;
+}
+
+.rbc-month-row {
+  border-top: none !important;
+}
+
+.rbc-day-bg {
+  background-color: var(--color-calendar-numbers);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 7px;
+  max-width: 160px;
+  height: 100%;
+}
+
+.rbc-date-cell {
+  margin: auto;
+}
+
+.rbc-calendar {
+  border-radius: 9px;
+  background-color: var(--color-calendar-bg);
+}
+
+.rbc-today {
+  border: 2px solid var(--color-calendar-border)
+}
+
+.rbc-header {
+  background-color: var(--color-calendar-numbers);
+  color: var(--color-calendar-border);
+  font-size: 1rem;
+  border-radius: 15px;
+  height: 45px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 160px;
+}
+
+.rbc-month-header, .rbc-row-bg, .rbc-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.rbc-month-header, .rbc-row-content, .rbc-row-bg, .rbc-month-view {
+  gap: 4px;
+}
+
+.rbc-row-content {
+  width: 99.5%;
+}
+
+.rbc-current button.rbc-button-link {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 3px;
+}
+
+.rbc-toolbar button {
+  background-color: var(--color-calendar-numbers);
+  color: var(--color-calendar-border);
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  transition: background-color 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+@media (max-width: 875px) {
+  .rbc-toolbar {
+    flex-direction: column;
+  }
+  .rbc-toolbar-label {
+    margin: 10px 0;
+  }
+}
+
+.rbc-event {
+
+}
+
+/* .rbc-toolbar button.rbc-active {
+  background-color: var(--color-toolbar-button-active);
+  color: var(--color-toolbar-label);
+  font-weight: 600;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.rbc-toolbar button.rbc-active:hover,
+.rbc-toolbar button:hover {
+  background-color: var(--color-toolbar-button-hover);
+  color: var(--color-toolbar-label);
+} */
+
+.rbc-toolbar button {
+  background-color: var(--color-toolbar-button);
+  color: var(--color-calendar-border);
+  font-weight: normal;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+
+.rbc-toolbar button.rbc-active {
+  background-color: var(--color-toolbar-button-active) !important;
+  color: var(--color-toolbar-label);
+  font-weight: 600;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.rbc-toolbar button:hover {
+  background-color: var(--color-toolbar-button-hover);
+  color: var(--color-toolbar-label);
+}
+
+.rbc-toolbar button.rbc-active:hover {
+  background-color: var(--color-toolbar-button-active) !important;
+  color: var(--color-toolbar-label);
+}
+
+.rbc-toolbar-label {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.rbc-button-link {
+  color: var(--color-calendar-border);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
