@@ -3,13 +3,39 @@ import styled from "styled-components";
 import { useCalendar } from "@/context/CalendarContext";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Button from "@/components/Button";
+import Link from "next/link";
 
 const LoginWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   height: 100%;
   flex-direction: column;
+  width: 300px;
+`;
+
+const LoginFormWrapper = styled.div`
+  height: auto;
+  padding: 20px;
+  background-color: var(--color-toolbar-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+`;
+
+const InputBoxes = styled.input`
+  padding: 10px;
+  font-size: 1.2rem;
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+
+  &:focus {
+    border: none;
+  }
 `;
 
 export default function LoginPage() {
@@ -64,32 +90,59 @@ export default function LoginPage() {
   return (
     <>
       <LoginWrapper>
-        <h2>Login</h2>
+        <div>
+          <div>
+            <h1 style={{fontSize: '2.8rem', marginBottom: '10px'}}>Login</h1>
+            <LoginFormWrapper>
+              {error && <p style={{ color: "red" }}>{error}</p>}
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        <form
-          onSubmit={handleLoginUser}
-          style={{ display: "flex", flexDirection: "column" }}
-        >
-          <input
-            placeholder="username"
-            type="text"
-            name="username"
-            value={loginData.username}
-            onChange={handleLoginChange}
-            required
-          />
-          <input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={loginData.password}
-            onChange={handleLoginChange}
-            required
-          />
-          <button type="submit">Login</button>
-        </form>
+              <form
+                onSubmit={handleLoginUser}
+                style={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                }}
+              >
+                <InputBoxes
+                  placeholder="Username"
+                  type="text"
+                  name="username"
+                  value={loginData.username}
+                  onChange={handleLoginChange}
+                  required
+                />
+                <InputBoxes
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  value={loginData.password}
+                  onChange={handleLoginChange}
+                  required
+                />
+                <Button
+                  style={{
+                    marginTop: "20px",
+                    width: "130px",
+                    fontWeight: "600",
+                  }}
+                  type="submit"
+                >
+                  Login
+                </Button>
+              </form>
+            </LoginFormWrapper>
+          </div>
+          <div style={{marginTop: '20px', width: '100%', textAlign: 'center'}}>
+            Don&apos;t have an account?{" "}
+            <Link href={"/register"}>
+              <u>Create one!</u>
+            </Link>
+          </div>
+        </div>
+        <div></div>
       </LoginWrapper>
     </>
   );

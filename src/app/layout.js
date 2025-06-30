@@ -31,34 +31,35 @@ export default function RootLayout({ children }) {
             <div
               style={{
                 display: "flex",
-                width: "100vw",
                 height: "100vh",
-                padding: "3px 10px",
                 overflow: "hidden",
+                flexDirection: "column",
+                width: "100vw",
               }}
             >
               <div
                 style={{
                   display: "flex",
-                  width: "180px",
-                  height: "100vh",
-                  padding: "3px 0 3px 10px",
-                  flexDirection: "column",
+                  backgroundColor: "var(--color-toolbar-bg)",
+                  width: '100%',
+                  height: 'auto',
+                  
                 }}
               >
-                <Square />
-                <Sidebar />
+                {/* <Square /> */}
+                <Header />
               </div>
               <div
                 style={{
                   display: "flex",
-                  flexDirection: "column",
-                  margin: "3px 10px",
-                  flexGrow: 1,
                   overflow: "hidden",
+                  justifyContent: "center",
+                  alignItems: 'center',
+                  width: "100%",
+                  height: "100%",
                 }}
               >
-                <Header />
+                {/* <Sidebar /> */}
                 {children}
               </div>
             </div>

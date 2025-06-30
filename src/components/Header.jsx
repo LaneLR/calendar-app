@@ -2,38 +2,89 @@
 import { useCalendar } from "@/context/CalendarContext";
 import styled from "styled-components";
 import EventFormModal from "./EventFormModal";
+import { useRouter } from "next/navigation";
+import Square from "./Square";
+import Button from "./Button";
+import Link from "next/link";
 
 const HeaderWrapper = styled.div`
-  min-height: 150px;
-  max-height: 150px;
-  width: 98.5%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 0;
-`;
-
-const HeaderContent = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lavender;
+  height: auto;
   width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  box-shadow: 4px 6px 5px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-export default function Header({ children }) {
-  const { user } = useCalendar();
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+  margin: 0 20px 0 0;
+`;
+
+const WelcomeText = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--color-header-button);
+`;
+
+export default function Header() {
+  const { user, isLoggedIn, logoutUser, toggleDarkMode } = useCalendar();
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch(`/api/logout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (res.ok) {
+        logoutUser();
+        setTimeout(() => {
+          router.refresh();
+          router.push("/login");
+        }, 100);
+      }
+    } catch (err) {
+      console.log("Error occurred while handling logout: ", err);
+      return;
+    }
+  };
 
   return (
     <>
       <HeaderWrapper>
-        <HeaderContent>
-          <p style={{ color: "black", fontSize: '1.4rem' }}>{user.username}</p>
-          {children}
-        </HeaderContent>
+        <Square />
+        {/* <WelcomeText>
+          <div>Welcome back</div>
+          <b>, {user.username}Lane</b>
+        </WelcomeText> */}
+        {isLoggedIn ? (
+          <ButtonContainer>
+            <Link href={"/"}>
+              <Button>Calendar</Button>
+            </Link>
+            <Link href={"/contacts"}>
+              <Button>Contacts</Button>
+            </Link>
+            <Button onClick={() => toggleDarkMode()}>Mode</Button>
+            <Button onClick={() => handleLogout()}>Logout</Button>
+          </ButtonContainer>
+        ) : (
+          <ButtonContainer>
+            <Link href={"/login"}>
+              <Button>Login</Button>
+            </Link>
+            <Link href={"/register"}>
+              <Button>Register</Button>
+            </Link>
+          </ButtonContainer>
+        )}
       </HeaderWrapper>
     </>
   );
