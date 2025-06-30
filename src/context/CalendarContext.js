@@ -34,6 +34,7 @@ export function CalendarProvider({ children }) {
       username: "",
       password: "",
     });
+    setTheme("light")
     setIsLoggedIn(false);
     setTimeout(() => {
       router.refresh();
@@ -200,6 +201,7 @@ useEffect(() => {
         setDate,
         toggleDarkMode,
         theme,
+        setTheme,
       }}
     >
       {loadingAuth ? (
