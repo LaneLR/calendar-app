@@ -8,10 +8,12 @@
 }
 
 :root {
+  --color-page-bg: #fff;
+
   --color-toolbar-bg: #ef3e0e;
   --color-toolbar-button: rgb(255, 255, 255);
   --color-toolbar-button-hover: rgba(79, 45, 80, 0.692);
-  --color-toolbar-button-active: rgba(79, 45, 80, 0.692) !important;
+  --color-toolbar-button-active: rgba(79, 45, 80, 0.692);
   --color-toolbar-label: #fff;
   --color-toolbar-text: #ef3e0e;
   --color-header-button: #ef3e0e;
@@ -39,6 +41,7 @@ body {
   overflow-x: hidden;
   height: auto;
   min-height: 100%;
+  background-color: var(--color-page-bg);
 }
 
 body {
@@ -61,6 +64,7 @@ html.dark {
   --color-header-bg: #2c2c3c;
   --color-toolbar-text: #fff;
   --color-calendar-bg: #b4b4b4;
+  --color-page-bg: #575757;
 }
 
 .logo {
