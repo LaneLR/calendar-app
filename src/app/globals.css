@@ -100,7 +100,7 @@ a {
   border-bottom-right-radius: 15px;
   border-top-left-radius: 15px;
   border-top-right-radius: 7px;
-  max-width: 160px;
+  max-width: none;
   height: 100%;
 }
 
@@ -127,17 +127,17 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 160px;
+  max-width: none;
 }
 
 .rbc-month-header, .rbc-row-bg, .rbc-row {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: stretch;
+  align-items: stretch;
 }
 
 .rbc-month-header, .rbc-row-content, .rbc-row-bg, .rbc-month-view {
-  gap: 4px;
+  gap: 1px;
 }
 
 .rbc-row-content {
