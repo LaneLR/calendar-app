@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Planz is a calendar web app developed by Lane Richardson and built using NextJS's App Router, React Big Calendar, and PostgreSQL. Planz allows users to register an account, plan their own events or make plans with contacts, and manage schedules with dynamic themes like dark mode.
 
-## Getting Started
+This app features:
+•   Account registration, login, and logout using JWT.
+•   An interactive big calendar where users can create events, select  event start and end times, and delete events altogether.
+•   Add and manage contacts to invite them to events.
+•   Responsive UI design with styled components.
+•   Dark mode!
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Setup Instructions:
+1. Clone the repo
+    in a terminal type:
+        git clone https://github.com/LaneLR/calendar-app.git
+        cd calendar-app
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install the dependencies
+    in a terminal type:
+        npm install
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. Create a .env file
+    DATABASE_URL=postgresql://...
+    NEXT_PUBLIC_BASE_URL=http://localhost:3000
+    NEXTAUTH_URL=http://localhost:3000
+    JWT_SECRET=Type-Your-Own-Secret-Phrase-Here
+    
+4. Run the app:
+    in a terminal, type:
+        npm run dev
