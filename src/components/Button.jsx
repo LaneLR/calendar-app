@@ -17,7 +17,7 @@ const ButtonWrapper = styled.button`
 
   &:hover {
     background-color: var(--color-header-button-hover);
-    color: var(--color-header-button);
+    color: var(--color-header-text-hover);
   }
 `;
 

@@ -6,6 +6,8 @@ import styled from "styled-components";
 const TabWrapper = styled.div`
   width: 100%;
   display: flex;
+  background-color: var(--color-toolbar-label);
+  color: #fff;
 `;
 
 const UserContactIconWrapper = styled.div`
@@ -15,6 +17,7 @@ const UserContactIconWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 7px 20px 7px 15px;
+  color: #fff; 
 `;
 
 const UserContactIcon = styled.div`
@@ -24,7 +27,7 @@ const UserContactIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: orange;
+  background-color: var(--color-toolbar-bg);
 `;
 
 const ContactSnippetWrapper = styled.div`
@@ -52,7 +55,6 @@ const AddContactButton = styled.button`
   width: auto;
   padding: 0 10px;
   cursor: pointer;
-  color: black;
 `;
 
 const ContactFunctionWrapper = styled.div`
@@ -69,7 +71,6 @@ export default function DetailsContactTab({ contact }) {
 
   const { contacts, addContacts, deleteContact } = useCalendar();
   const contactExists = contacts.some((c) => c.id === contact.id);
-
 
   return (
     <TabWrapper>

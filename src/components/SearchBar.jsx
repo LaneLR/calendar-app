@@ -3,7 +3,7 @@ import { useCalendar } from "@/context/CalendarContext";
 import styled from "styled-components";
 
 const SearchBarWrapper = styled.div`
-  width: 90%;
+  width: 100%;
   height: auto;
   margin: 5px 0 10px 0;
   display: flex;
@@ -14,13 +14,25 @@ const SearchBarWrapper = styled.div`
 const Search = styled.input`
   font-size: 1.3rem;
   width: 100%;
-  padding: 5px;
   max-width: 1200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid var(--color-toolbar-bg);
 
   &:focus {
     outline: none;
   }
 `;
+
+const InputBoxes = styled.input`
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+`
 
 export default function SearchBar() {
   const { user, setResult, searchTerm, setSearchTerm } = useCalendar();
