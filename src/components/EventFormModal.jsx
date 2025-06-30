@@ -219,7 +219,6 @@ export default function EventFormModal({ contact }) {
                   />
                 ))}
               </ContactsAddedContainer>
-
               <ModalButtonWrapper>
                 <Button type="submit">Confirm</Button>
                 <Button

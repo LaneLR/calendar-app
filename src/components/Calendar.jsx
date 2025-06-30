@@ -11,8 +11,8 @@ const CalendarWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 88.5vh;
-  width: 98%;
+  height: 75vh;
+  width: 90vw;
   padding: 10px;
   box-sizing: border-box;
 `;
@@ -20,7 +20,7 @@ const CalendarWrapper = styled.div`
 const CalendarSizing = styled.div`
   flex-grow: 1;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   height: 100%;
 `;
 
@@ -120,7 +120,7 @@ export default function UserCalendar() {
               onNavigate={(date) => setDate(date)}
               style={{
                 minHeight: "494px",
-                height: '90%',
+                height: '100%',
                 minWidth: "452px",
                 boxShadow: "2px 3px 6px 4px rgba(0, 0, 0, 0.1)",
               }}
