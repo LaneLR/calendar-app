@@ -92,10 +92,8 @@ export default function LoginPage() {
       <LoginWrapper>
         <div>
           <div>
-            <h1 style={{fontSize: '2.8rem', marginBottom: '10px'}}>Login</h1>
+            <h1 style={{ fontSize: "2.8rem", marginBottom: "10px" }}>Login</h1>
             <LoginFormWrapper>
-              {error && <p style={{ color: "red" }}>{error}</p>}
-
               <form
                 onSubmit={handleLoginUser}
                 style={{
@@ -135,7 +133,14 @@ export default function LoginPage() {
               </form>
             </LoginFormWrapper>
           </div>
-          <div style={{marginTop: '20px', width: '100%', textAlign: 'center'}}>
+          {error && (
+            <p style={{ color: "var(--color-error-text)", marginTop: "20px" }}>
+              {error}
+            </p>
+          )}
+          <div
+            style={{ marginTop: "20px", width: "100%", textAlign: "center" }}
+          >
             Don&apos;t have an account?{" "}
             <Link href={"/register"}>
               <u>Create one!</u>
