@@ -37,6 +37,7 @@
 
   --color-contacts-bg: #fff;
   --color-contacts-text: #1e1e1e;
+  --color-error-text: red;
 }
 
 html,
@@ -75,6 +76,7 @@ html.dark {
   --color-header-text-hover: #eee;
   --color-contacts-bg: #333;
   --color-contacts-text: #fff;
+  --color-error-text: red;
 }
 
 .logo {
