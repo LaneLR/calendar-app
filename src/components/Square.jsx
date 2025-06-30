@@ -56,9 +56,10 @@ export default function Square() {
           >
             <Image
               src={"/images/PlanzText.png"}
-              width={170}
+              width={190}
               height={60}
               alt="Planz Text Logo"
+              style={{marginLeft: '10px'}}
             />
           </div>
         </SquareContent>
