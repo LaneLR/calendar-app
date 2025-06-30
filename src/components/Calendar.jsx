@@ -1,6 +1,6 @@
 "use client";
 import { Calendar, momentLocalizer } from "react-big-calendar";
-import "@/styles/custom-calendar.scss";
+// import "@/styles/custom-calendar.css";
 import moment from "moment";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ const CalendarWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100%;
+  height: 88.5vh;
   width: 98%;
   padding: 10px;
   box-sizing: border-box;
@@ -22,7 +22,6 @@ const CalendarSizing = styled.div`
   width: 100%;
   max-width: 1200px;
   height: 100%;
-  
 `;
 
 const localizer = momentLocalizer(moment);
@@ -42,15 +41,16 @@ export default function UserCalendar() {
     contacts,
     setShowModal,
     showModal,
+    theme,
   } = useCalendar();
 
   const [modalStart, setModalStart] = useState(null);
   const [modalEnd, setModalEnd] = useState(null);
 
   const handleSelectSlot = async ({ start, end }) => {
-    setModalStart(start)
-    setModalEnd(end)
-    setShowModal(true)
+    setModalStart(start);
+    setModalEnd(end);
+    setShowModal(true);
   };
 
   const fetchEvents = async () => {
@@ -102,27 +102,33 @@ export default function UserCalendar() {
 
   return (
     <>
-      <CalendarWrapper>
-        <CalendarSizing>
-          <Calendar
-            key={user?.id || "calendar"}
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            view={calendarView}
-            onView={(view) => setCalendarView(view)}
-            selectable
-            date={date}
-            onSelectSlot={handleSelectSlot}
-            onSelectEvent={handleDeleteEvent}
-            onNavigate={(date) => setDate(date)}
-            style={{ minHeight: "494px", minWidth: "452px",   boxShadow: '2px 3px 6px 4px rgba(0, 0, 0, 0.1)'
-}}
-          />
-          {showModal && <EventFormModal start={modalStart} end={modalEnd} />}
-        </CalendarSizing>
-      </CalendarWrapper>
+      <div key={theme}>
+        <CalendarWrapper>
+          <CalendarSizing>
+            <Calendar
+              key={user?.id || "calendar"}
+              localizer={localizer}
+              events={events}
+              startAccessor="start"
+              endAccessor="end"
+              view={calendarView}
+              onView={(view) => setCalendarView(view)}
+              selectable
+              date={date}
+              onSelectSlot={handleSelectSlot}
+              onSelectEvent={handleDeleteEvent}
+              onNavigate={(date) => setDate(date)}
+              style={{
+                minHeight: "494px",
+                height: '90%',
+                minWidth: "452px",
+                boxShadow: "2px 3px 6px 4px rgba(0, 0, 0, 0.1)",
+              }}
+            />
+            {showModal && <EventFormModal start={modalStart} end={modalEnd} />}
+          </CalendarSizing>
+        </CalendarWrapper>
+      </div>
     </>
   );
 }

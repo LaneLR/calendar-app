@@ -62,7 +62,7 @@ export default function ContactTabInModal({ contact, isSelected, onToggle }) {
   const trashcanImage = "/images/trashcan.png";
 
   return (
-    <TabWrapper style={{ backgroundColor: isSelected ? "#eeeeee" : "#ffffff" }}>
+    <TabWrapper>
       <UserContactIconWrapper>
         <UserContactIcon type="button" onClick={() => onToggle(contact.id)}>
           {contact.username?.slice(0, 2).toUpperCase()}

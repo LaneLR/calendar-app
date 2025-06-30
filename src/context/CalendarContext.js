@@ -20,6 +20,7 @@ export function CalendarProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [date, setDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
+  const [theme, setTheme] = useState("light");
 
   const router = useRouter();
 
@@ -126,6 +127,16 @@ export function CalendarProvider({ children }) {
     setContacts((prev) => prev.filter((e) => e.name !== contactId));
   };
 
+const toggleDarkMode = () => {
+  const dark = document.documentElement.classList.toggle("dark");
+  localStorage.setItem("theme", dark ? "dark" : "light");
+};
+useEffect(() => {
+  if (window.localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+  }
+}, []);
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -187,6 +198,8 @@ export function CalendarProvider({ children }) {
         addContacts,
         date,
         setDate,
+        toggleDarkMode,
+        theme,
       }}
     >
       {loadingAuth ? (

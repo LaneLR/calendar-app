@@ -70,7 +70,7 @@ const SidebarTabDiv = styled.button`
 `;
 
 export default function Sidebar() {
-  const { isLoggedIn, logoutUser } = useCalendar();
+  const { isLoggedIn, logoutUser, toggleDarkMode} = useCalendar();
 
   const router = useRouter();
 
@@ -100,6 +100,7 @@ export default function Sidebar() {
         <SidebarTabContainer>
           <SidebarTab href="/">Calendar</SidebarTab>
           <SidebarTab href="/contacts">Contacts</SidebarTab>
+          
           {isLoggedIn ? (
             <SidebarTabDiv
               onClick={() => {
@@ -113,7 +114,7 @@ export default function Sidebar() {
               <SidebarTab href="/login">Login</SidebarTab>
               <SidebarTab href="/register">Create account</SidebarTab>
             </>
-          )}
+          )}<button onClick={() => toggleDarkMode()}>Toggle</button>
         </SidebarTabContainer>
       </SidebarWrapper>
     </>

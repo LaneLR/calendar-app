@@ -7,14 +7,15 @@ const ButtonWrapper = styled.button`
   text-align: center;
   font-size: 1.1rem;
   border: none;
-  background-color: rgb(187, 151, 194);
+  background-color: var(--color-toolbar-button);
   padding: 15px;
   border-radius: 15px;
   cursor: pointer;
   width: auto;
 
   &:hover {
-  background-color: rgb(177, 127, 187);  }
+  background-color: var(--color-toolbar-button-hover)
+  }
 `;
 
 export default function Button({ children, type = 'button', ...props }) {
