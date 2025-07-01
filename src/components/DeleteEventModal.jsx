@@ -96,18 +96,8 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
 
     if (Array.isArray(event.users)) {
       setUsers(event.users);
-    } else if (Array.isArray(event.userIds)) {
-      // fallback if users array not included
-      fetch("/api/users/byIds", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ids: event.userIds }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.users) setUsers(data.users);
-        })
-        .catch((err) => console.error("Failed to fetch users", err));
+    } else {
+      setUsers([])
     }
   }, [event]);
 
@@ -128,7 +118,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                     width: "100%",
                   }}
                 >
-                  {event?.title}
+                  {event.title}
                 </h4>
                 <AddDatesContainers>
                   <div>
@@ -142,7 +132,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         width: "100%",
                       }}
                     >
-                      {event?.start}
+                      {event.start}
                      
                     </p>
                   </div>
@@ -157,7 +147,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         width: "100%",
                       }}
                     >
-                      {event?.end}
+                      {event.end}
 
                     </p>
                   </div>
@@ -169,8 +159,8 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                 </TextContainerLeftAlign>
 
                 <ContactsAddedContainer>
-                  {users?.length > 0 ? (
-                    event?.map((user) => (
+                  {users.length > 0 ? (
+                    users.map((user) => (
                       <UserOnEventInModal key={user.id} user={user} />
                     ))
                   ) : (
