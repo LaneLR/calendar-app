@@ -51,8 +51,8 @@ body {
   --color-today-border: #007bff;
   --color-header-bg: rgba(145, 71, 148, 0.692);
 
-  --color-calendar-event-bg: rgba(145, 71, 148, 0.692);
-  --color-calendar-event-text: #d3d3d3;
+  --color-calendar-event-bg: #a33718;
+  --color-calendar-event-text: #fff;
 
   --color-contacts-container-bg: #d6d6d6;
   --color-contacts-bg: #fff;

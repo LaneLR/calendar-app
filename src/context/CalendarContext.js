@@ -129,6 +129,11 @@ export function CalendarProvider({ children }) {
   const toggleDarkMode = () => {
     const dark = document.documentElement.classList.toggle("dark");
     localStorage.setItem("theme", dark ? "dark" : "light");
+    if (theme === 'dark') {
+      setTheme('dark')
+    } else if (theme === 'light') {
+      setTheme('light')
+    }
   };
   useEffect(() => {
     if (window.localStorage.getItem("theme") === "dark") {
