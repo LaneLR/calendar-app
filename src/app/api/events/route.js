@@ -48,36 +48,43 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const userId = parseInt(searchParams.get("userId"), 10);
 
-    let whereClause = {};
-    if (!isNaN(userId)) {
-      whereClause = {
-        include: {
-          model: User,
-          where: { id: userId },
-          through: { attributes: [] },
-          attributes: [], 
-        },
-      };
+    if (isNaN(userId)) {
+      return NextResponse.json(
+        { error: "Invalid or missing userId" },
+        { status: 400 }
+      );
     }
 
-    const events = await Event.findAll({
-      ...whereClause,
+    const user = await User.findByPk(userId, {
       include: [
         {
-          model: User,
+          model: Event,
           through: { attributes: [] }, 
-          attributes: ["id", "username"], 
+          include: [
+            {
+              model: User,
+              through: { attributes: [] }, 
+              attributes: ["id", "username"], 
+            },
+          ],
         },
       ],
     });
 
-    return NextResponse.json({
-      events: events.map((event) => ({
-        ...event.toJSON(),
-        start: event.start,
-        end: event.end,
-      })),
-    });
+    if (!user) {
+      return NextResponse.json(
+        { error: `User with id ${userId} not found` },
+        { status: 404 }
+      );
+    }
+
+    const events = user.Events.map((event) => ({
+      ...event.toJSON(), 
+      start: event.start, 
+      end: event.end,
+    }));
+
+    return NextResponse.json({ events });
   } catch (err) {
     console.error("Error in GET events route:", err);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
