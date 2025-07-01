@@ -58,11 +58,9 @@ export async function GET(req) {
     const events = await Event.findAll({
       include: {
         model: User,
+        include: {id: userId},
         through: { attributes: [] },
         attributes: ["id", "username",],
-      },
-      where: {
-        "$Users.id$": userId,
       },
     });
 
