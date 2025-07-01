@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useCalendar } from "@/context/CalendarContext";
 import EventFormModal from "./EventFormModal";
+import DeleteEventModal from "./DeleteEventModal";
 
 const CalendarWrapper = styled.div`
   display: flex;
@@ -42,6 +43,8 @@ export default function UserCalendar() {
     setShowModal,
     showModal,
     theme,
+    eventToDelete,
+    setEventToDelete,
   } = useCalendar();
 
   const [modalStart, setModalStart] = useState(null);
@@ -49,8 +52,8 @@ export default function UserCalendar() {
 
   const handleSelectSlot = async ({ start, end }) => {
     if (!isLoggedIn) {
-      alert("You must be logged in to create an event.")
-      return
+      alert("You must be logged in to create an event.");
+      return;
     }
     setModalStart(start);
     setModalEnd(end);
@@ -124,12 +127,23 @@ export default function UserCalendar() {
               onNavigate={(date) => setDate(date)}
               style={{
                 minHeight: "494px",
-                height: '100%',
+                height: "100%",
                 minWidth: "452px",
                 boxShadow: "2px 3px 6px 4px rgba(0, 0, 0, 0.1)",
               }}
             />
             {showModal && <EventFormModal start={modalStart} end={modalEnd} />}
+            {eventToDelete && (
+              <DeleteEventModal
+                event={eventToDelete}
+                onCancel={() => setEventToDelete(null)}
+                onConfirm={async () => {
+                  await handleDeleteEvent(eventToDelete);
+                  setEventToDelete(null);
+                }}
+                onSelectEvent={(event) => setEventToDelete(event)}
+              />
+            )}
           </CalendarSizing>
         </CalendarWrapper>
       </div>

@@ -2,7 +2,6 @@
 import { useCalendar } from "@/context/CalendarContext";
 import { useState } from "react";
 import styled from "styled-components";
-import TabExample from "./ContactTabInModal";
 import ContactTabInModal from "./ContactTabInModal";
 import ModalButton from "./ModalButton";
 
