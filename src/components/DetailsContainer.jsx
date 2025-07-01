@@ -27,10 +27,15 @@ const ContactsSectionWrapper = styled.div`
   background-color: var(--color-contacts-container-bg);
   color: var(--color-contacts-text);
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+  }
 `;
 
 const TabsLayout = styled.div`
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   width: 100%;
   height: auto;
   display: flex;
