@@ -70,9 +70,7 @@ async function initializeModels() {
   foreignKey: "UserId",  // who is doing the adding
   otherKey: "ContactId",   // who is being added
 });
-
-  User.hasMany(Message, { foreignKey: "senderUserId", as: "SentMessages" });
-  User.hasMany(Message, { foreignKey: "recipientUserId", as: "ReceivedMessages" });
+  // User.belongsToMany(User)
 
   User.belongsToMany(Event, { through: "UserEvents" });
   Event.belongsToMany(User, { through: "UserEvents" }); 
@@ -80,7 +78,6 @@ async function initializeModels() {
   return {
     sequelize,
     User,
-    Message,
     Event,
   };
 }
