@@ -28,7 +28,7 @@ const ContactsSectionWrapper = styled.div`
   color: var(--color-contacts-text);
   overflow-y: auto;
 
-  &::-webkit-scrollbar {
+  &::-webkit-scrollbar-track {
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
   }

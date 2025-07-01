@@ -27,6 +27,7 @@ const UserContactIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1rem;
   background-color: var(--color-user-icon);
   color: var(--color-contacts-icon-text);
 `;
@@ -79,7 +80,7 @@ export default function DetailsContactTab({ contact }) {
     <TabWrapper>
       <UserContactIconWrapper>
         <UserContactIcon>
-          <b>{contact.username.slice(0, 2).toUpperCase()}</b>
+          {contact.username.slice(0, 2).toUpperCase()}
         </UserContactIcon>
       </UserContactIconWrapper>
       <ContactSnippetWrapper>
