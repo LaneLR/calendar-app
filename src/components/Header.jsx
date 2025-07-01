@@ -32,7 +32,7 @@ const WelcomeText = styled.div`
 `;
 
 export default function Header() {
-  const { user, isLoggedIn, logoutUser, toggleDarkMode } = useCalendar();
+  const { user, isLoggedIn, logoutUser, toggleDarkMode, theme } = useCalendar();
 
   const router = useRouter();
 
@@ -72,7 +72,11 @@ export default function Header() {
             <Link href={"/contacts"}>
               <Button>Contacts</Button>
             </Link>
-            <Button onClick={() => toggleDarkMode()}>Mode</Button>
+            {theme === "light" ? (
+              <Button onClick={() => toggleDarkMode()}>Dark</Button>
+            ) : (
+              <Button onClick={() => toggleDarkMode()}>Light</Button>
+            )}
             <Button onClick={() => handleLogout()}>Logout</Button>
           </ButtonContainer>
         ) : (
