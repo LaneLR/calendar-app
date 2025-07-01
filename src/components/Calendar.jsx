@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useCalendar } from "@/context/CalendarContext";
 import EventFormModal from "./EventFormModal";
 import DeleteEventModal from "./DeleteEventModal";
+import { useRouter } from "next/router";
 
 const CalendarWrapper = styled.div`
   display: flex;
@@ -49,6 +50,8 @@ export default function UserCalendar() {
   const [modalStart, setModalStart] = useState(null);
   const [modalEnd, setModalEnd] = useState(null);
 
+  const router = useRouter();
+
   const handleSelectSlot = async ({ start, end }) => {
     if (!isLoggedIn) {
       alert("You must be logged in to create an event.");
@@ -57,6 +60,7 @@ export default function UserCalendar() {
     setModalStart(start);
     setModalEnd(end);
     setShowModal(true);
+    router.refresh();
   };
 
   const fetchEvents = async () => {
@@ -95,6 +99,7 @@ export default function UserCalendar() {
         return;
       }
       deleteEvent(event.id);
+      router.refresh();
     } catch (err) {
       console.error("Error occurred while trying to delete event: ", err);
     }
@@ -132,7 +137,7 @@ export default function UserCalendar() {
               }}
             />
             {showModal && <EventFormModal start={modalStart} end={modalEnd} />}
-            {eventToDelete && typeof eventToDelete === 'object' && (
+            {eventToDelete && typeof eventToDelete === "object" && (
               <DeleteEventModal
                 event={eventToDelete}
                 onCancel={() => setEventToDelete(null)}
