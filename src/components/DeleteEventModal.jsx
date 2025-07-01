@@ -75,9 +75,10 @@ const AddDatesContainers = styled.div`
 
 const ContactsAddedContainer = styled.div`
   width: 80%;
-  height: auto;
+  height: 750px;
   background-color: lightgray;
   margin: 0 0 20px 0;
+  overflow-y: auto;
 `;
 
 const TextContainer = styled.div`
