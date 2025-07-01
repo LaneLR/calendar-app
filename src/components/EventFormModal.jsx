@@ -10,7 +10,6 @@ const ModalWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  min-width: 315px;
 `;
 
 const ModalForm = styled.form`
@@ -48,6 +47,7 @@ const ModalFormContainer = styled.div`
   width: 60%;
   padding: 30px;
   border-radius: 10px;
+  min-width: 315px;
 `;
 
 const TextContainerLeftAlign = styled.div`
