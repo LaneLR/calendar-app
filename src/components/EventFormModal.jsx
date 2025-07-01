@@ -188,26 +188,25 @@ export default function EventFormModal({ contact }) {
               />
               <AddDatesContainers>
                 <div>
-
-                
-                <TextContainerLeftAlign>
-                  <h4>Start Time</h4>
-                </TextContainerLeftAlign>
-                <StartTimeBar
-                  type="datetime-local"
-                  value={start ? formatLocalDateTime(start) : ""}
-                  onChange={(e) => setStart(new Date(e.target.value))}
-                /></div><div>
-
-                
-                <TextContainerLeftAlign>
-                  <h4>End Time</h4>
-                </TextContainerLeftAlign>
-                <EndTimeBar
-                  type="datetime-local"
-                  value={end ? formatLocalDateTime(end) : ""}
-                  onChange={(e) => setEnd(new Date(e.target.value))}
-                /></div>
+                  <TextContainerLeftAlign>
+                    <h4>Start Time</h4>
+                  </TextContainerLeftAlign>
+                  <StartTimeBar
+                    type="datetime-local"
+                    value={start ? formatLocalDateTime(start) : ""}
+                    onChange={(e) => setStart(new Date(e.target.value))}
+                  />
+                </div>
+                <div>
+                  <TextContainerLeftAlign>
+                    <h4>End Time</h4>
+                  </TextContainerLeftAlign>
+                  <EndTimeBar
+                    type="datetime-local"
+                    value={end ? formatLocalDateTime(end) : ""}
+                    onChange={(e) => setEnd(new Date(e.target.value))}
+                  />
+                </div>
               </AddDatesContainers>
 
               <TextContainerLeftAlign>
