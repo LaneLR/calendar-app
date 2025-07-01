@@ -44,20 +44,6 @@ async function initializeModels() {
     }
   );
 
-  Message.init(
-    {
-      content: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      sentAtTime: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-      },
-    },
-    { sequelize, modelName: "Message" }
-  );
-
   Event.init({
     title: {
       type: DataTypes.STRING,
@@ -87,9 +73,6 @@ async function initializeModels() {
 
   User.hasMany(Message, { foreignKey: "senderUserId", as: "SentMessages" });
   User.hasMany(Message, { foreignKey: "recipientUserId", as: "ReceivedMessages" });
-
-  Message.belongsTo(User, { foreignKey: "senderUserId", as: "Sender" });
-  Message.belongsTo(User, { foreignKey: "recipientUserId", as: "Recipient" });
 
   User.belongsToMany(Event, { through: "UserEvents" });
   Event.belongsToMany(User, { through: "UserEvents" }); 
