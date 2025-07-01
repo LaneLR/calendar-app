@@ -1,14 +1,14 @@
 "use client";
-import { useCalendar } from "@/context/CalendarContext";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import styled from "styled-components";
 
 const TabWrapper = styled.div`
   width: 100%;
   display: flex;
-  background-color: var(--color-toolbar-label);
+  background-color: ${({ isSelected }) =>
+    isSelected ? "var(--color-selected-contact-bg)" : "var(--color-notselected-contact-bg)"};
   color: #fff;
+  transition: background-color 0.2s ease;
 `;
 
 const UserContactIconWrapper = styled.div`
@@ -18,7 +18,7 @@ const UserContactIconWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 7px 20px 7px 15px;
-  color: var(--color-contacts-text); 
+  color: var(--color-contacts-text);
 `;
 
 const UserContactIcon = styled.button`
@@ -65,7 +65,7 @@ export default function ContactTabInModal({ contact, isSelected, onToggle }) {
   const trashcanImage = "/images/trashcan.png";
 
   return (
-    <TabWrapper>
+    <TabWrapper isSelected={isSelected}>
       <UserContactIconWrapper>
         <UserContactIcon type="button" onClick={() => onToggle(contact.id)}>
           {contact.username?.slice(0, 2).toUpperCase()}
