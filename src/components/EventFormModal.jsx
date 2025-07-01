@@ -97,9 +97,10 @@ const EndTimeBar = styled.input`
 
 const ContactsAddedContainer = styled.div`
   width: 80%;
-  height: auto;
+  max-height: 750px;
   background-color: lightgray;
   margin: 0 0 20px 0;
+  overflow-y: auto;
 `;
 
 export default function EventFormModal({ contact }) {
