@@ -43,7 +43,7 @@ export async function POST(req) {
 export async function GET(req) {
   try {
     const db = await initializeDbAndModels();
-    const { Event, User } = db;
+    const {Event, User} = db
 
     const { searchParams } = new URL(req.url);
     const userId = parseInt(searchParams.get("userId"), 10);
@@ -56,31 +56,15 @@ export async function GET(req) {
     }
 
     const user = await User.findByPk(userId, {
-      include: [
-        {
-          model: Event,
-          through: { attributes: [] }, 
-          include: [
-            {
-              model: User,
-              through: { attributes: [] }, 
-              attributes: ["id", "username"], 
-            },
-          ],
-        },
-      ],
+      include: {
+        model: Event,
+        through: { attributes: [] },
+      },
     });
 
-    if (!user) {
-      return NextResponse.json(
-        { error: `User with id ${userId} not found` },
-        { status: 404 }
-      );
-    }
-
     const events = user.Events.map((event) => ({
-      ...event.toJSON(), 
-      start: event.start, 
+      ...event.toJSON(),
+      start: event.start,
       end: event.end,
     }));
 
