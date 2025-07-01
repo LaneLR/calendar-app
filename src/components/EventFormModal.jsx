@@ -3,8 +3,8 @@ import { useCalendar } from "@/context/CalendarContext";
 import { useState } from "react";
 import styled from "styled-components";
 import TabExample from "./ContactTabInModal";
-import Button from "./Button";
 import ContactTabInModal from "./ContactTabInModal";
+import ModalButton from "./ModalButton";
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -220,8 +220,8 @@ export default function EventFormModal({ contact }) {
                 ))}
               </ContactsAddedContainer>
               <ModalButtonWrapper>
-                <Button type="submit">Confirm</Button>
-                <Button
+                <ModalButton type="submit">Confirm</ModalButton>
+                <ModalButton
                   type="button"
                   onClick={() => {
                     setShowModal(false);
@@ -232,7 +232,7 @@ export default function EventFormModal({ contact }) {
                   }}
                 >
                   Cancel
-                </Button>
+                </ModalButton>
               </ModalButtonWrapper>
             </ModalFormContainer>
           </ModalForm>

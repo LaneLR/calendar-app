@@ -7,17 +7,17 @@ const ButtonWrapper = styled.button`
   text-align: center;
   font-size: 1.1rem;
   border: none;
-  background-color: var(--color-header-button);
+  background-color: var(--color-modal-button);
   padding: 15px;
   border-radius: 15px;
   cursor: pointer;
   width: auto;
-  color: var(--color-header-text);
+  color: var(--color-modal-text);
   transition: background-color 0.2s ease, color 0.2s ease;
 
   &:hover {
-    background-color: var(--color-header-button-hover);
-    color: var(--color-header-text-hover);
+    background-color: var(--color-modal-button-hover);
+    color: var(--color-modal-text-hover);
   }
 `;
 
