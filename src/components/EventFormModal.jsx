@@ -2,7 +2,6 @@
 import { useCalendar } from "@/context/CalendarContext";
 import { useState } from "react";
 import styled from "styled-components";
-import TabExample from "./ContactTabInModal";
 import ContactTabInModal from "./ContactTabInModal";
 import ModalButton from "./ModalButton";
 
@@ -11,6 +10,7 @@ const ModalWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  min-width: 315px;
 `;
 
 const ModalForm = styled.form`

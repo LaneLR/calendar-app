@@ -21,6 +21,7 @@ export function CalendarProvider({ children }) {
   const [date, setDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [theme, setTheme] = useState("light");
+  const [eventToDelete, setEventToDelete] = useState(null);
 
   const router = useRouter();
 
@@ -30,7 +31,7 @@ export function CalendarProvider({ children }) {
   };
 
   const logoutUser = () => {
-    setTheme("light")
+    setTheme("light");
     setUser({
       username: "",
       password: "",
@@ -49,16 +50,12 @@ export function CalendarProvider({ children }) {
   };
 
   const deleteEvent = (deleted) => {
-    const confirmDelete = window.confirm(
-      `Are you sure you want to delete this event?`
-    );
-    if (confirmDelete) {
-      setEvents((prev) => prev.filter((e) => e.id !== deleted));
-    }
+    setEvents((prev) => prev.filter((e) => e.id !== deleted));
   };
 
   const handleDeleteEvent = async (event) => {
-    if (!event?.id) return;
+    if (!event?.id) return; //if event doesn't exist then stop
+    setEventToDelete(event); //open modal for the event to delete
 
     try {
       const res = await fetch(`/api/events/${event.id}`, { method: "DELETE" });
@@ -69,7 +66,7 @@ export function CalendarProvider({ children }) {
       }
 
       deleteEvent(event.id);
-      router.refresh();
+      setEventToDelete(null);
     } catch (err) {
       console.error("Error deleting event:", err);
     }
@@ -128,15 +125,15 @@ export function CalendarProvider({ children }) {
     setContacts((prev) => prev.filter((e) => e.name !== contactId));
   };
 
-const toggleDarkMode = () => {
-  const dark = document.documentElement.classList.toggle("dark");
-  localStorage.setItem("theme", dark ? "dark" : "light");
-};
-useEffect(() => {
-  if (window.localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark");
-  }
-}, []);
+  const toggleDarkMode = () => {
+    const dark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  };
+  useEffect(() => {
+    if (window.localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+    }
+  }, []);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -202,6 +199,8 @@ useEffect(() => {
         toggleDarkMode,
         theme,
         setTheme,
+        eventToDelete,
+        setEventToDelete,
       }}
     >
       {loadingAuth ? (
