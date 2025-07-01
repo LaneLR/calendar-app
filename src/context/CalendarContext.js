@@ -32,7 +32,7 @@ export function CalendarProvider({ children }) {
 
   const logoutUser = () => {
     document.documentElement.classList.remove("dark");
-    setEventToDelete(null)
+    setEventToDelete(null);
     setTheme("light");
     setUser({
       username: "",
@@ -127,14 +127,13 @@ export function CalendarProvider({ children }) {
   };
 
   const toggleDarkMode = () => {
-    const dark = document.documentElement.classList.toggle("dark");
-    localStorage.setItem("theme", dark ? "dark" : "light");
-    if (theme === 'dark') {
-      setTheme('dark')
-    } else if (theme === 'light') {
-      setTheme('light')
-    }
+    const isDark = document.documentElement.classList.toggle("dark");
+    const newTheme = isDark ? "dark" : "light";
+
+    localStorage.setItem("theme", newTheme);
+    setTheme(newTheme);
   };
+
   useEffect(() => {
     if (window.localStorage.getItem("theme") === "dark") {
       document.body.classList.add("dark");

@@ -1,16 +1,15 @@
 "use client";
 import { useCalendar } from "@/context/CalendarContext";
 import styled from "styled-components";
-import DetailsMessageTab from "./DetailsMessageTab";
 import { usePathname } from "next/navigation";
 import DetailsContactTab from "./DetailsContactTab";
 import SearchBar from "./SearchBar";
 
 const ComponentWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  height: 85%;
+  height: 95%;
   flex-flow: column;
   width: 60%;
 `;
@@ -27,8 +26,9 @@ const ContactsSectionWrapper = styled.div`
   background-color: var(--color-contacts-container-bg);
   color: var(--color-contacts-text);
   overflow-y: auto;
+  margin-bottom: 40px;
 
-  &::-webkit-scrollbar-track {
+  &::-webkit-scrollbar {
     border-bottom-right-radius: 8px;
     border-top-right-radius: 8px;
   }
@@ -50,23 +50,32 @@ const EmptyInfoWrapper = styled.div`
   text-align: center;
 `;
 
+const TextContainerLeftAlign = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+`;
+
 export default function DetailsContainer() {
   const { messages, contacts, searchTerm, result } = useCalendar();
   const pathname = usePathname();
 
-    const contact = [{username: "Lane", password: "password"}]
-
-
   return (
     <ComponentWrapper>
-      <SearchBar />
+      <div style={{width: '100%'}}>
+        <SearchBar /> 
+      </div>
+
+      <TextContainerLeftAlign><h2 style={{paddingTop: '20px'}}>Your Contacts</h2></TextContainerLeftAlign>
       <ContactsSectionWrapper>
         {pathname.startsWith("/messages") ? (
           //message section below
           <>
             {messages?.length === 0 ? (
               <EmptyInfoWrapper>
-                <h1>You have no Messages</h1>
+                <h1 style={{padding: '20px'}}>You have no Messages</h1>
               </EmptyInfoWrapper>
             ) : (
               <>
@@ -86,7 +95,7 @@ export default function DetailsContainer() {
             contacts.length === 0 &&
             searchTerm.length < 3 ? (
               <EmptyInfoWrapper>
-                <h1>Your Contacts List is empty...</h1>
+                <h1 style={{padding: '20px'}}>Your Contacts List is empty...</h1>
               </EmptyInfoWrapper>
             ) : Array.isArray(contacts) &&
               contacts.length > 0 &&
@@ -108,11 +117,11 @@ export default function DetailsContainer() {
               </>
             ) : searchTerm.length >= 3 && result.length === 0 ? (
               <EmptyInfoWrapper>
-                <h1>No results found</h1>
+                <h1 style={{padding: '20px'}}>No results found</h1>
               </EmptyInfoWrapper>
             ) : (
               <EmptyInfoWrapper>
-                <h1>Loading...</h1>
+                <h1 style={{padding: '20px'}}>Loading...</h1>
               </EmptyInfoWrapper>
             )}
           </>
