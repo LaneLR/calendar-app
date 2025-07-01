@@ -39,10 +39,6 @@ const TabsLayout = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-
-  &:last-child {
-    border: none;
-  }
 `;
 
 const EmptyInfoWrapper = styled.div`
