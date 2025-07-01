@@ -123,7 +123,7 @@ export default function UserCalendar() {
               selectable
               date={date}
               onSelectSlot={handleSelectSlot}
-              onSelectEvent={handleDeleteEvent}
+              onSelectEvent={(event) => setEventToDelete(event)}
               onNavigate={(date) => setDate(date)}
               style={{
                 minHeight: "494px",
@@ -141,7 +141,6 @@ export default function UserCalendar() {
                   await handleDeleteEvent(eventToDelete);
                   setEventToDelete(null);
                 }}
-                onSelectEvent={(event) => setEventToDelete(event)}
               />
             )}
           </CalendarSizing>
