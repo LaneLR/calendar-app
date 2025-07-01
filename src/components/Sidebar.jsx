@@ -89,7 +89,7 @@ export default function Sidebar() {
         }, 100);
       }
     } catch (err) {
-      console.log("Error occurred while handling logout: ", err);
+      console.error("Error occurred while handling logout: ", err);
       return;
     }
   };
