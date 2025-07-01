@@ -6,7 +6,9 @@ const TabWrapper = styled.div`
   width: 100%;
   display: flex;
   background-color: ${({ isSelected }) =>
-    isSelected ? "var(--color-selected-contact-bg)" : "var(--color-notselected-contact-bg)"};
+    isSelected
+      ? "var(--color-selected-contact-bg)"
+      : "var(--color-notselected-contact-bg)"};
   color: #fff;
   transition: background-color 0.2s ease;
 `;
@@ -29,6 +31,7 @@ const UserContactIcon = styled.button`
   border-radius: 30px;
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: var(--color-user-icon);
   color: var(--color-contacts-icon-text);
 `;
