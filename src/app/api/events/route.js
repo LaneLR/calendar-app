@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     const db = await initializeDbAndModels();
-    const {Event, User} = db
+    const { Event, User } = db;
 
     const body = await req.json();
     const { title, start, end, userIds } = body;
@@ -43,7 +43,7 @@ export async function POST(req) {
 export async function GET(req) {
   try {
     const db = await initializeDbAndModels();
-    const {Event, User} = db
+    const { Event, User } = db;
 
     const { searchParams } = new URL(req.url);
     const userId = parseInt(searchParams.get("userId"), 10);
@@ -55,20 +55,37 @@ export async function GET(req) {
       );
     }
 
-    const user = await User.findByPk(userId, {
+    const events = await Event.findAll({
       include: {
-        model: Event,
+        model: User,
         through: { attributes: [] },
+        attributes: ["id", "username",],
+      },
+      where: {
+        "$Users.id$": userId,
       },
     });
 
-    const events = user.Events.map((event) => ({
-      ...event.toJSON(),
-      start: event.start,
-      end: event.end,
-    }));
+    // const user = await User.findByPk(userId, {
+    //   include: {
+    //     model: Event,
+    //     through: { attributes: [] },
+    //   },
+    // });
 
-    return NextResponse.json({ events });
+    // const events = user.Events.map((event) => ({
+    //   ...event.toJSON(),
+    //   start: event.start,
+    //   end: event.end,
+    // }));
+
+    return NextResponse.json({
+      events: events.map((event) => ({
+        ...event.toJSON(),
+        start: event.start,
+        end: event.end,
+      })),
+    });
   } catch (err) {
     console.error("Error in GET events route:", err);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
