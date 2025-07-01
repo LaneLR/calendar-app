@@ -110,17 +110,18 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
             <ModalFormContainer>
               <TextContainer>
                 <TextContainerLeftAlign>
-                  <h4 style={{ paddingBottom: "5px" }}>Event Title:</h4>
+                  <h4 style={{ paddingBottom: "5px 0" }}>Event Title:</h4>
                 </TextContainerLeftAlign>
-                <h4
+                <p
                   style={{
                     display: "flex",
                     justifyContent: "center",
                     width: "100%",
+                    paddingBottom: "20px 0",
                   }}
                 >
                   {event.title}
-                </h4>
+                </p>
                 <AddDatesContainers>
                   <div>
                     <TextContainerLeftAlign>
@@ -131,6 +132,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         display: "flex",
                         justifyContent: "center",
                         width: "100%",
+                        paddingBottom: "20px 0",
                       }}
                     >
                       {event.start
@@ -147,6 +149,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         display: "flex",
                         justifyContent: "center",
                         width: "100%",
+                        paddingBottom: "20px 0",
                       }}
                     >
                       {event.end ? new Date(event.end).toLocaleString() : "N/A"}
@@ -171,6 +174,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         justifyContent: "center",
                         width: "100%",
                         backgroundColor: "#fff",
+                        paddingBottom: "20px 0",
                       }}
                     >
                       No contacts were invited

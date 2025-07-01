@@ -46,13 +46,15 @@ const ContactSnippetWrapper = styled.div`
   padding: 10px;
 `;
 
-const ContactSnippet = styled.div`
+const ContactSnippet = styled.button`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--color-contacts-text);
+  cursor: pointer;
+  border: none;
 `;
 
 const ContactFunctionWrapper = styled.div`
@@ -76,7 +78,7 @@ export default function ContactTabInModal({ contact, isSelected, onToggle }) {
       </UserContactIconWrapper>
 
       <ContactSnippetWrapper>
-        <ContactSnippet>{contact.username}</ContactSnippet>
+        <ContactSnippet type="button" onClick={() => onToggle(contact.id)}>{contact.username}</ContactSnippet>
       </ContactSnippetWrapper>
       <ContactFunctionWrapper>
         <button

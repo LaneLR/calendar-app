@@ -136,6 +136,25 @@ export function CalendarProvider({ children }) {
     setTheme(newTheme);
   };
 
+  const refreshEvents = async () => {
+  try {
+    const res = await fetch(`/api/events?userId=${user.id}`);
+    const data = await res.json();
+
+    if (Array.isArray(data.events)) {
+      const parsedEvents = data.events.map((event) => ({
+        ...event,
+        start: new Date(event.start),
+        end: new Date(event.end),
+      }));
+
+      setEvents(parsedEvents);
+    }
+  } catch (err) {
+    console.error("Error getting events:", err);
+  }
+};
+
   useEffect(() => {
     if (window.localStorage.getItem("theme") === "dark") {
       document.body.classList.add("dark");
@@ -171,6 +190,7 @@ export function CalendarProvider({ children }) {
   return (
     <CalendarContext.Provider
       value={{
+        refreshEvents,
         events,
         messages,
         contacts,
