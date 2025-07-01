@@ -28,7 +28,7 @@ const UserContactIcon = styled.div`
   justify-content: center;
   align-items: center;
   background-color: var(--color-user-icon);
-  color: var(--color-contacts-text);
+  color: var(--color-contacts-icon-text);
 `;
 
 const ContactSnippetWrapper = styled.div`
