@@ -79,7 +79,7 @@ export default function DetailsContactTab({ contact }) {
     <TabWrapper>
       <UserContactIconWrapper>
         <UserContactIcon>
-          {contact.username.slice(0, 2).toUpperCase()}
+          <b>{contact.username.slice(0, 2).toUpperCase()}</b>
         </UserContactIcon>
       </UserContactIconWrapper>
       <ContactSnippetWrapper>
