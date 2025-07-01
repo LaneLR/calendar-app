@@ -110,7 +110,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
             <ModalFormContainer>
               <TextContainer>
                 <TextContainerLeftAlign>
-                  <h4 style={{ paddingBottom: "5px" }}>Event Title</h4>
+                  <h4 style={{ paddingBottom: "5px" }}>Event Title:</h4>
                 </TextContainerLeftAlign>
                 <h4
                   style={{
