@@ -103,8 +103,8 @@ const ContactsAddedContainer = styled.div`
   overflow-y: auto;
 `;
 
-export default function EventFormModal({ contact }) {
-  const { showModal, setShowModal, contacts, addEvent, setEvents, user } =
+export default function EventFormModal() {
+  const { showModal, setShowModal, contacts, addEvent, setEvents, user, refreshEvents } =
     useCalendar();
 
   const [title, setTitle] = useState("");
@@ -114,8 +114,6 @@ export default function EventFormModal({ contact }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("Start: ", start, " End: ", end, " Title: ", title);
 
     if (!start || !end || !title) {
       console.error("Missing start, end, or title");
@@ -148,7 +146,7 @@ export default function EventFormModal({ contact }) {
         start: new Date(data.event.start),
         end: new Date(data.event.end),
       });
-
+      await refreshEvents();
       setShowModal(false);
     } catch (err) {
       console.error("Error occurred while submitting form: ", err);
@@ -180,7 +178,7 @@ export default function EventFormModal({ contact }) {
           <ModalForm onSubmit={handleSubmit}>
             <ModalFormContainer>
               <TextContainerLeftAlign>
-                <h4>Event Title</h4>
+                <h4>Event Title:</h4>
               </TextContainerLeftAlign>
               <TitleBar
                 placeholder="Title..."
@@ -190,7 +188,7 @@ export default function EventFormModal({ contact }) {
               <AddDatesContainers>
                 <div>
                   <TextContainerLeftAlign>
-                    <h4>Start Time</h4>
+                    <h4>Start Time:</h4>
                   </TextContainerLeftAlign>
                   <StartTimeBar
                     type="datetime-local"
@@ -200,7 +198,7 @@ export default function EventFormModal({ contact }) {
                 </div>
                 <div>
                   <TextContainerLeftAlign>
-                    <h4>End Time</h4>
+                    <h4>End Time:</h4>
                   </TextContainerLeftAlign>
                   <EndTimeBar
                     type="datetime-local"

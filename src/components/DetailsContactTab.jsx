@@ -17,7 +17,7 @@ const UserContactIconWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 7px 20px 7px 15px;
-  color: var(--color-contacts-text); 
+  color: var(--color-contacts-text);
 `;
 
 const UserContactIcon = styled.div`
@@ -27,7 +27,7 @@ const UserContactIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
   background-color: var(--color-user-icon);
   color: var(--color-contacts-icon-text);
 `;
@@ -48,7 +48,8 @@ const ContactSnippet = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--color-contacts-text)
+  cursor: pointer;
+  color: var(--color-contacts-text);
 `;
 
 const AddContactButton = styled.button`
