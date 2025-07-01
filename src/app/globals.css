@@ -51,6 +51,9 @@ body {
   --color-today-border: #007bff;
   --color-header-bg: rgba(145, 71, 148, 0.692);
 
+  --color-calendar-event-bg: rgba(145, 71, 148, 0.692);
+  --color-calendar-event-text: #d3d3d3;
+
   --color-contacts-container-bg: #d6d6d6;
   --color-contacts-bg: #fff;
   --color-contacts-text: #333;
@@ -90,6 +93,8 @@ html.dark {
   --color-modal-button-hover: #444;
   --color-selected-contact-bg: #888;
   --color-notselected-contact-bg: #fff;
+  --color-calendar-event-bg: #2a2a2a;
+  --color-calendar-event-text: #fff;
 }
 
 .logo {
@@ -118,12 +123,13 @@ a {
   border-radius: 9px;
 }
 
-.rbc-event, .rbc-event.rbc-selected {
+.rbc-event, .rbc-event:focus,
+.rbc-event.rbc-selected {
   border-radius: 8px;
   padding: 4px;
   font-size: 0.9rem;
-  background-color: var(--color-event-bg);
-  color: var(--color-event-text);
+  background-color: var(--color-calendar-event-bg);
+  color: var(--color-calendar-event-text);
 }
 
 .rbc-today {
