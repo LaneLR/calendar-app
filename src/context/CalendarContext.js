@@ -21,7 +21,7 @@ export function CalendarProvider({ children }) {
   const [date, setDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [theme, setTheme] = useState("light");
-  const [eventToDelete, setEventToDelete] = useState(null);
+  const [eventToDelete, setEventToDelete] = useState([]);
 
   const router = useRouter();
 

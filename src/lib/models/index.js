@@ -70,7 +70,6 @@ async function initializeModels() {
   foreignKey: "UserId",  // who is doing the adding
   otherKey: "ContactId",   // who is being added
 });
-  // User.belongsToMany(User)
 
   User.belongsToMany(Event, { through: "UserEvents" });
   Event.belongsToMany(User, { through: "UserEvents" }); 
