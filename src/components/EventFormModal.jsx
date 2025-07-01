@@ -97,7 +97,7 @@ const EndTimeBar = styled.input`
 
 const ContactsAddedContainer = styled.div`
   width: 80%;
-  max-height: 350px;
+  max-height: 220px;
   background-color: #fff;
   margin: 0 0 20px 0;
   overflow-y: auto;
