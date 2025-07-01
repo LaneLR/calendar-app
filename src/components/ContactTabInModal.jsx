@@ -7,6 +7,8 @@ import styled from "styled-components";
 const TabWrapper = styled.div`
   width: 100%;
   display: flex;
+  background-color: var(--color-toolbar-label);
+  color: #fff;
 `;
 
 const UserContactIconWrapper = styled.div`
@@ -16,7 +18,7 @@ const UserContactIconWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 7px 20px 7px 15px;
-  background-color: inherit;
+  background-color: var(--color-user-icon);
 `;
 
 const UserContactIcon = styled.button`
@@ -27,8 +29,8 @@ const UserContactIcon = styled.button`
   border-radius: 30px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: orange;
+  background-color: var(--color-user-icon);
+  color: var(--color-contacts-icon-text);
 `;
 
 const ContactSnippetWrapper = styled.div`
@@ -47,6 +49,7 @@ const ContactSnippet = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--color-contacts-text);
 `;
 
 const ContactFunctionWrapper = styled.div`
