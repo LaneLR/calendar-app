@@ -172,7 +172,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         backgroundColor: '#fff',
                       }}
                     >
-                    No invited contacts
+                    No contacts were invited
                     </p>
                   )}
                 </ContactsAddedContainer>
