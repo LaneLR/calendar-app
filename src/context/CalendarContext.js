@@ -31,6 +31,8 @@ export function CalendarProvider({ children }) {
   };
 
   const logoutUser = () => {
+    document.documentElement.classList.remove("dark");
+
     setTheme("light");
     setUser({
       username: "",
@@ -38,7 +40,6 @@ export function CalendarProvider({ children }) {
     });
     setIsLoggedIn(false);
     setTimeout(() => {
-      router.refresh();
       router.push("/login");
     }, 100);
     emptyEvents();
