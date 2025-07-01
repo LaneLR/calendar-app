@@ -190,6 +190,10 @@ a {
   color: black;
 }
 
+.rbc-time-view {
+  background-color: rgb(216, 216, 216);
+}
+
 .rbc-allday-cell .rbc-row-bg {
   padding: 2px;
 }

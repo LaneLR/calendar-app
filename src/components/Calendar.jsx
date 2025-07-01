@@ -21,7 +21,7 @@ const CalendarWrapper = styled.div`
 const CalendarSizing = styled.div`
   flex-grow: 1;
   width: 100%;
-  max-width: 1500px;
+  max-width: 1200px;
   height: 100%;
 `;
 
