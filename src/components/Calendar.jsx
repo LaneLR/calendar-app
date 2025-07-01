@@ -133,7 +133,7 @@ export default function UserCalendar() {
               }}
             />
             {showModal && <EventFormModal start={modalStart} end={modalEnd} />}
-            {eventToDelete && typeof eventToDelete === 'object' && (
+            {eventToDelete && typeof eventToDelete === 'object' ? (
               <DeleteEventModal
                 event={eventToDelete}
                 onCancel={() => setEventToDelete(null)}
@@ -142,6 +142,8 @@ export default function UserCalendar() {
                   setEventToDelete(null);
                 }}
               />
+            ) : (
+              <p>Something went really wrong.</p>
             )}
           </CalendarSizing>
         </CalendarWrapper>
