@@ -23,7 +23,6 @@ const UserContactIconWrapper = styled.div`
 `;
 
 const UserContactIcon = styled.button`
-  cursor: pointer;
   border: none;
   height: 40px;
   width: 40px;
