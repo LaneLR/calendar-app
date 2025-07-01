@@ -57,7 +57,7 @@ body {
   --color-error-text: red;
   --color-user-icon: #ef3e03;
   --color-contacts-icon-text: #333;
-  --color-selected-contact-bg: #666;
+  --color-selected-contact-bg: #888;
   --color-notselected-contact-bg: #fff;
 }
 
@@ -88,7 +88,7 @@ html.dark {
   --color-modal-button: #333;
   --color-modal-text: #fff;
   --color-modal-button-hover: #444;
-  --color-selected-contact-bg: #666;
+  --color-selected-contact-bg: #888;
   --color-notselected-contact-bg: #fff;
 }
 
