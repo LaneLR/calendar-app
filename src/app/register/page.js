@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useCalendar } from "@/context/CalendarContext";
 import Button from "@/components/Button";
 import Link from "next/link";
+import RedirectPath from "@/components/Redirect";
 
 const RegisterWrapper = styled.div`
   display: flex;
@@ -101,6 +102,7 @@ export default function RegisterPage() {
 
   return (
     <>
+      <RedirectPath />
       <RegisterWrapper>
         <div>
           <div>

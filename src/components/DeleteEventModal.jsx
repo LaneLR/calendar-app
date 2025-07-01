@@ -1,7 +1,6 @@
-// components/DeleteEventModal.jsx
 "use client";
 import styled from "styled-components";
-import ModalButton from "./ModalButton"; // or use your existing styled button
+import ModalButton from "./ModalButton"; 
 import { useEffect, useState } from "react";
 
 const ModalWrapper = styled.div`
@@ -94,8 +93,8 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
   useEffect(() => {
     if (!event) return;
 
-    if (Array.isArray(event.users)) {
-      setUsers(event.users);
+    if (Array.isArray(event.Users)) {
+      setUsers(event.Users);
     } else {
       setUsers([])
     }
@@ -132,7 +131,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         width: "100%",
                       }}
                     >
-                      {event.start}
+                      {event.start ? new Date(event.start).toLocaleString() : 'N/A'}
                      
                     </p>
                   </div>
@@ -147,7 +146,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         width: "100%",
                       }}
                     >
-                      {event.end}
+                      {event.end ? new Date(event.end).toLocaleString() : 'N/A'}
 
                     </p>
                   </div>

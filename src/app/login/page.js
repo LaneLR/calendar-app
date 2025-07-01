@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Link from "next/link";
+import RedirectPath from "@/components/Redirect";
 
 const LoginWrapper = styled.div`
   display: flex;
@@ -89,6 +90,7 @@ export default function LoginPage() {
 
   return (
     <>
+      <RedirectPath />
       <LoginWrapper>
         <div>
           <div>
