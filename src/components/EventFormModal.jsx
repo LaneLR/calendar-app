@@ -179,7 +179,7 @@ export default function EventFormModal({ contact }) {
           <ModalForm onSubmit={handleSubmit}>
             <ModalFormContainer>
               <TextContainerLeftAlign>
-                <h4>Title</h4>
+                <h4>Event Title</h4>
               </TextContainerLeftAlign>
               <TitleBar
                 placeholder="Title..."
@@ -187,17 +187,27 @@ export default function EventFormModal({ contact }) {
                 onChange={(e) => setTitle(e.target.value)}
               />
               <AddDatesContainers>
+                <div>
+
+                
+                <TextContainerLeftAlign>
+                  <h4>Start Time</h4>
+                </TextContainerLeftAlign>
                 <StartTimeBar
                   type="datetime-local"
                   value={start ? formatLocalDateTime(start) : ""}
                   onChange={(e) => setStart(new Date(e.target.value))}
-                />
+                /></div><div>
 
+                
+                <TextContainerLeftAlign>
+                  <h4>End Time</h4>
+                </TextContainerLeftAlign>
                 <EndTimeBar
                   type="datetime-local"
                   value={end ? formatLocalDateTime(end) : ""}
                   onChange={(e) => setEnd(new Date(e.target.value))}
-                />
+                /></div>
               </AddDatesContainers>
 
               <TextContainerLeftAlign>
