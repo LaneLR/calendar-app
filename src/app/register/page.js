@@ -155,7 +155,20 @@ export default function RegisterPage() {
               </form>
             </RegisterFormWrapper>
           </div>
-          {error && <p style={{ color: "var(--color-error-text)", marginTop: '20px', }}>{error}</p>}
+          {error && (
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                color: "var(--color-error-text)",
+                marginTop: "20px",
+              }}
+            >
+              {error}
+            </p>
+          )}
           <div
             style={{ marginTop: "20px", width: "100%", textAlign: "center" }}
           >

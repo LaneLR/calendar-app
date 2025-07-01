@@ -134,7 +134,16 @@ export default function LoginPage() {
             </LoginFormWrapper>
           </div>
           {error && (
-            <p style={{ color: "var(--color-error-text)", marginTop: "20px" }}>
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                color: "var(--color-error-text)",
+                marginTop: "20px",
+              }}
+            >
               {error}
             </p>
           )}
