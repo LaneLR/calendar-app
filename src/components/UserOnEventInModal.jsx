@@ -67,7 +67,7 @@ const ContactFunctionWrapper = styled.div`
 export default function UserOnEventInModal({ user }) {
 
     return (
-        <TabWrapper isSelected={isSelected}>
+        <TabWrapper>
           <UserContactIconWrapper>
             <UserContactIcon>
               {user.username?.slice(0, 2).toUpperCase()}
