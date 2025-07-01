@@ -17,7 +17,7 @@ const ButtonWrapper = styled.button`
 
   &:hover {
     background-color: var(--color-modal-button-hover);
-    color: var(--color-modal-text-hover);
+    color: var(--color-modal-text);
   }
 `;
 

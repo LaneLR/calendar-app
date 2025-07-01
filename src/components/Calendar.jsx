@@ -48,6 +48,10 @@ export default function UserCalendar() {
   const [modalEnd, setModalEnd] = useState(null);
 
   const handleSelectSlot = async ({ start, end }) => {
+    if (!isLoggedIn) {
+      alert("You must be logged in to create an event.")
+      return
+    }
     setModalStart(start);
     setModalEnd(end);
     setShowModal(true);
