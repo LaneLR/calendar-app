@@ -1,6 +1,6 @@
 "use client";
 import styled from "styled-components";
-import ModalButton from "./ModalButton"; 
+import ModalButton from "./ModalButton";
 import { useEffect, useState } from "react";
 import UserOnEventInModal from "./UserOnEventInModal";
 
@@ -75,7 +75,7 @@ const AddDatesContainers = styled.div`
 
 const ContactsAddedContainer = styled.div`
   width: 80%;
-  max-height: 350px;
+  max-height: 220px;
   background-color: #fff;
   margin: 0 0 20px 0;
   overflow-y: auto;
@@ -90,7 +90,7 @@ const TextContainer = styled.div`
 `;
 
 export default function DeleteEventModal({ event, onCancel, onConfirm }) {
-    const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     if (!event) return;
@@ -98,7 +98,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
     if (Array.isArray(event.Users)) {
       setUsers(event.Users);
     } else {
-      setUsers([])
+      setUsers([]);
     }
   }, [event]);
 
@@ -133,8 +133,9 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         width: "100%",
                       }}
                     >
-                      {event.start ? new Date(event.start).toLocaleString() : 'N/A'}
-                     
+                      {event.start
+                        ? new Date(event.start).toLocaleString()
+                        : "N/A"}
                     </p>
                   </div>
                   <div>
@@ -148,8 +149,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         width: "100%",
                       }}
                     >
-                      {event.end ? new Date(event.end).toLocaleString() : 'N/A'}
-
+                      {event.end ? new Date(event.end).toLocaleString() : "N/A"}
                     </p>
                   </div>
                 </AddDatesContainers>
@@ -170,10 +170,10 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         display: "flex",
                         justifyContent: "center",
                         width: "100%",
-                        backgroundColor: '#fff',
+                        backgroundColor: "#fff",
                       }}
                     >
-                    No contacts were invited
+                      No contacts were invited
                     </p>
                   )}
                 </ContactsAddedContainer>
