@@ -11,6 +11,7 @@ const ModalWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  min-width: 315px;
 `;
 
 const ModalForm = styled.form`
