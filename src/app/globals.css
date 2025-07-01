@@ -39,7 +39,8 @@
   --color-contacts-bg: #fff;
   --color-contacts-text: #333;
   --color-error-text: red;
-  --color-user-icon: #222;
+  --color-user-icon: #ef3e03;
+  --color-contacts-icon-text: #333;
 }
 
 html,
@@ -79,7 +80,8 @@ html.dark {
   --color-contacts-bg: #333;
   --color-contacts-text: #333;
   --color-error-text: red;
-  --color-user-icon: #fff;
+  --color-user-icon: #333;
+  --color-contacts-icon-text: #fff;
 }
 
 .logo {
