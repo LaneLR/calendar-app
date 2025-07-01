@@ -45,6 +45,7 @@ export default function UserCalendar() {
     theme,
     eventToDelete,
     setEventToDelete,
+    refreshEvents,
   } = useCalendar();
 
   const [modalStart, setModalStart] = useState(null);
