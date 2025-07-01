@@ -128,8 +128,7 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                     width: "100%",
                   }}
                 >
-                  {/* {event.title} */}
-                  Event Name
+                  {event?.title}
                 </h4>
                 <AddDatesContainers>
                   <div>
@@ -143,8 +142,8 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         width: "100%",
                       }}
                     >
-                      {/* {event.start} */}
-                      11:30:00pm
+                      {event?.start}
+                     
                     </p>
                   </div>
                   <div>
@@ -158,8 +157,8 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                         width: "100%",
                       }}
                     >
-                      {/* {event.end} */}
-                      10:30:00pm
+                      {event?.end}
+
                     </p>
                   </div>
                 </AddDatesContainers>
