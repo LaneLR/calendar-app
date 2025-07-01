@@ -1,7 +1,6 @@
 "use client";
 import { useCalendar } from "@/context/CalendarContext";
 import styled from "styled-components";
-import EventFormModal from "./EventFormModal";
 import { useRouter } from "next/navigation";
 import Square from "./Square";
 import Button from "./Button";
@@ -60,10 +59,6 @@ export default function Header() {
     <>
       <HeaderWrapper>
         <Square />
-        {/* <WelcomeText>
-          <div>Welcome back</div>
-          <b>, {user.username}Lane</b>
-        </WelcomeText> */}
         {isLoggedIn ? (
           <ButtonContainer>
             <Link href={"/"}>
