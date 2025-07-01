@@ -21,7 +21,7 @@ export function CalendarProvider({ children }) {
   const [date, setDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [theme, setTheme] = useState("light");
-  const [eventToDelete, setEventToDelete] = useState([]);
+  const [eventToDelete, setEventToDelete] = useState(null);
 
   const router = useRouter();
 
@@ -32,7 +32,7 @@ export function CalendarProvider({ children }) {
 
   const logoutUser = () => {
     document.documentElement.classList.remove("dark");
-    setEventToDelete([])
+    setEventToDelete(null)
     setTheme("light");
     setUser({
       username: "",
