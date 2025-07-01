@@ -32,7 +32,7 @@ export function CalendarProvider({ children }) {
 
   const logoutUser = () => {
     document.documentElement.classList.remove("dark");
-
+    setEventToDelete([])
     setTheme("light");
     setUser({
       username: "",
