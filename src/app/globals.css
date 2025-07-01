@@ -118,7 +118,7 @@ a {
   border-radius: 9px;
 }
 
-.rbc-event, .rbc-selected, .rbc-event .rbc-selected {
+.rbc-event, .rbc-event.rbc-selected {
   border-radius: 8px;
   padding: 4px;
   font-size: 0.9rem;
