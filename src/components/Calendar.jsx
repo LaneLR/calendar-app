@@ -60,7 +60,6 @@ export default function UserCalendar() {
     setModalStart(start);
     setModalEnd(end);
     setShowModal(true);
-    router.refresh();
   };
 
   const fetchEvents = async () => {
@@ -99,7 +98,6 @@ export default function UserCalendar() {
         return;
       }
       deleteEvent(event.id);
-      router.refresh();
     } catch (err) {
       console.error("Error occurred while trying to delete event: ", err);
     }
