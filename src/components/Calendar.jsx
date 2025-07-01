@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useCalendar } from "@/context/CalendarContext";
 import EventFormModal from "./EventFormModal";
 import DeleteEventModal from "./DeleteEventModal";
-import { useRouter } from "next/router";
 
 const CalendarWrapper = styled.div`
   display: flex;
@@ -49,8 +48,6 @@ export default function UserCalendar() {
 
   const [modalStart, setModalStart] = useState(null);
   const [modalEnd, setModalEnd] = useState(null);
-
-  const router = useRouter();
 
   const handleSelectSlot = async ({ start, end }) => {
     if (!isLoggedIn) {
