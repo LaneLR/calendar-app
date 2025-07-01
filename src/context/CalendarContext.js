@@ -47,6 +47,7 @@ export function CalendarProvider({ children }) {
 
   const addEvent = (newEvent) => {
     setEvents((prev = []) => [...prev, newEvent]);
+    router.refresh();
   };
 
   const deleteEvent = (deleted) => {
