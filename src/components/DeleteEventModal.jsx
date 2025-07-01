@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import ModalButton from "./ModalButton"; 
 import { useEffect, useState } from "react";
+import UserOnEventInModal from "./UserOnEventInModal";
 
 const ModalWrapper = styled.div`
   display: flex;
