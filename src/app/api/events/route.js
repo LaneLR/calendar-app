@@ -48,34 +48,28 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const userId = parseInt(searchParams.get("userId"), 10);
 
-    if (isNaN(userId)) {
-      return NextResponse.json(
-        { error: "Invalid or missing userId" },
-        { status: 400 }
-      );
+    let whereClause = {};
+    if (!isNaN(userId)) {
+      whereClause = {
+        include: {
+          model: User,
+          where: { id: userId },
+          through: { attributes: [] },
+          attributes: [], 
+        },
+      };
     }
 
     const events = await Event.findAll({
-      include: {
-        model: User,
-        include: {id: userId},
-        through: { attributes: [] },
-        attributes: ["id", "username",],
-      },
+      ...whereClause,
+      include: [
+        {
+          model: User,
+          through: { attributes: [] }, 
+          attributes: ["id", "username"], 
+        },
+      ],
     });
-
-    // const user = await User.findByPk(userId, {
-    //   include: {
-    //     model: Event,
-    //     through: { attributes: [] },
-    //   },
-    // });
-
-    // const events = user.Events.map((event) => ({
-    //   ...event.toJSON(),
-    //   start: event.start,
-    //   end: event.end,
-    // }));
 
     return NextResponse.json({
       events: events.map((event) => ({
