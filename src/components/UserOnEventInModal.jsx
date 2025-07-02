@@ -76,9 +76,7 @@ export default function UserOnEventInModal({ user }) {
           <ContactSnippetWrapper>
             <ContactSnippet>{user.username}</ContactSnippet>
           </ContactSnippetWrapper>
-          
-          <ContactFunctionWrapper>
-          </ContactFunctionWrapper>
+        
         </TabWrapper>
       );
 }
