@@ -60,6 +60,16 @@ const TextContainerLeftAlign = styled.div`
   min-width: 100px;
 `;
 
+const TextContainerCenterAlign = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  min-width: 100px;
+  textalign: "center";
+`;
+
 const TitleBar = styled.input`
   width: 80%;
   font-size: 1.1rem;
@@ -109,30 +119,34 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
           <ModalForm>
             <ModalFormContainer>
               <TextContainer>
-                <TextContainerLeftAlign>
-                  <h4 style={{ paddingBottom: "5px 0" }}>Event Title:</h4>
-                </TextContainerLeftAlign>
+                <TextContainerCenterAlign>
+                  <p style={{ paddingBottom: "5px 0" }}>Event Title:</p>
+                </TextContainerCenterAlign>
                 <p
                   style={{
                     display: "flex",
                     justifyContent: "center",
                     width: "100%",
-                    paddingBottom: "20px 0",
+                    padding: "0 0 15px 0",
+                    fontWeight: "bold",
+                    fontSize: "1.2rem",
                   }}
                 >
                   {event.title}
                 </p>
                 <AddDatesContainers>
                   <div>
-                    <TextContainerLeftAlign>
-                      <h4 style={{ padding: "5px 0" }}>Start Time:</h4>
-                    </TextContainerLeftAlign>
+                    <TextContainerCenterAlign>
+                      <p style={{ padding: "5px 0" }}>Start Time:</p>
+                    </TextContainerCenterAlign>
                     <p
                       style={{
                         display: "flex",
                         justifyContent: "center",
                         width: "100%",
-                        paddingBottom: "20px 0",
+                        padding: "0 0 15px 0",
+                        fontWeight: "bold",
+                        fontSize: "1.2rem",
                       }}
                     >
                       {event.start
@@ -141,26 +155,26 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                     </p>
                   </div>
                   <div>
-                    <TextContainerLeftAlign>
-                      <h4 style={{ padding: "5px 0" }}>End Time:</h4>
-                    </TextContainerLeftAlign>
+                    <TextContainerCenterAlign>
+                      <p style={{ padding: "5px 0" }}>End Time:</p>
+                    </TextContainerCenterAlign>
                     <p
                       style={{
                         display: "flex",
                         justifyContent: "center",
                         width: "100%",
-                        paddingBottom: "20px 0",
+                        padding: "0 0 15px 0",
+                        fontWeight: "bold",
+                        fontSize: "1.2rem",
                       }}
                     >
                       {event.end ? new Date(event.end).toLocaleString() : "N/A"}
                     </p>
                   </div>
                 </AddDatesContainers>
-                <TextContainerLeftAlign>
-                  <h4 style={{ width: "100%", padding: "5px 0" }}>
-                    Invited Contacts
-                  </h4>
-                </TextContainerLeftAlign>
+                <TextContainerCenterAlign>
+                  <p style={{ padding: "5px 0" }}>Invited Contacts</p>
+                </TextContainerCenterAlign>
 
                 <ContactsAddedContainer>
                   {users.length > 0 ? (
@@ -168,17 +182,22 @@ export default function DeleteEventModal({ event, onCancel, onConfirm }) {
                       <UserOnEventInModal key={user.id} user={user} />
                     ))
                   ) : (
-                    <p
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        width: "100%",
-                        backgroundColor: "#fff",
-                        paddingBottom: "20px 0",
-                      }}
-                    >
-                      No contacts were invited
-                    </p>
+                    <TextContainerCenterAlign>
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          backgroundColor: "#fff",
+                          width: "auto",
+                          padding: "0 0 15px 0",
+                          fontSize: "1rem",
+                          fontWeight: "bold",
+                          textAlign: "center",
+                        }}
+                      >
+                        No contacts were invited
+                      </p>
+                    </TextContainerCenterAlign>
                   )}
                 </ContactsAddedContainer>
                 <ModalButtonWrapper>
