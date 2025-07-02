@@ -103,19 +103,20 @@ const ContactsAddedContainer = styled.div`
   overflow-y: auto;
 `;
 
-export default function EventFormModal() {
+export default function EventFormModal({ start, end }) {
   const { showModal, setShowModal, contacts, addEvent, setEvents, user, refreshEvents } =
     useCalendar();
 
   const [title, setTitle] = useState("");
   const [selectContacts, setSelectContacts] = useState([]);
-  const [start, setStart] = useState(null);
-  const [end, setEnd] = useState(null);
+
+  const [startTime, setStartTime] = useState(start || null);
+  const [endTime, setEndTime] = useState(end || null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!start || !end || !title) {
+    if (!startTime || !endTime || !title) {
       console.error("Missing start, end, or title");
       return;
     }
@@ -123,8 +124,8 @@ export default function EventFormModal() {
     const userIds = [user.id, ...selectContacts];
     const newEvent = {
       title,
-      end: end.toISOString(),
-      start: start.toISOString(),
+      end: endTime.toISOString(),
+      start: startTime.toISOString(),
       userIds,
     };
 
@@ -146,6 +147,7 @@ export default function EventFormModal() {
         start: new Date(data.event.start),
         end: new Date(data.event.end),
       });
+
       await refreshEvents();
       setShowModal(false);
     } catch (err) {
@@ -154,8 +156,6 @@ export default function EventFormModal() {
     }
   };
 
-  //type="datetime-local" sets time to UTC,
-  //so adjust time to my local time
   function formatLocalDateTime(date) {
     const pad = (n) => (n < 10 ? "0" + n : n);
     return (
@@ -185,6 +185,7 @@ export default function EventFormModal() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
+
               <AddDatesContainers>
                 <div>
                   <TextContainerLeftAlign>
@@ -192,8 +193,8 @@ export default function EventFormModal() {
                   </TextContainerLeftAlign>
                   <StartTimeBar
                     type="datetime-local"
-                    value={start ? formatLocalDateTime(start) : ""}
-                    onChange={(e) => setStart(new Date(e.target.value))}
+                    value={startTime ? formatLocalDateTime(startTime) : ""}
+                    onChange={(e) => setStartTime(new Date(e.target.value))}
                   />
                 </div>
                 <div>
@@ -202,8 +203,8 @@ export default function EventFormModal() {
                   </TextContainerLeftAlign>
                   <EndTimeBar
                     type="datetime-local"
-                    value={end ? formatLocalDateTime(end) : ""}
-                    onChange={(e) => setEnd(new Date(e.target.value))}
+                    value={endTime ? formatLocalDateTime(endTime) : ""}
+                    onChange={(e) => setEndTime(new Date(e.target.value))}
                   />
                 </div>
               </AddDatesContainers>
@@ -227,6 +228,7 @@ export default function EventFormModal() {
                   />
                 ))}
               </ContactsAddedContainer>
+
               <ModalButtonWrapper>
                 <ModalButton type="submit">Confirm</ModalButton>
                 <ModalButton
@@ -234,8 +236,8 @@ export default function EventFormModal() {
                   onClick={() => {
                     setShowModal(false);
                     setTitle("");
-                    setEnd(null);
-                    setStart(null);
+                    setEndTime(null);
+                    setStartTime(null);
                     setSelectContacts([]);
                   }}
                 >
