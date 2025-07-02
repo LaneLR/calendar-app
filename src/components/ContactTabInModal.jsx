@@ -55,6 +55,8 @@ const ContactSnippet = styled.button`
   color: var(--color-contacts-text);
   cursor: pointer;
   border: none;
+  background-color: #fff;
+  font-size: 1.2rem;
 `;
 
 const ContactFunctionWrapper = styled.div`
