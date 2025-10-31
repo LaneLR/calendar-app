@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Suspense fallback={<CalendarSkeleton />}>
-        <UserCalendar />
+        <UserCalendar /> 
       </Suspense>
     </>
   );
