@@ -1,0 +1,157 @@
+.contacts {
+    
+  &__tab-wrapper {
+    width: 100%;
+    display: flex;
+    background-color: var(--color-toolbar-label);
+    color: #fff;
+  }
+
+  &__user-contact-icon-wrapper {
+    min-width: 13%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 20px 7px 15px;
+    color: var(--color-contacts-text);
+  }
+
+  &__user-contact-icon {
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    background-color: var(--color-user-icon);
+    color: var(--color-contacts-icon-text);
+  }
+
+  &__contact-snippet-wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-grow: 1;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 10px;
+  }
+
+  &__contact-snippet {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    color: var(--color-contacts-text);
+  }
+
+  &__add-contact-button {
+    border: 0;
+    background-color: inherit;
+    font-size: 1.6rem;
+    width: auto;
+    padding: 0 10px;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+
+  &__contact-function-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: 100%;
+    position: relative;
+  }
+
+  &__delete-contact-btn {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  &__delete-contact-icon {
+    margin: 0 10px;
+    object-fit: contain;
+    cursor: pointer;
+  }
+
+  &__delete-contact-icon--selected {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  &__delete-contact-icon--notselected {
+    opacity: 0.4;
+    transform: rotate(20deg);
+  }
+
+  &__component-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 95%;
+    flex-flow: column;
+    width: 60%;
+  }
+
+  &__contacts-section-wrapper {
+    flex-flow: column nowrap;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-contacts-container-bg);
+    color: var(--color-contacts-text);
+    overflow-y: auto;
+    margin-bottom: 40px;
+  }
+
+  &__contacts-section-wrapper::-webkit-scrollbar {
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  &__tabs-layout {
+    border-bottom: 1px solid black;
+    width: 100%;
+    height: auto;
+    display: flex;
+  }
+
+  &__empty-info-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  &__contacts-empty-message {
+    padding: 20px;
+  }
+
+  &__text-container-left-align {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+  }
+
+  &__contacts-title {
+    padding-top: 20px;
+  }
+
+  &__contacts-searchbar-container {
+    width: 100%;
+  }
+}

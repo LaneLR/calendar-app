@@ -1,5 +1,5 @@
 "use client";
-import styled from "styled-components";
+
 import { useCalendar } from "@/context/CalendarContext";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -7,37 +7,7 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import RedirectPath from "@/components/Redirect";
 
-const LoginWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 100%;
-  flex-direction: column;
-  width: 300px;
-`;
-
-const LoginFormWrapper = styled.div`
-  height: auto;
-  padding: 20px;
-  background-color: var(--color-toolbar-bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-`;
-
-const InputBoxes = styled.input`
-  padding: 10px;
-  font-size: 1.2rem;
-  width: 100%;
-  margin: 10px 0;
-  border-radius: 5px;
-  border: none;
-
-  &:focus {
-    border: none;
-  }
-`;
+// ...styles moved to _login.scss
 
 export default function LoginForm() {
   const { loginUser } = useCalendar();
@@ -73,7 +43,6 @@ export default function LoginForm() {
         console.error(error);
         return;
       }
-
       if (data.user) {
         loginUser(data.user);
         setLoginData({ username: "", password: "" });
@@ -91,22 +60,14 @@ export default function LoginForm() {
   return (
     <>
       <RedirectPath />
-      <LoginWrapper>
+      <div className="login">
         <div>
           <div>
-            <h1 style={{ fontSize: "2.8rem", marginBottom: "10px" }}>Login</h1>
-            <LoginFormWrapper>
-              <form
-                onSubmit={handleLoginUser}
-                style={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                }}
-              >
-                <InputBoxes
+            <h1 className="login__title">Login</h1>
+            <div className="login__form-wrapper">
+              <form onSubmit={handleLoginUser} className="login__form">
+                <input
+                  className="login__input-boxes"
                   placeholder="Username"
                   type="text"
                   name="username"
@@ -114,7 +75,8 @@ export default function LoginForm() {
                   onChange={handleLoginChange}
                   required
                 />
-                <InputBoxes
+                <input
+                  className="login__input-boxes"
                   placeholder="Password"
                   type="password"
                   name="password"
@@ -122,44 +84,22 @@ export default function LoginForm() {
                   onChange={handleLoginChange}
                   required
                 />
-                <Button
-                  style={{
-                    marginTop: "20px",
-                    width: "130px",
-                    fontWeight: "600",
-                  }}
-                  type="submit"
-                >
+                <Button className="login__btn" type="submit">
                   Login
                 </Button>
               </form>
-            </LoginFormWrapper>
+            </div>
           </div>
-          {error && (
-            <p
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                textAlign: "center",
-                color: "var(--color-error-text)",
-                marginTop: "20px",
-              }}
-            >
-              {error}
-            </p>
-          )}
-          <div
-            style={{ marginTop: "20px", width: "100%", textAlign: "center" }}
-          >
+          {error && <p className="login__error">{error}</p>}
+          <div className="login__register-link">
             Don&apos;t have an account?{" "}
-            <Link href={"/register"}>
+            <Link href="/register">
               <u>Create one!</u>
             </Link>
           </div>
         </div>
         <div></div>
-      </LoginWrapper>
+      </div>
     </>
   );
 }

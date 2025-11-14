@@ -1,20 +1,11 @@
-'use client'
-import styled from "styled-components";
-
-const SkeletonWrapper = styled.div`
-  flex-grow: 1;          // fill the remaining space next to Sidebar
-  padding: 50px 20px 50px 50px;
-  height: 80vh;
-`;
+"use client";
 
 const CalendarSkeleton = () => {
   return (
-    <>
-        <SkeletonWrapper>
-            <p>Loading calendar...</p>
-        </SkeletonWrapper>
-    </>
-  )
-}
+    <div className="calendar__wrapper">
+      <div className="calendar__component">Loading calendar...</div>
+    </div>
+  );
+};
 
-export default CalendarSkeleton
+export default CalendarSkeleton;

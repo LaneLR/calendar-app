@@ -1,29 +1,12 @@
 "use client";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import styled from "styled-components";
+
 import { useEffect, useState } from "react";
 import { useCalendar } from "@/context/CalendarContext";
 import EventFormModal from "./EventFormModal";
 import DeleteEventModal from "./DeleteEventModal";
 import { useRouter } from "next/navigation";
-
-const CalendarWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 75vh;
-  width: 90vw;
-  padding: 10px;
-  box-sizing: border-box;
-`;
-
-const CalendarSizing = styled.div`
-  flex-grow: 1;
-  width: 100%;
-  max-width: 1200px;
-  height: 100%;
-`;
 
 const localizer = momentLocalizer(moment);
 
@@ -113,8 +96,8 @@ export default function UserCalendar() {
   return (
     <>
       <div key={theme}>
-        <CalendarWrapper>
-          <CalendarSizing>
+        <div className="calendar__wrapper">
+          <div className="calendar__sizing">
             <Calendar
               key={user?.id || "calendar"}
               localizer={localizer}
@@ -128,12 +111,7 @@ export default function UserCalendar() {
               onSelectSlot={handleSelectSlot}
               onSelectEvent={(event) => setEventToDelete(event)}
               onNavigate={(date) => setDate(date)}
-              style={{
-                minHeight: "494px",
-                height: "100%",
-                minWidth: "452px",
-                boxShadow: "2px 3px 6px 4px rgba(0, 0, 0, 0.1)",
-              }}
+              className="calendar__component"
             />
             {showModal && <EventFormModal start={modalStart} end={modalEnd} />}
             {eventToDelete && typeof eventToDelete === "object" && (
@@ -147,8 +125,8 @@ export default function UserCalendar() {
                 }}
               />
             )}
-          </CalendarSizing>
-        </CalendarWrapper>
+          </div>
+        </div>
       </div>
     </>
   );

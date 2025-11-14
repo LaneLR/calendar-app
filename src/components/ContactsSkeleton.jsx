@@ -1,20 +1,11 @@
-'use client'
-import styled from "styled-components";
-
-const SkeletonWrapper = styled.div`
-  flex-grow: 1;          // fill the remaining space next to Sidebar
-  padding: 50px 20px 50px 50px;
-  height: 80vh;
-`;
+"use client";
 
 const ContactsSkeleton = () => {
   return (
-    <>
-        <SkeletonWrapper>
-            <div style={{fontSize: '3.5rem', padding: '0 0 50px 0', display: 'flex', justifyContent: 'center', alignItems: 'center', flexGrow: '1', minHeight: '80vh'}}>Loading...</div>
-        </SkeletonWrapper>
-    </>
-  )
-}
+    <div className="contacts__section-wrapper">
+      <div className="contacts__empty-message">Loading...</div>
+    </div>
+  );
+};
 
-export default ContactsSkeleton
+export default ContactsSkeleton;

@@ -2,75 +2,11 @@
 import { useCalendar } from "@/context/CalendarContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import styled from "styled-components";
 
-const SidebarWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  height: 80%;
-  background-color: lavender;
-  border-radius: 8px;
-  box-shadow: 4px 6px 5px 3px rgba(0, 0, 0, 0.1);
-  min-width: 130px;
-  max-width: 130px;
-  flex-flow: column nowrap;
-  margin: 10px 0 0 10px;
-`;
-
-const SidebarTabContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-flow: column nowrap;
-  width: 100%;
-  gap: 5px;
-  height: 90%;
-`;
-
-const SidebarTab = styled(Link)`
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  padding: 3px;
-  width: 100%;
-  border: 1px solid white;
-  height: 40px;
-  color: black;
-  background-color: rgb(187, 151, 194);
-  cursor: pointer;
-  border-radius: 7px;
-
-  &:first-of-type {
-    margin-top: 10px;
-  }
-
-    &:hover {
-  background-color: rgb(149, 114, 156)
-  }
-`;
-
-const SidebarTabDiv = styled.button`
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  padding: 3px;
-  width: 100%;
-  border: 1px solid white;
-  height: 40px;
-  color: black;
-  background-color: rgb(187, 151, 194);
-  cursor: pointer;
-  border-radius: 7px;
-  font-size: 1rem;
-
-  &:hover {
-  background-color: rgb(149, 114, 156)
-  }
-`;
+// ...styles moved to _sidebar.scss
 
 export default function Sidebar() {
-  const { isLoggedIn, logoutUser, toggleDarkMode} = useCalendar();
+  const { isLoggedIn, logoutUser, toggleDarkMode } = useCalendar();
 
   const router = useRouter();
 
@@ -96,27 +32,36 @@ export default function Sidebar() {
 
   return (
     <>
-      <SidebarWrapper>
-        <SidebarTabContainer>
-          <SidebarTab href="/">Calendar</SidebarTab>
-          <SidebarTab href="/contacts">Contacts</SidebarTab>
-          
+      <div className="sidebar">
+        <div className="sidebar__tab-container">
+          <Link href="/" className="sidebar__tab">
+            Calendar
+          </Link>
+          <Link href="/contacts" className="sidebar__tab">
+            Contacts
+          </Link>
           {isLoggedIn ? (
-            <SidebarTabDiv
+            <button
+              className="sidebar__tab sidebar__tab--div"
               onClick={() => {
                 handleLogout();
               }}
             >
               Logout
-            </SidebarTabDiv>
+            </button>
           ) : (
             <>
-              <SidebarTab href="/login">Login</SidebarTab>
-              <SidebarTab href="/register">Create account</SidebarTab>
+              <Link href="/login" className="sidebar__tab">
+                Login
+              </Link>
+              <Link href="/register" className="sidebar__tab">
+                Create account
+              </Link>
             </>
-          )}<button onClick={() => toggleDarkMode()}>Toggle</button>
-        </SidebarTabContainer>
-      </SidebarWrapper>
+          )}
+          <button onClick={() => toggleDarkMode()}>Toggle</button>
+        </div>
+      </div>
     </>
   );
 }

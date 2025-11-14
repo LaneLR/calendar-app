@@ -1,28 +1,7 @@
 "use client";
 import { useCalendar } from "@/context/CalendarContext";
-import styled from "styled-components";
 
-const SearchBarWrapper = styled.div`
-  width: 100%;
-  height: auto;
-  margin: 5px 0 10px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Search = styled.input`
-  font-size: 1.3rem;
-  width: 100%;
-  max-width: 1200px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 2px solid black;
-
-  &:focus {
-    outline: none;
-  }
-`;
+// ...styles moved to _searchbar.scss
 
 export default function SearchBar() {
   const { user, setResult, searchTerm, setSearchTerm } = useCalendar();
@@ -47,14 +26,15 @@ export default function SearchBar() {
 
   return (
     <>
-      <SearchBarWrapper>
-        <Search
+      <div className="searchbar">
+        <input
+          className="searchbar__input"
           type="text"
           placeholder="Find new contacts..."
           value={searchTerm}
           onChange={handleSearch}
         />
-      </SearchBarWrapper>
+      </div>
     </>
   );
 }
