@@ -1,5 +1,4 @@
 @import "react-big-calendar/lib/css/react-big-calendar.css";
-/* @import '../styles/custom-calendar.css'; */
 
 * {
   box-sizing: border-box;
@@ -25,27 +24,27 @@ body {
 :root {
   --color-page-bg: #fff;
 
-  --color-toolbar-bg: #ef3e0e;
+  --color-toolbar-bg: #2C3168;
   --color-toolbar-button: rgb(255, 255, 255);
-  --color-toolbar-button-hover: rgba(79, 45, 80, 0.692);
-  --color-toolbar-button-active: rgba(79, 45, 80, 0.692);
+  --color-toolbar-button-hover: rgba(44, 49, 104, 0.692);
+  --color-toolbar-button-active: rgba(113, 120, 197, 0.692);
   --color-toolbar-label: #fff;
-  --color-toolbar-text: #ef3e0e;
+  --color-toolbar-text: #2C3168;
 
-  --color-modal-button: #ef3e0e;
+  --color-modal-button: #2C3168;
   --color-modal-text: #fff;
-  --color-modal-button-hover: #a33718;
+  --color-modal-button-hover: #1c2050;
 
   --color-header-button: #fff;
-  --color-header-text: #ef3e0e;
-  --color-header-button-hover: #a33718;
+  --color-header-text: #2C3168;
+  --color-header-button-hover: #1c2050;
   --color-header-text-hover: #fff;
 
   --color-calendar-bg: #d3d3d3;
-  --color-calendar-border: #ee5126;
+  --color-calendar-border: #5960b3;
   --color-calendar-numbers: #ffffff;
 
-  --color-event-bg: #ef3e0e;
+  --color-event-bg: #2C3168;
   --color-event-text: #fff;
 
   --color-today-border: #007bff;

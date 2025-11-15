@@ -1,10 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-// import "@/styles/custom-calendar.css";
-import Sidebar from "@/components/Sidebar";
+import "@/styles/main.scss";
 import Header from "@/components/Header";
 import StyledComponentsRegistry from "@/lib/registry";
-import Square from "@/components/Square";
 import { CalendarProvider } from "@/context/CalendarContext";
 
 const geistSans = Geist({
@@ -41,9 +39,8 @@ export default function RootLayout({ children }) {
                 style={{
                   display: "flex",
                   backgroundColor: "var(--color-toolbar-bg)",
-                  width: '100%',
-                  height: 'auto',
-                  
+                  width: "100%",
+                  height: "auto",
                 }}
               >
                 {/* <Square /> */}
@@ -54,7 +51,7 @@ export default function RootLayout({ children }) {
                   display: "flex",
                   overflow: "hidden",
                   justifyContent: "center",
-                  alignItems: 'center',
+                  alignItems: "center",
                   width: "100%",
                   height: "100%",
                 }}

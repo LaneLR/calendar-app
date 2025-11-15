@@ -1,34 +1,9 @@
 "use client";
 import { useCalendar } from "@/context/CalendarContext";
-import styled from "styled-components";
 import { useRouter } from "next/navigation";
 import Square from "./Square";
 import Button from "./Button";
 import Link from "next/link";
-
-const HeaderWrapper = styled.div`
-  height: auto;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  align-items: center;
-  margin: 0 20px 0 0;
-`;
-
-const WelcomeText = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: var(--color-header-button);
-`;
 
 export default function Header() {
   const { user, isLoggedIn, logoutUser, toggleDarkMode, theme } = useCalendar();
@@ -57,10 +32,10 @@ export default function Header() {
 
   return (
     <>
-      <HeaderWrapper>
+      <div className="header__wrapper">
         <Square />
         {isLoggedIn ? (
-          <ButtonContainer>
+          <div className="header__button-container">
             <Link href={"/"}>
               <Button>Calendar</Button>
             </Link>
@@ -73,18 +48,18 @@ export default function Header() {
               <Button onClick={() => toggleDarkMode()}>Light</Button>
             )}
             <Button onClick={() => handleLogout()}>Logout</Button>
-          </ButtonContainer>
+          </div>
         ) : (
-          <ButtonContainer>
+          <div className="header__button-container">
             <Link href={"/login"}>
               <Button>Login</Button>
             </Link>
             <Link href={"/register"}>
               <Button>Register</Button>
             </Link>
-          </ButtonContainer>
+          </div>
         )}
-      </HeaderWrapper>
+      </div>
     </>
   );
 }
