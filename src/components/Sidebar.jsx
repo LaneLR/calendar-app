@@ -3,8 +3,6 @@ import { useCalendar } from "@/context/CalendarContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-// ...styles moved to _sidebar.scss
-
 export default function Sidebar() {
   const { isLoggedIn, logoutUser, toggleDarkMode } = useCalendar();
 

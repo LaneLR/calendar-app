@@ -3,8 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// ...styles moved to _calendar.scss
-
 export default function Square() {
   return (
     <>

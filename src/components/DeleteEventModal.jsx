@@ -4,8 +4,6 @@ import ModalButton from "./ModalButton";
 import { useEffect, useState } from "react";
 import UserOnEventInModal from "./UserOnEventInModal";
 
-// ...styles moved to _event_modal.scss
-
 export default function DeleteEventModal({ event, onCancel, onConfirm }) {
   const [users, setUsers] = useState([]);
 

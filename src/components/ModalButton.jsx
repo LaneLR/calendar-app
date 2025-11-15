@@ -1,4 +1,3 @@
-// ...styles moved to _button.scss
 
 export default function ModalButton({
   children,

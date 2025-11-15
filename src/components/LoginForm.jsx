@@ -7,8 +7,6 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import RedirectPath from "@/components/Redirect";
 
-// ...styles moved to _login.scss
-
 export default function LoginForm() {
   const { loginUser } = useCalendar();
   const [loginData, setLoginData] = useState({

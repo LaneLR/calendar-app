@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 import DetailsContactTab from "./DetailsContactTab";
 import SearchBar from "./SearchBar";
 
-// ...styles moved to _contacts.scss
-
 export default function DetailsContainer() {
   const { messages, contacts, searchTerm, result } = useCalendar();
   const pathname = usePathname();

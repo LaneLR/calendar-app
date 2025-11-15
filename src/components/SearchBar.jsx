@@ -1,8 +1,6 @@
 "use client";
 import { useCalendar } from "@/context/CalendarContext";
 
-// ...styles moved to _searchbar.scss
-
 export default function SearchBar() {
   const { user, setResult, searchTerm, setSearchTerm } = useCalendar();
 

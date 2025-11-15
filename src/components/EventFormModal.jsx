@@ -5,8 +5,6 @@ import { useState } from "react";
 import ContactTabInModal from "./ContactTabInModal";
 import ModalButton from "./ModalButton";
 
-// ...styles moved to _event_modal.scss
-
 export default function EventFormModal({ start, end }) {
   const {
     showModal,

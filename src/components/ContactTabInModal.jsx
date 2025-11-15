@@ -1,8 +1,6 @@
 "use client";
 import Image from "next/image";
 
-// Styled-components removed. Use SCSS classes instead.
-
 export default function ContactTabInModal({ contact, isSelected, onToggle }) {
   const trashcanImage = "/images/trashcan.png";
 

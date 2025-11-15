@@ -1,5 +1,4 @@
 "use client";
-import { useCalendar } from "@/context/CalendarContext";
 import Image from "next/image";
 
 export default function DetailsContactTab({
@@ -9,6 +8,9 @@ export default function DetailsContactTab({
   deleteContact,
 }) {
   const trashcanImage = "/images/trashcan.png";
+  const { contacts, addContacts, deleteContact } = useCalendar();
+  const contactExists = contacts.some((c) => c.id === contact.id);
+  
   return (
     <div className="contacts__tab-wrapper">
       <div className="contacts__user-contact-icon-wrapper">

@@ -1,11 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@/styles/main.scss";
-// import "@/styles/custom-calendar.css";
-import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import StyledComponentsRegistry from "@/lib/registry";
-import Square from "@/components/Square";
 import { CalendarProvider } from "@/context/CalendarContext";
 
 const geistSans = Geist({
