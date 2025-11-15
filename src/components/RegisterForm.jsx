@@ -20,22 +20,55 @@ export default function RegisterForm() {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  // ...existing code...
-  function handleRegisterChange(e) {
-    setRegisterData({ ...registerData, [e.target.name]: e.target.value });
-  }
+  const handleRegisterChange = (e) => {
+    setRegisterData({
+      ...registerData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  function handleCreateUser(e) {
+  const handleCreateUser = async (e) => {
     e.preventDefault();
+    setError(null);
+
     if (registerData.password !== registerData.confirmPassword) {
       setError("Passwords do not match");
+      console.error(error);
       return;
     }
-    // Add registration logic here (e.g., API call)
-    // On success, redirect or clear form
-    setError(null);
-    // router.push('/login'); // Example redirect
-  }
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: registerData.username,
+          password: registerData.password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        setError(data.error || "Registration failed");
+        console.error(error);
+        return;
+      }
+
+      if (data.user) {
+        loginUser(data.user);
+        setRegisterData({ username: "", password: "", confirmPassword: "" });
+        setTimeout(() => {
+          router.refresh();
+          router.push("/");
+        }, 100);
+      }
+    } catch (err) {
+      setError("Something went wrong during registration");
+      console.error(err);
+      return;
+    }
+  };
 
   return (
     <div className="register__wrapper">
@@ -78,7 +111,6 @@ export default function RegisterForm() {
         {error && <p className="register__error">{error}</p>}
         <div
           className="register__login-link"
-          style={{ marginTop: "20px", width: "100%", textAlign: "center" }}
         >
           Already have an account?{" "}
           <Link href="/login">
