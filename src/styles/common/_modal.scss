@@ -1,0 +1,48 @@
+.modal-style {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 1;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-toolbar-label);
+    padding: 40px;
+    border-radius: 24px;
+    color: black;
+    min-width: 320px;
+    min-height: 120px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  &__inner-text {
+    padding: 24px 0 32px;
+  }
+
+  &__button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+  }
+
+  &__login-button {
+    width: 100%;
+  }
+
+  &__close-button {
+    width: 25%;
+  }
+}
