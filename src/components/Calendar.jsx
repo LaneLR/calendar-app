@@ -7,6 +7,7 @@ import { useCalendar } from "@/context/CalendarContext";
 import EventFormModal from "./EventFormModal";
 import DeleteEventModal from "./DeleteEventModal";
 import { useRouter } from "next/navigation";
+import Modal from "./Modal";
 
 const localizer = momentLocalizer(moment);
 
@@ -33,12 +34,13 @@ export default function UserCalendar() {
 
   const [modalStart, setModalStart] = useState(null);
   const [modalEnd, setModalEnd] = useState(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const router = useRouter();
 
   const handleSelectSlot = async ({ start, end }) => {
     if (!isLoggedIn) {
-      alert("You must be logged in to create an event.");
+      setShowLoginModal(true);
       return;
     }
     setModalStart(start);
@@ -125,6 +127,14 @@ export default function UserCalendar() {
                 }}
               />
             )}
+            <Modal
+              open={showLoginModal}
+              onClose={() => setShowLoginModal(false)}
+            >
+              <div style={{ fontSize: "1.2rem", marginBottom: "1rem" }}>
+                You must be logged in to create an event.
+              </div>
+            </Modal>
           </div>
         </div>
       </div>
