@@ -45,14 +45,14 @@
     text-align: center;
   }
 
-  &__modal-wrapper {
+  &__wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
   }
 
-  &__modal-form {
+  &__form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,7 +60,7 @@
     width: 70%;
   }
 
-  &__modal-overlay {
+  &__overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -70,14 +70,14 @@
     z-index: 10;
   }
 
-  &__modal-button-wrapper {
+  &__button-wrapper {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
   }
 
-  &__modal-form-container {
+  &__form-container {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
