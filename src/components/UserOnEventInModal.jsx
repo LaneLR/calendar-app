@@ -1,5 +1,7 @@
 "use client";
 
+import Button from "./Button";
+
 export default function UserOnEventInModal({ user, isSelected }) {
   return (
     <div
@@ -13,7 +15,7 @@ export default function UserOnEventInModal({ user, isSelected }) {
         </button>
       </div>
       <div className="contacts__contact-snippet-wrapper">
-        <div className="contacts__contact-snippet">{user.username}</div>
+        <button className="contacts__contact-snippet">{user.username}</button>
       </div>
     </div>
   );

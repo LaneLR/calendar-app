@@ -1,6 +1,7 @@
 "use client";
 import { useCalendar } from "@/context/CalendarContext";
 import Image from "next/image";
+import Button from "./Button";
 
 export default function DetailsContactTab({ contact }) {
   const trashcanImage = "/images/trashcan.png";
@@ -15,7 +16,7 @@ export default function DetailsContactTab({ contact }) {
         </div>
       </div>
       <div className="contacts__contact-snippet-wrapper">
-        <div className="contacts__contact-snippet">{contact.username}</div>
+        <button className="contacts__contact-snippet">{contact.username}</button>
       </div>
       {!contactExists ? (
         <button
