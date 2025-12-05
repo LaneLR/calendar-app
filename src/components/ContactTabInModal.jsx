@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Button from "./Button";
 
 export default function ContactTabInModal({ contact, isSelected, onToggle }) {
   const trashcanImage = "/images/trashcan.png";

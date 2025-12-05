@@ -39,10 +39,11 @@ export default function UserCalendar() {
   const router = useRouter();
 
   const handleSelectSlot = async ({ start, end }) => {
-    if (!isLoggedIn) {
-      setShowLoginModal(true);
-      return;
-    }
+    // TEMP: Allow event modal to open without login for testing
+    // if (!isLoggedIn) {
+    //   setShowLoginModal(true);
+    //   return;
+    // }
     setModalStart(start);
     setModalEnd(end);
     setShowModal(true);
