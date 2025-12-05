@@ -40,10 +40,11 @@ export default function UserCalendar() {
 
   const handleSelectSlot = async ({ start, end }) => {
     // TEMP: Allow event modal to open without login for testing
-    // if (!isLoggedIn) {
-    //   setShowLoginModal(true);
-    //   return;
-    // }
+    if (!isLoggedIn) {
+      setShowLoginModal(true);
+      return;
+    }
+    //
     setModalStart(start);
     setModalEnd(end);
     setShowModal(true);

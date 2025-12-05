@@ -61,6 +61,7 @@ body {
   --color-contacts-icon-text: #333;
   --color-selected-contact-bg: #b8b8b8;
   --color-notselected-contact-bg: #fff;
+  --color-selected-contact-text: #252525;
 }
 
 html.dark {

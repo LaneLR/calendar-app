@@ -7,6 +7,10 @@
     color: #fff;
   }
 
+  &__tab-wrapper--selected {
+    background-color: var(--color-selected-contact-bg);
+  }
+
   &__user-contact-icon-wrapper {
     min-width: 13%;
     height: 100%;
