@@ -1,6 +1,6 @@
 ## 🗓️ What is Planz?
 
-Planz is a collaborative calendar web app built by Lane Richardson using Next.js App Router, React Big Calendar, and PostgreSQL. The app allows users to create and manage events, invite contacts, and view their schedules with a clean, responsive UI — complete with dark mode. You can [check it out here](https://calendar-app-y2h7.onrender.com)!
+Planz is a collaborative calendar web app built by Lane Richardson using Next.js App Router, React Big Calendar, and PostgreSQL. The app allows users to create and manage events, invite contacts, and view their schedules with a clean, responsive UI — complete with dark mode. You can [check it out here](https://calendar-app-y2h7.onrender.com)! 
 
 ## ℹ️ Overview
 
