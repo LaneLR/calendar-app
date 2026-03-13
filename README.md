@@ -86,7 +86,7 @@ To delete an event, simply click on the event in your calendar. A modal will app
 
 ### 🙋🏻 Contacts
 
-On the Contacts page, you'll see a list of people who are your contacts. If you have no contacts yet, don't worry! Using the search bar above your contacts list, you can search for other users by their username! Only people who have an account with Planz (and in your database) can be added as a contact. 
+On the Contacts page, you'll see a list of people who are your contacts. If you have no contacts yet, don't worry! Using the search bar above your contacts list, you can search for other users by their username! Only people who have an account with Planz can be added as a contact. 
 
 You can remove contacts by clicking the trashcan (delete) icon next to their username. Note, however, that this won't remove them from events that they've been invited to.
 
